@@ -1,0 +1,51 @@
+
+
+<!-- Navigation -->
+    <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <a class="navbar-brand" href="#">
+                    <img src="./factset_banner_logo.png" height="50px" width="150px" alt=""> 
+                </a>
+            </div>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
+                    <li>
+                        <a [routerLink]="['Dashboard']">Dashboard</a>
+                    </li>
+                    <li>
+                        <a [routerLink]="['My Accounts']">My Accounts</a>
+                    </li>
+                    <li>
+                        <a href="#">Services</a>
+                    </li>
+                    <li>
+                        <a href="#">Contact</a>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+    </nav>
+
+    <!-- Sidebar -->
+        <div id="sidebar-wrapper">
+            <p>can this be anything?</p>
+            <label>Search</label>
+            <input type="text" placeholder="Enter Company.."/>
+        </div>
+    <!-- /#sidebar-wrapper -->
+
+    <!-- Page Content -->
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1>{{title}}</h1>
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+    <!-- /.container -->
