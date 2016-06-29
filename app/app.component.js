@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_deprecated_1 = require('@angular/router-deprecated');
 var dashboard_component_1 = require('./+dashboard/dashboard.component');
+var company_search_component_1 = require('./+company-search/company-search.component');
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'Factset UI';
@@ -30,6 +31,11 @@ var AppComponent = (function () {
                 name: 'Dashboard',
                 component: dashboard_component_1.DashboardComponent,
                 useAsDefault: true
+            },
+            {
+                path: '/companysearch',
+                name: 'CompanySearch',
+                component: company_search_component_1.CompanySearchComponent
             }
         ]), 
         __metadata('design:paramtypes', [])

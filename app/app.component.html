@@ -16,7 +16,7 @@
                         <a [routerLink]="['Dashboard']">Dashboard</a>
                     </li>
                     <li>
-                        <a [routerLink]="['My Accounts']">My Accounts</a>
+                        <a [routerLink]="['CompanySearch']">Search</a>
                     </li>
                     <li>
                         <a href="#">Services</a>
@@ -31,19 +31,10 @@
         <!-- /.container -->
     </nav>
 
-    <!-- Sidebar -->
-        <div id="sidebar-wrapper">
-            <p>can this be anything?</p>
-            <label>Search</label>
-            <input type="text" placeholder="Enter Company.."/>
-        </div>
-    <!-- /#sidebar-wrapper -->
-
     <!-- Page Content -->
     <div class="container">
         <div class="row">
             <div class="col-lg-12">
-                <h1>{{title}}</h1>
                 <router-outlet></router-outlet>
             </div>
         </div>
