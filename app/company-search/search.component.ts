@@ -13,17 +13,17 @@ export class SearchComponent implements OnInit{
     }
 
     ngOnInit(){
-        this.bindForm();
+        this.bindTemplate();
     }
 
-    bindForm(){
+    bindTemplate(){
         this.getIndustries();
     }
 
     getIndustries(){
         this.companySearchProvider.getIndustries()
-        .then(response => this.industries = response)
-        .catch(error => this.logError(error));
+            .then(response => this.industries = response)
+            .catch(error => this.logError(error));
     }
 
     logError(error: any){

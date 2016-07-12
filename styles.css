@@ -27,6 +27,8 @@
 
     .navbar-fixed-top .navbar-brand {
         padding: 15px 0;
+        font-family: Arial;
+        font-size: smaller;
     }
 }
 

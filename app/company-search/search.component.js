@@ -15,9 +15,9 @@ var SearchComponent = (function () {
         this.companySearchProvider = companySearchProvider;
     }
     SearchComponent.prototype.ngOnInit = function () {
-        this.bindForm();
+        this.bindTemplate();
     };
-    SearchComponent.prototype.bindForm = function () {
+    SearchComponent.prototype.bindTemplate = function () {
         this.getIndustries();
     };
     SearchComponent.prototype.getIndustries = function () {

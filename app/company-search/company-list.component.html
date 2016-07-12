@@ -1,0 +1,11 @@
+<div>
+    <h4>Companies</h4>
+    <div *ngIf="loading">
+        <img src="./pre-loading.gif"/>
+    </div>
+    <ul>
+        <li *ngFor="let company of companies">
+            {{company.fs_perm_sec_id}}{{company.ff_co_name}}
+        </li>
+    </ul>
+</div>

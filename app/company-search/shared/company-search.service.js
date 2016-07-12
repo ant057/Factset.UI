@@ -14,12 +14,21 @@ require('rxjs/add/operator/toPromise');
 var CompanySearchService = (function () {
     function CompanySearchService(http) {
         this.http = http;
-        this.apiUrl = 'app/company-search/shared/industries.json';
+        this.mockApiUrl = 'app/company-search/shared/industries.json';
+        this.apiUrlBase = 'http://localhost:54665/api/';
+        this.apiUrl = this.apiUrlBase + 'CompanySearch/';
+        //does this compile??
     }
     CompanySearchService.prototype.getIndustries = function () {
-        return this.http.get(this.apiUrl)
+        return this.http.get(this.mockApiUrl)
             .toPromise()
             .then(function (response) { return response.json().data; })
+            .catch(this.handleError);
+    };
+    CompanySearchService.prototype.getCompanies = function () {
+        return this.http.get(this.apiUrl + 'SearchCompanies')
+            .toPromise()
+            .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
     CompanySearchService.prototype.handleError = function (error) {
