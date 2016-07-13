@@ -29,9 +29,9 @@
     <div class="table-container">
         <table *ngIf="companies" id="companyTable" class="table table-filter table-striped">
             <tr>
-                <th>Factset Security ID</th>
-                <th>Factset Entity ID</th>
-                <th>Company</th>
+                <th><div class="media"><p class="summary">Factset Security ID</p></div></th>
+                <th><div class="media"><p class="summary">Factset Entity ID</p></div></th>
+                <th><div class="media"><p class="summary">Company Details</p></div></th>
             </tr>
             <tbody>
                 <tr *ngFor="let company of companies" (click)="anAlert()">

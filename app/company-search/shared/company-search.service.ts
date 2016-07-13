@@ -12,6 +12,8 @@ export class CompanySearchService {
     private apiUrlBase: string = 'http://localhost:54665/api/';
     private apiUrl: string = this.apiUrlBase + 'CompanySearch/';
 
+    private _companyList; 
+
     constructor(private http: Http) { 
         //does this compile??
     }
@@ -25,6 +27,13 @@ export class CompanySearchService {
 
     getCompanies() : Promise<CompanySearch[]> {
         return this.http.get(this.apiUrl + 'SearchCompanies')
+            .toPromise()
+            .then(response => response.json())
+            .catch(this.handleError);
+    }
+
+    getCompaniesAll(): Promise<CompanySearch[]> {
+        return this.http.get(this.apiUrl + 'GetAll')
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);

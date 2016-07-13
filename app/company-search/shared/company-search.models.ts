@@ -1,5 +1,5 @@
 ﻿
-export class CompanySearch {
+export class CompanyList {
     fs_perm_sec_id: string;
     factset_entity_id: string;
     ff_country_iso: string;

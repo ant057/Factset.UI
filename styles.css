@@ -96,7 +96,7 @@
 
 @media(min-width:768px) {
     #wrapper {
-        /*padding-left: 250px;*/
+        padding-left: 250px;
     }
 
     #wrapper.toggled {
@@ -174,5 +174,41 @@
 	color: #d9534f;
 }
 .table-filter .media .summary {
-	font-size: 14px;
+	font-size: 11px;
 }
+
+/* auto complete */
+.suggestions{
+	border:solid 1px #f1f1f1;
+	position:absolute;
+	width:600px;
+	background: white;
+    z-index: 1001;
+}
+
+.suggestions ul{
+	padding: 0px;
+	margin: 0px;
+}
+
+.suggestions ul li{
+	list-style: none;
+	padding: 0px;
+	margin: 0px;
+}
+
+.suggestions ul li a{
+	padding:5px;
+	display: block;
+	text-decoration: none;
+	color:#7E7E7E;
+}
+
+.suggestions ul li a:hover{
+	background-color: #f1f1f1;
+}
+
+.complete-selected{
+     background-color: orange;
+     z-index: 0;
+ }

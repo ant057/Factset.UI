@@ -10,6 +10,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var company_search_service_1 = require('./shared/company-search.service');
+var auto_complete_component_1 = require('./shared/auto-complete.component');
 var SearchComponent = (function () {
     function SearchComponent(companySearchProvider) {
         this.companySearchProvider = companySearchProvider;
@@ -32,7 +33,8 @@ var SearchComponent = (function () {
     SearchComponent = __decorate([
         core_1.Component({
             selector: 'search',
-            templateUrl: 'app/company-search/search.component.html'
+            templateUrl: 'app/company-search/search.component.html',
+            directives: [auto_complete_component_1.AutoCompleteComponent]
         }), 
         __metadata('design:paramtypes', [company_search_service_1.CompanySearchService])
     ], SearchComponent);

@@ -1,9 +1,12 @@
 import {Component, OnInit} from '@angular/core';
+
 import {CompanySearchService} from './shared/company-search.service';
+import {AutoCompleteComponent} from './shared/auto-complete.component';
 
 @Component({
     selector: 'search',
-    templateUrl: 'app/company-search/search.component.html'
+    templateUrl: 'app/company-search/search.component.html',
+    directives: [AutoCompleteComponent]
 })
 export class SearchComponent implements OnInit{
 

@@ -1,8 +1,8 @@
 "use strict";
-var CompanySearch = (function () {
-    function CompanySearch() {
+var CompanyList = (function () {
+    function CompanyList() {
     }
-    return CompanySearch;
+    return CompanyList;
 }());
-exports.CompanySearch = CompanySearch;
+exports.CompanyList = CompanyList;
 //# sourceMappingURL=company-search.models.js.map

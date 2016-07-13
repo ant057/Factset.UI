@@ -31,6 +31,12 @@ var CompanySearchService = (function () {
             .then(function (response) { return response.json(); })
             .catch(this.handleError);
     };
+    CompanySearchService.prototype.getCompaniesAll = function () {
+        return this.http.get(this.apiUrl + 'GetAll')
+            .toPromise()
+            .then(function (response) { return response.json(); })
+            .catch(this.handleError);
+    };
     CompanySearchService.prototype.handleError = function (error) {
         console.error('An Error Occurred ', error);
         return Promise.reject(error.message || error);
