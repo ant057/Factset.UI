@@ -1,11 +1,67 @@
 <div>
-    <h4>Companies</h4>
+    <h2>Companies</h2>
     <div *ngIf="loading">
-        <img src="./pre-loading.gif"/>
+        <img src="app/assets/pre-loading.gif" /> 
     </div>
-    <ul>
-        <li *ngFor="let company of companies">
-            {{company.fs_perm_sec_id}}{{company.ff_co_name}}
-        </li>
-    </ul>
+    <!--<table *ngIf="companies" id="companyTable" class="table table-bordred table-striped table-condensed">
+        <tr>
+            <th>Factset Security ID</th>
+            <th>Factset Entity ID</th>
+            <th>Country</th>
+            <th>Latest Annual Update</th>
+            <th>Company Name</th>
+            <th>Business Description</th>
+            <th>Market Value</th>
+        </tr>
+        <tbody>
+            <tr *ngFor="let company of companies">
+                <td>{{company.fs_perm_sec_id}}</td>
+                <td>{{company.factset_entity_id}}</td>
+                <td>{{company.ff_country_iso}}</td>
+                <td>{{company.fa_latest_ann_update}}</td>
+                <td>{{company.ff_co_name}}</td>
+                <td>{{company.ff_bus_desc_abbrev}}</td>
+                <td>{{company.ff_mkt_val_curr}}</td>
+            </tr>
+        </tbody>
+    </table>-->
+
+    <div class="table-container">
+        <table *ngIf="companies" id="companyTable" class="table table-filter table-striped">
+            <tr>
+                <th>Factset Security ID</th>
+                <th>Factset Entity ID</th>
+                <th>Company</th>
+            </tr>
+            <tbody>
+                <tr *ngFor="let company of companies" (click)="anAlert()">
+                    <td>
+                        <div class="media">
+                            <p class="summary">{{company.fs_perm_sec_id}}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="media">
+                            <p class="summary">{{company.factset_entity_id}}</p>
+                        </div>
+                    </td>
+                    <td>
+                        <div class="media">
+                            <a href="#" class="pull-left">
+                                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                            </a>
+                            <div class="media-body">
+                                <span *ngIf="company.ff_mkt_val_curr" class="media-meta">Market Value: {{company.ff_mkt_val_curr}}</span>
+                                <h4 class="title">
+                                    {{company.ff_co_name}}
+                                    <span class="pull-right pagado">{{company.ff_country_iso}}</span>
+                                </h4>
+                                <p class="summary">{{company.ff_bus_desc_abbrev}}</p>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
 </div>

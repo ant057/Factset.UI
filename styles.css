@@ -15,11 +15,11 @@
 }
 
 .navbar-inverse{
-    background-color: dodgerblue;
+    background-color: #01244A;
 }
 
 .navbar-inverse .navbar-nav > li > a {
-    color: black;
+    color: white;
     font-size: medium;
 }
 
@@ -41,7 +41,9 @@
     border-radius: 10px 10px 10px 10px;
     -moz-border-radius: 10px 10px 10px 10px;
     -webkit-border-radius: 10px 10px 10px 10px;
-    border: 0px solid #000000;
+    border: .5px solid #000000;
+    background-color: white;
+    text-align:center;
 }
 
 
@@ -94,7 +96,7 @@
 
 @media(min-width:768px) {
     #wrapper {
-        padding-left: 250px;
+        /*padding-left: 250px;*/
     }
 
     #wrapper.toggled {
@@ -118,4 +120,59 @@
         position: relative;
         margin-right: 0;
     }
+}
+
+.table-filter {
+	background-color: #fff;
+	border-bottom: 1px solid #eee;
+}
+.table-filter tbody tr:hover {
+	cursor: pointer;
+	background-color: #eee;
+}
+.table-filter tbody tr td {
+	padding: 10px;
+	vertical-align: middle;
+	border-top-color: #eee;
+}
+.table-filter tbody tr.selected td {
+	background-color: #eee;
+}
+.table-filter tr td:first-child {
+	width: 38px;
+}
+.table-filter tr td:nth-child(2) {
+	width: 35px;
+}
+.table-filter .media-photo {
+	width: 35px;
+}
+
+.table-filter .media-meta {
+	font-size: 11px;
+	color: #999;
+}
+
+.table-filter .media .title {
+	color: #2BBCDE;
+	font-size: 14px;
+	font-weight: bold;
+	line-height: normal;
+	margin: 0;
+}
+.table-filter .media .title span {
+	font-size: .8em;
+	margin-right: 20px;
+}
+.table-filter .media .title span.pagado {
+	color: #5cb85c;
+}
+.table-filter .media .title span.pendiente {
+	color: #f0ad4e;
+}
+.table-filter .media .title span.cancelado {
+	color: #d9534f;
+}
+.table-filter .media .summary {
+	font-size: 14px;
 }

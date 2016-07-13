@@ -37,6 +37,9 @@ var CompanyListComponent = (function () {
     CompanyListComponent.prototype.logError = function (error) {
         console.error('error inside form bind OnInit ' + error);
     };
+    CompanyListComponent.prototype.anAlert = function () {
+        window.alert('i wouldnt do that if i were you.."');
+    };
     CompanyListComponent = __decorate([
         core_1.Component({
             selector: 'company-list',

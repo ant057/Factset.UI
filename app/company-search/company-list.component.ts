@@ -40,4 +40,8 @@ export class CompanyListComponent implements OnInit {
     logError(error: any) {
         console.error('error inside form bind OnInit ' + error);
     }
+
+    anAlert() {
+        window.alert('i wouldnt do that if i were you.."');
+    }
 }
