@@ -26,13 +26,13 @@ var CompanySearchService = (function () {
             .catch(this.handleError);
     };
     CompanySearchService.prototype.getCompanies = function () {
-        return this.http.get(this.apiUrl + 'SearchCompanies')
+        return this.http.get(this.apiUrl + 'GetAllCompaniesPaged/1/10')
             .toPromise()
-            .then(function (response) { return response.json(); })
+            .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
     CompanySearchService.prototype.getCompaniesAll = function () {
-        return this.http.get(this.apiUrl + 'GetAll')
+        return this.http.get(this.apiUrl + 'GetAllCompanies')
             .toPromise()
             .then(function (response) { return response.json(); })
             .catch(this.handleError);

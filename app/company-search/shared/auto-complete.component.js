@@ -42,7 +42,7 @@ var AutoCompleteComponent = (function () {
         if (this.query !== "") {
             this.filteredList = this.companies.filter(function (el) {
                 //console.log('im filtering on..' + el.ff_co_name.toString());
-                return el.ff_co_name.toString().toLowerCase().indexOf(this.query.toLowerCase()) > -1;
+                return el.companyName.toString().toLowerCase().indexOf(this.query.toLowerCase()) > -1;
             }.bind(this));
             if (event.code == "ArrowDown" && this.selectedIdx < this.filteredList.length) {
                 this.selectedIdx--;
@@ -57,7 +57,7 @@ var AutoCompleteComponent = (function () {
     };
     AutoCompleteComponent.prototype.select = function (item) {
         console.log('getting clicked');
-        this.query = item.ff_co_name;
+        this.query = item.companyName;
         this.filteredList = [];
         this.selectedIdx = -1;
     };
@@ -94,7 +94,7 @@ var AutoCompleteComponent = (function () {
             host: {
                 '(document:click)': 'handleClick($event)',
             },
-            template: "\n            <div class=\"input-field col s12\">\n              <input id=\"company\" type=\"text\" class=\"validate filter-input\" [(ngModel)]=\"query\" (keyup)=\"filter($event)\" (blur)=\"handleBlur()\">\n            </div>\n            <div class=\"suggestions\" *ngIf=\"filteredList.length > 0\">\n                <ul *ngFor=\"let item of filteredList;let idx = index\">\n                    <li [class.complete-selected]=\"idx == selectedIdx\" (click)=\"select(item)\">\n                        <a (click)=\"select(item)\">{{item.ff_co_name}}</a>\n                    </li>\n                </ul>\n            </div>\t\n        "
+            template: "\n            <div class=\"input-field col s12\">\n              <input id=\"company\" type=\"text\" class=\"validate filter-input\" [(ngModel)]=\"query\" (keyup)=\"filter($event)\" (blur)=\"handleBlur()\">\n            </div>\n            <div class=\"suggestions\" *ngIf=\"filteredList.length > 0\">\n                <ul *ngFor=\"let item of filteredList;let idx = index\" (click)=\"select(item.companyName)\">\n                    <li [class.complete-selected]=\"idx == selectedIdx\">\n                        <a>{{item.companyName}}</a>\n                    </li>\n                </ul>\n            </div>\t\n        "
         }), 
         __metadata('design:paramtypes', [core_1.ElementRef, company_search_service_1.CompanySearchService])
     ], AutoCompleteComponent);

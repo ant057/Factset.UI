@@ -1,7 +1,7 @@
 ﻿import {Component, OnInit, ElementRef} from '@angular/core';
 
 import {CompanySearchService} from './company-search.service';
-import {CompanySearch} from './company-search.models';
+import {CompanyList} from './company-search.models';
 
 @Component({
     selector: 'autocomplete',
@@ -13,9 +13,9 @@ import {CompanySearch} from './company-search.models';
               <input id="company" type="text" class="validate filter-input" [(ngModel)]="query" (keyup)="filter($event)" (blur)="handleBlur()">
             </div>
             <div class="suggestions" *ngIf="filteredList.length > 0">
-                <ul *ngFor="let item of filteredList;let idx = index">
-                    <li [class.complete-selected]="idx == selectedIdx" (click)="select(item)">
-                        <a (click)="select(item)">{{item.ff_co_name}}</a>
+                <ul *ngFor="let item of filteredList;let idx = index" (click)="select(item.companyName)">
+                    <li [class.complete-selected]="idx == selectedIdx">
+                        <a>{{item.companyName}}</a>
                     </li>
                 </ul>
             </div>	
@@ -63,7 +63,7 @@ export class AutoCompleteComponent implements OnInit{
         if (this.query !== "") {
             this.filteredList = this.companies.filter(function (el) {
                 //console.log('im filtering on..' + el.ff_co_name.toString());
-                return el.ff_co_name.toString().toLowerCase().indexOf(this.query.toLowerCase()) > -1;
+                return el.companyName.toString().toLowerCase().indexOf(this.query.toLowerCase()) > -1;
             }.bind(this));
             if (event.code == "ArrowDown" && this.selectedIdx < this.filteredList.length) {
                 this.selectedIdx--;
@@ -77,7 +77,7 @@ export class AutoCompleteComponent implements OnInit{
 
     select(item) {
         console.log('getting clicked');
-        this.query = item.ff_co_name;
+        this.query = item.companyName;
         this.filteredList = [];
         this.selectedIdx = -1;
     }

@@ -25,7 +25,6 @@
             </tr>
         </tbody>
     </table>-->
-
     <div class="table-container">
         <table *ngIf="companies" id="companyTable" class="table table-filter table-striped">
             <tr>
@@ -37,12 +36,12 @@
                 <tr *ngFor="let company of companies" (click)="anAlert()">
                     <td>
                         <div class="media">
-                            <p class="summary">{{company.fs_perm_sec_id}}</p>
+                            <p class="summary">{{company.permanentSecurityID}}</p>
                         </div>
                     </td>
                     <td>
                         <div class="media">
-                            <p class="summary">{{company.factset_entity_id}}</p>
+                            <p class="summary">{{company.entityId}}</p>
                         </div>
                     </td>
                     <td>
@@ -51,12 +50,12 @@
                                 <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
                             </a>
                             <div class="media-body">
-                                <span *ngIf="company.ff_mkt_val_curr" class="media-meta">Market Value: {{company.ff_mkt_val_curr}}</span>
+                                <span *ngIf="company.marketValueCurrent" class="media-meta">Market Value: {{company.marketValueCurrent}}</span>
                                 <h4 class="title">
-                                    {{company.ff_co_name}}
-                                    <span class="pull-right pagado">{{company.ff_country_iso}}</span>
+                                    {{company.companyName}}
+                                    <span class="pull-right pagado">{{company.countryISO}}</span>
                                 </h4>
-                                <p class="summary">{{company.ff_bus_desc_abbrev}}</p>
+                                <p class="summary">{{company.businessDescriptionAbbrev}}</p>
                             </div>
                         </div>
                     </td>

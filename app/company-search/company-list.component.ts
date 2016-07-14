@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 
 import {CompanySearchService} from './shared/company-search.service';
-import {CompanySearch} from './shared/company-search.models';
+import {CompanyList} from './shared/company-search.models';
 
 @Component({
     selector: 'company-list',
@@ -9,7 +9,7 @@ import {CompanySearch} from './shared/company-search.models';
 })
 export class CompanyListComponent implements OnInit {
 
-    companies: CompanySearch[];
+    companies: CompanyList[];
     loading: boolean = false;
 
     constructor(private companySearchProvider: CompanySearchService) {

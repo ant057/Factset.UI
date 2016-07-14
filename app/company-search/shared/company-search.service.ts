@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
-import {CompanySearch} from './company-search.models';
+import {CompanyList} from './company-search.models';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -25,15 +25,15 @@ export class CompanySearchService {
             .catch(this.handleError);
     }
 
-    getCompanies() : Promise<CompanySearch[]> {
-        return this.http.get(this.apiUrl + 'SearchCompanies')
+    getCompanies(): Promise<CompanyList[]> {
+        return this.http.get(this.apiUrl + 'GetAllCompaniesPaged/1/10')
             .toPromise()
-            .then(response => response.json())
+            .then(response => response.json().data)
             .catch(this.handleError);
     }
 
-    getCompaniesAll(): Promise<CompanySearch[]> {
-        return this.http.get(this.apiUrl + 'GetAll')
+    getCompaniesAll(): Promise<CompanyList[]> {
+        return this.http.get(this.apiUrl + 'GetAllCompanies')
             .toPromise()
             .then(response => response.json())
             .catch(this.handleError);
