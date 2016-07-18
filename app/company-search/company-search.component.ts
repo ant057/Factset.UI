@@ -12,8 +12,7 @@ import {CompanySearch} from './shared/company-search.models';
 @Component({
     selector: 'company-search',
     templateUrl: 'app/company-search/company-search.component.html',
-    directives: [SearchComponent, CompanyListComponent],
-    providers: [CompanySearchService]
+    directives: [SearchComponent, CompanyListComponent]
 })
 export class CompanySearchComponent implements OnInit{
 
@@ -26,6 +25,7 @@ export class CompanySearchComponent implements OnInit{
     }
 
     bindTemplate() {
-        //get service
+        // get vm for this and child components
+        //this.companySearchProvider.getCompaniesAll();
     }
 }

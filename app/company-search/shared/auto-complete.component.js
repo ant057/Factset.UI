@@ -20,7 +20,7 @@ var AutoCompleteComponent = (function () {
         this.selectedIdx = -1;
     }
     AutoCompleteComponent.prototype.ngOnInit = function () {
-        this.bindTemplate();
+        //this.bindTemplate();
     };
     AutoCompleteComponent.prototype.bindTemplate = function () {
         //get vm data back from service
@@ -28,7 +28,7 @@ var AutoCompleteComponent = (function () {
     };
     AutoCompleteComponent.prototype.getCompanies = function () {
         var _this = this;
-        this.companySearchProvider.getCompanies()
+        this.companySearchProvider.getCompaniesAll()
             .then(function (response) { return _this.successHandler(response); })
             .catch(function (error) { return _this.logError(error); });
     };

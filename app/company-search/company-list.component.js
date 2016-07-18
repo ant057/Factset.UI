@@ -8,12 +8,17 @@ var __decorate = (this && this.__decorate) || function (decorators, target, key,
 var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
+//angular
 var core_1 = require('@angular/core');
+var ng2_pagination_1 = require('ng2-pagination');
+//services
 var company_search_service_1 = require('./shared/company-search.service');
 var CompanyListComponent = (function () {
     function CompanyListComponent(companySearchProvider) {
         this.companySearchProvider = companySearchProvider;
         this.loading = false;
+        this._page = 1;
+        this._pageSize = 25;
         //
     }
     CompanyListComponent.prototype.ngOnInit = function () {
@@ -22,16 +27,19 @@ var CompanyListComponent = (function () {
     CompanyListComponent.prototype.bindTemplate = function () {
         this.loading = true;
         //get vm data back from service
-        this.getCompanies();
+        this.getCompanyPage(this._page);
     };
-    CompanyListComponent.prototype.getCompanies = function () {
+    CompanyListComponent.prototype.getCompanyPage = function (page) {
         var _this = this;
-        this.companySearchProvider.getCompanies()
+        this.companySearchProvider.getCompanies(page, this._pageSize)
             .then(function (response) { return _this.successHandler(response); })
             .catch(function (error) { return _this.logError(error); });
+        this._page = page;
     };
     CompanyListComponent.prototype.successHandler = function (response) {
-        this.companies = response;
+        this.pagedData = response;
+        this.companies = response.data;
+        this._total = response.count;
         this.loading = false;
     };
     CompanyListComponent.prototype.logError = function (error) {
@@ -43,7 +51,10 @@ var CompanyListComponent = (function () {
     CompanyListComponent = __decorate([
         core_1.Component({
             selector: 'company-list',
-            templateUrl: 'app/company-search/company-list.component.html'
+            templateUrl: 'app/company-search/company-list.component.html',
+            providers: [ng2_pagination_1.PaginationService],
+            directives: [ng2_pagination_1.PaginationControlsCmp],
+            pipes: [ng2_pagination_1.PaginatePipe]
         }), 
         __metadata('design:paramtypes', [company_search_service_1.CompanySearchService])
     ], CompanyListComponent);

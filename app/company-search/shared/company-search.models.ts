@@ -1,9 +1,9 @@
 ﻿export class CompanySearch {
-     country: Country 
-     industry: Industry 
-     sector: Sector 
-     sic: SIC 
-     entityType: EntityType 
+     countries: Country[]
+     industries: Industry[] 
+     sectors: Sector[] 
+     sics: SIC[] 
+     entityTypes: EntityType[] 
      universe: Universe
 }
 
@@ -14,7 +14,7 @@ export class CompanyList {
      latestAnnualUpdate: number
      companyName: string 
      businessDescriptionAbbrev: string 
-     marketValueCurrent: number?
+     marketValueCurrent: number
 
      //search criteria
      universeAmerica: boolean
@@ -29,7 +29,7 @@ export class CompanyList {
 }
 
 export class PagedCompanyList {
-     data: [CompanyList]
+     data: CompanyList[]
      count: number
 }
 
@@ -40,6 +40,7 @@ export class Universe {
 } 
 
 export class Country {
+     isoCountry: string
      countryDescription: string 
      isoCurrency: string 
      region: Region 

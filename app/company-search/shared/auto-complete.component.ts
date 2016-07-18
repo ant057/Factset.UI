@@ -36,7 +36,7 @@ export class AutoCompleteComponent implements OnInit{
     }
 
     ngOnInit() {
-        this.bindTemplate();
+        //this.bindTemplate();
     }
 
     bindTemplate() {
@@ -46,7 +46,7 @@ export class AutoCompleteComponent implements OnInit{
     }
 
     getCompanies() {
-        this.companySearchProvider.getCompanies()
+        this.companySearchProvider.getCompaniesAll()
             .then(response => this.successHandler(response))
             .catch(error => this.logError(error));
     }

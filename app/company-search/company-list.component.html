@@ -26,14 +26,17 @@
         </tbody>
     </table>-->
     <div class="table-container">
+        <div class="row">
+            <pagination-controls (pageChange)="getCompanyPage($event)" id="server"></pagination-controls>
+        </div>
         <table *ngIf="companies" id="companyTable" class="table table-filter table-striped">
-            <tr>
+            <thead>
                 <th><div class="media"><p class="summary">Factset Security ID</p></div></th>
                 <th><div class="media"><p class="summary">Factset Entity ID</p></div></th>
                 <th><div class="media"><p class="summary">Company Details</p></div></th>
-            </tr>
+            </thead>
             <tbody>
-                <tr *ngFor="let company of companies" (click)="anAlert()">
+                <tr *ngFor="let company of companies | paginate: {id: 'server', itemsPerPage: _pageSize, currentPage: _page, totalItems: _total }" (click)="anAlert()">
                     <td>
                         <div class="media">
                             <p class="summary">{{company.permanentSecurityID}}</p>

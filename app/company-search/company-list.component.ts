@@ -1,16 +1,27 @@
+//angular
 import {Component, OnInit} from '@angular/core';
+import {PaginatePipe, PaginationService, PaginationControlsCmp, IPaginationInstance} from 'ng2-pagination';
 
+//services
 import {CompanySearchService} from './shared/company-search.service';
-import {CompanyList} from './shared/company-search.models';
+//models
+import {CompanyList, PagedCompanyList} from './shared/company-search.models';
 
 @Component({
     selector: 'company-list',
-    templateUrl: 'app/company-search/company-list.component.html'
+    templateUrl: 'app/company-search/company-list.component.html',
+    providers: [PaginationService],
+    directives: [PaginationControlsCmp],
+    pipes: [PaginatePipe]
 })
 export class CompanyListComponent implements OnInit {
 
+    pagedData: PagedCompanyList;
     companies: CompanyList[];
     loading: boolean = false;
+    private _page: number = 1;
+    private _pageSize: number = 25;
+    private _total: number;
 
     constructor(private companySearchProvider: CompanySearchService) {
     //
@@ -23,17 +34,21 @@ export class CompanyListComponent implements OnInit {
     bindTemplate() {
         this.loading = true;
         //get vm data back from service
-        this.getCompanies();
+        this.getCompanyPage(this._page);
     }
 
-    getCompanies() {
-        this.companySearchProvider.getCompanies()
+    getCompanyPage(page: number) {
+        this.companySearchProvider.getCompanies(page, this._pageSize)
             .then(response => this.successHandler(response))
             .catch(error => this.logError(error));
+
+        this._page = page;
     }
 
     successHandler(response: any) {
-        this.companies = response;
+        this.pagedData = response;
+        this.companies = response.data;
+        this._total = response.count;
         this.loading = false;
     }
 

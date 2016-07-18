@@ -10,8 +10,11 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var router_deprecated_1 = require('@angular/router-deprecated');
+//compnents
 var dashboard_component_1 = require('./dashboard/dashboard.component');
 var company_search_component_1 = require('./company-search/company-search.component');
+//services
+var company_search_service_1 = require('./company-search/shared/company-search.service');
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'Factset UI';
@@ -22,7 +25,8 @@ var AppComponent = (function () {
             templateUrl: 'app/app.component.html',
             directives: [router_deprecated_1.ROUTER_DIRECTIVES],
             providers: [
-                router_deprecated_1.ROUTER_PROVIDERS
+                router_deprecated_1.ROUTER_PROVIDERS,
+                company_search_service_1.CompanySearchService
             ]
         }),
         router_deprecated_1.RouteConfig([

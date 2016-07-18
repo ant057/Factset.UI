@@ -24,14 +24,14 @@ var CompanySearchComponent = (function () {
         this.bindTemplate();
     };
     CompanySearchComponent.prototype.bindTemplate = function () {
-        //get service
+        // get vm for this and child components
+        //this.companySearchProvider.getCompaniesAll();
     };
     CompanySearchComponent = __decorate([
         core_1.Component({
             selector: 'company-search',
             templateUrl: 'app/company-search/company-search.component.html',
-            directives: [search_component_1.SearchComponent, company_list_component_1.CompanyListComponent],
-            providers: [company_search_service_1.CompanySearchService]
+            directives: [search_component_1.SearchComponent, company_list_component_1.CompanyListComponent]
         }), 
         __metadata('design:paramtypes', [company_search_service_1.CompanySearchService])
     ], CompanySearchComponent);

@@ -10,11 +10,33 @@
                 <div class="divUnderline" style="background-color:white">
                     <label>Customize Search</label>
                 </div>
+                <div>
+                    <label>Industries Multi-Select</label>
+                    <ng-select style="z-index:1001" [data]="value"
+                               [multiple]="true"
+                               [items]="items"
+                               (selected)="selected($event)"
+                               (removed)="removed($event)"
+                               placeholder="Select Industries">
+                    </ng-select>
+                </div>
                 <div class="input-group">
                     <label>Industries</label>
-                    <div *ngFor="let industry of industries">
-                        <input type="checkbox" value="industry.id"> {{industry.name}}
-                    </div> 
+                    <select>
+                        <option *ngFor="let industry of companySearch.industries" value="industry.industryDescription"> {{industry.industryDescription}}</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>Countries</label>
+                    <select>
+                        <option *ngFor="let country of companySearch.countries" value="country.isoCountry"> {{country.isoCountry}} - {{country.countryDescription}}</option>
+                    </select>
+                </div>
+                <div class="input-group">
+                    <label>SIC</label>
+                    <select>
+                        <option *ngFor="let sic of companySearch.sics" value="sic.siccode"> {{sic.sicCode}} - {{sic.sicDescription}}</option>
+                    </select>
                 </div>
             </div>
             <div style="padding:8px">
