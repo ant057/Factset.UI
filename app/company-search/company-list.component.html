@@ -3,28 +3,6 @@
     <div *ngIf="loading">
         <img src="app/assets/pre-loading.gif" /> 
     </div>
-    <!--<table *ngIf="companies" id="companyTable" class="table table-bordred table-striped table-condensed">
-        <tr>
-            <th>Factset Security ID</th>
-            <th>Factset Entity ID</th>
-            <th>Country</th>
-            <th>Latest Annual Update</th>
-            <th>Company Name</th>
-            <th>Business Description</th>
-            <th>Market Value</th>
-        </tr>
-        <tbody>
-            <tr *ngFor="let company of companies">
-                <td>{{company.fs_perm_sec_id}}</td>
-                <td>{{company.factset_entity_id}}</td>
-                <td>{{company.ff_country_iso}}</td>
-                <td>{{company.fa_latest_ann_update}}</td>
-                <td>{{company.ff_co_name}}</td>
-                <td>{{company.ff_bus_desc_abbrev}}</td>
-                <td>{{company.ff_mkt_val_curr}}</td>
-            </tr>
-        </tbody>
-    </table>-->
     <div class="table-container">
         <div class="row">
             <pagination-controls (pageChange)="getCompanyPage($event)" id="server"></pagination-controls>

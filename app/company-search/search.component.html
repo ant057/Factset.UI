@@ -10,33 +10,47 @@
                 <div class="divUnderline" style="background-color:white">
                     <label>Customize Search</label>
                 </div>
-                <div>
-                    <label>Industries Multi-Select</label>
-                    <ng-select style="z-index:1001" [data]="value"
+                <div *ngIf="companySearch.industries" class="input-group">
+                    <label>Industry</label>
+                    <ng-select class="input-sm" [data]="value"
                                [multiple]="true"
-                               [items]="items"
-                               (selected)="selected($event)"
-                               (removed)="removed($event)"
+                               [items]="industryItems"
+                               (selected)="selectedIndustry($event)"
+                               (removed)="removedIndustry($event)"
                                placeholder="Select Industries">
                     </ng-select>
                 </div>
-                <div class="input-group">
-                    <label>Industries</label>
-                    <select>
-                        <option *ngFor="let industry of companySearch.industries" value="industry.industryDescription"> {{industry.industryDescription}}</option>
-                    </select>
+                <div *ngIf="companySearch.countries" class="input-group">
+                    <label>Country</label>
+                    <ng-select class="input-sm" [data]="value"
+                               [multiple]="true"
+                               [items]="countryItems"
+                               placeholder="Select Country">
+                    </ng-select>
                 </div>
-                <div class="input-group">
-                    <label>Countries</label>
-                    <select>
-                        <option *ngFor="let country of companySearch.countries" value="country.isoCountry"> {{country.isoCountry}} - {{country.countryDescription}}</option>
-                    </select>
-                </div>
-                <div class="input-group">
+                <div *ngIf="companySearch.sics" class="input-group">
                     <label>SIC</label>
-                    <select>
-                        <option *ngFor="let sic of companySearch.sics" value="sic.siccode"> {{sic.sicCode}} - {{sic.sicDescription}}</option>
-                    </select>
+                    <ng-select class="input-sm" [data]="value"
+                               [multiple]="true"
+                               [items]="sicItems"
+                               placeholder="Select SIC">
+                    </ng-select>
+                </div>
+                <div *ngIf="companySearch.entityTypes" class="input-group">
+                    <label>Entity Type</label>
+                    <ng-select class="input-sm" [data]="value"
+                               [multiple]="true"
+                               [items]="entityTypeItems"
+                               placeholder="Select Entity Type">
+                    </ng-select>
+                </div>
+                <div *ngIf="companySearch.sectors" class="input-group">
+                    <label>Sector</label>
+                    <ng-select class="input-sm" [data]="value"
+                               [multiple]="true"
+                               [items]="sectorItems"
+                               placeholder="Select Sector">
+                    </ng-select>
                 </div>
             </div>
             <div style="padding:8px">

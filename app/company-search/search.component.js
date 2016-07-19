@@ -20,15 +20,11 @@ var company_search_models_1 = require('./shared/company-search.models');
 var SearchComponent = (function () {
     function SearchComponent(companySearchProvider) {
         this.companySearchProvider = companySearchProvider;
-        this.items = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
-            'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
-            'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin', 'Dusseldorf',
-            'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg', 'Hamburg', 'Hannover',
-            'Helsinki', 'Leeds', 'Leipzig', 'Lisbon', 'todz', 'London', 'Krakow', 'Madrid',
-            'Mlaga', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Naples', 'Palermo',
-            'Paris', 'Poznan', 'Prague', 'Riga', 'Rome', 'Rotterdam', 'Seville', 'Sheffield',
-            'Sofia', 'Stockholm', 'Stuttgart', 'The Hague', 'Turin', 'Valencia', 'Vienna',
-            'Vilnius', 'Warsaw', 'Wroclaw', 'Zagreb', 'Zaragoza'];
+        this.industryItems = [];
+        this.countryItems = [];
+        this.sicItems = [];
+        this.entityTypeItems = [];
+        this.sectorItems = [];
         this.companySearch = new company_search_models_1.CompanySearch;
     }
     SearchComponent.prototype.ngOnInit = function () {
@@ -49,15 +45,29 @@ var SearchComponent = (function () {
         this.companySearch.industries = response.industries;
         this.companySearch.sectors = response.sectors;
         this.companySearch.sics = response.siCs;
-        console.warn(this.companySearch);
+        for (var i = 0; i < this.companySearch.industries.length; i++) {
+            this.industryItems.push(this.companySearch.industries[i].industryDescription);
+        }
+        for (var i = 0; i < this.companySearch.sics.length; i++) {
+            this.sicItems.push(this.companySearch.sics[i].sicCode + ' ' + this.companySearch.sics[i].sicDescription.substr(0, 20) + '..');
+        }
+        for (var i = 0; i < this.companySearch.entityTypes.length; i++) {
+            this.entityTypeItems.push(this.companySearch.entityTypes[i].entityTypeDescription);
+        }
+        for (var i = 0; i < this.companySearch.countries.length; i++) {
+            this.countryItems.push(this.companySearch.countries[i].countryDescription);
+        }
+        for (var i = 0; i < this.companySearch.sectors.length; i++) {
+            this.sectorItems.push(this.companySearch.sectors[i].sectorDescription);
+        }
     };
     SearchComponent.prototype.logError = function (error) {
         console.error('error inside form bind OnInit ' + error);
     };
-    SearchComponent.prototype.selected = function (value) {
+    SearchComponent.prototype.selectedIndustry = function (value) {
         console.log('Selected value is: ', value);
     };
-    SearchComponent.prototype.removed = function (value) {
+    SearchComponent.prototype.removedIndustry = function (value) {
         console.log('Removed value is: ', value);
     };
     SearchComponent.prototype.refreshValue = function (value) {

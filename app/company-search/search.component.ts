@@ -17,16 +17,11 @@ export class SearchComponent implements OnInit{
 
     companySearch: CompanySearch;
     private value: any;
-
-    public items: Array<string> = ['Amsterdam', 'Antwerp', 'Athens', 'Barcelona',
-        'Berlin', 'Birmingham', 'Bradford', 'Bremen', 'Brussels', 'Bucharest',
-        'Budapest', 'Cologne', 'Copenhagen', 'Dortmund', 'Dresden', 'Dublin', 'Dusseldorf',
-        'Essen', 'Frankfurt', 'Genoa', 'Glasgow', 'Gothenburg', 'Hamburg', 'Hannover',
-        'Helsinki', 'Leeds', 'Leipzig', 'Lisbon', 'todz', 'London', 'Krakow', 'Madrid',
-        'Mlaga', 'Manchester', 'Marseille', 'Milan', 'Munich', 'Naples', 'Palermo',
-        'Paris', 'Poznan', 'Prague', 'Riga', 'Rome', 'Rotterdam', 'Seville', 'Sheffield',
-        'Sofia', 'Stockholm', 'Stuttgart', 'The Hague', 'Turin', 'Valencia', 'Vienna',
-        'Vilnius', 'Warsaw', 'Wroclaw', 'Zagreb', 'Zaragoza'];
+    public industryItems: Array<string> = [];
+    public countryItems: Array<string> = [];
+    public sicItems: Array<string> = [];
+    public entityTypeItems: Array<string> = [];
+    public sectorItems: Array<string> = [];
 
     constructor(private companySearchProvider: CompanySearchService) {
         this.companySearch = new CompanySearch;
@@ -42,7 +37,7 @@ export class SearchComponent implements OnInit{
 
     getCompanySearchModel(){
         this.companySearchProvider.getCompanySearchModel()
-            .then(response => this.successHandler(response))
+            .then(response =>  this.successHandler(response))
             .catch(error => this.logError(error));
     }
 
@@ -52,18 +47,37 @@ export class SearchComponent implements OnInit{
         this.companySearch.industries = response.industries;
         this.companySearch.sectors = response.sectors;
         this.companySearch.sics = response.siCs;
-        console.warn(this.companySearch);
+
+        for (var i = 0; i < this.companySearch.industries.length; i++) {
+            this.industryItems.push(this.companySearch.industries[i].industryDescription);
+        }
+
+        for (var i = 0; i < this.companySearch.sics.length; i++) {
+            this.sicItems.push(this.companySearch.sics[i].sicCode + ' ' + this.companySearch.sics[i].sicDescription.substr(0, 20) + '..');
+        }
+
+        for (var i = 0; i < this.companySearch.entityTypes.length; i++) {
+            this.entityTypeItems.push(this.companySearch.entityTypes[i].entityTypeDescription);
+        }
+
+        for (var i = 0; i < this.companySearch.countries.length; i++) {
+            this.countryItems.push(this.companySearch.countries[i].countryDescription);
+        }
+
+        for (var i = 0; i < this.companySearch.sectors.length; i++) {
+            this.sectorItems.push(this.companySearch.sectors[i].sectorDescription);
+        }
     }
 
     logError(error: any){
         console.error('error inside form bind OnInit ' + error);
     }
 
-    public selected(value: any): void {
+    public selectedIndustry(value: any): void {
         console.log('Selected value is: ', value);
     }
 
-    public removed(value: any): void {
+    public removedIndustry(value: any): void {
         console.log('Removed value is: ', value);
     }
 
