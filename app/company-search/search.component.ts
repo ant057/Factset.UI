@@ -5,13 +5,17 @@ import {CompanySearchService} from './shared/company-search.service';
 //components
 import {AutoCompleteComponent} from './shared/auto-complete.component';
 import {SELECT_DIRECTIVES} from 'ng2-select';
+import {ACCORDION_DIRECTIVES} from 'ng2-bootstrap/components/accordion';
+import {TYPEAHEAD_DIRECTIVES} from 'ng2-bootstrap/components/typeahead';
+import {FORM_DIRECTIVES} from '@angular/forms';
 //models
-import {CompanySearch} from './shared/company-search.models';
+import {CompanySearch, CompanyList} from './shared/company-search.models';
 
 @Component({
     selector: 'search',
     templateUrl: 'app/company-search/search.component.html',
-    directives: [AutoCompleteComponent, SELECT_DIRECTIVES]
+    directives: [AutoCompleteComponent, SELECT_DIRECTIVES,
+        ACCORDION_DIRECTIVES, TYPEAHEAD_DIRECTIVES, FORM_DIRECTIVES]
 })
 export class SearchComponent implements OnInit{
 
@@ -23,6 +27,11 @@ export class SearchComponent implements OnInit{
     public entityTypeItems: Array<string> = [];
     public sectorItems: Array<string> = [];
 
+    public accordionOpen: boolean = true;
+
+    public selected: string = '';
+    public companyListArray: Array<string> = [];
+    
     constructor(private companySearchProvider: CompanySearchService) {
         this.companySearch = new CompanySearch;
     }
@@ -31,13 +40,28 @@ export class SearchComponent implements OnInit{
         this.bindTemplate();
     }
 
+    alert() {
+        window.alert('hi');
+    }
+
     bindTemplate(){
         this.getCompanySearchModel();
+        this.getCompanies();
     }
 
     getCompanySearchModel(){
         this.companySearchProvider.getCompanySearchModel()
             .then(response =>  this.successHandler(response))
+            .catch(error => this.logError(error));
+    }
+
+    getCompanies() {
+        this.companySearchProvider.getCompaniesAll()
+            .then(response => {
+                for (var i = 0; i < response.length; i++) {
+                    this.companyListArray.push(response[i].companyName);
+                }
+            })
             .catch(error => this.logError(error));
     }
 
@@ -90,5 +114,9 @@ export class SearchComponent implements OnInit{
             .map((item: any) => {
                 return item.text;
             }).join(',');
+    }
+
+    public typeaheadOnSelect(e: any): void {
+        console.log('Selected value: ', e.item);
     }
 }

@@ -15,6 +15,9 @@ var company_search_service_1 = require('./shared/company-search.service');
 //components
 var auto_complete_component_1 = require('./shared/auto-complete.component');
 var ng2_select_1 = require('ng2-select');
+var accordion_1 = require('ng2-bootstrap/components/accordion');
+var typeahead_1 = require('ng2-bootstrap/components/typeahead');
+var forms_1 = require('@angular/forms');
 //models
 var company_search_models_1 = require('./shared/company-search.models');
 var SearchComponent = (function () {
@@ -25,18 +28,35 @@ var SearchComponent = (function () {
         this.sicItems = [];
         this.entityTypeItems = [];
         this.sectorItems = [];
+        this.accordionOpen = true;
+        this.selected = '';
+        this.companyListArray = [];
         this.companySearch = new company_search_models_1.CompanySearch;
     }
     SearchComponent.prototype.ngOnInit = function () {
         this.bindTemplate();
     };
+    SearchComponent.prototype.alert = function () {
+        window.alert('hi');
+    };
     SearchComponent.prototype.bindTemplate = function () {
         this.getCompanySearchModel();
+        this.getCompanies();
     };
     SearchComponent.prototype.getCompanySearchModel = function () {
         var _this = this;
         this.companySearchProvider.getCompanySearchModel()
             .then(function (response) { return _this.successHandler(response); })
+            .catch(function (error) { return _this.logError(error); });
+    };
+    SearchComponent.prototype.getCompanies = function () {
+        var _this = this;
+        this.companySearchProvider.getCompaniesAll()
+            .then(function (response) {
+            for (var i = 0; i < response.length; i++) {
+                _this.companyListArray.push(response[i].companyName);
+            }
+        })
             .catch(function (error) { return _this.logError(error); });
     };
     SearchComponent.prototype.successHandler = function (response) {
@@ -80,11 +100,15 @@ var SearchComponent = (function () {
             return item.text;
         }).join(',');
     };
+    SearchComponent.prototype.typeaheadOnSelect = function (e) {
+        console.log('Selected value: ', e.item);
+    };
     SearchComponent = __decorate([
         core_1.Component({
             selector: 'search',
             templateUrl: 'app/company-search/search.component.html',
-            directives: [auto_complete_component_1.AutoCompleteComponent, ng2_select_1.SELECT_DIRECTIVES]
+            directives: [auto_complete_component_1.AutoCompleteComponent, ng2_select_1.SELECT_DIRECTIVES,
+                accordion_1.ACCORDION_DIRECTIVES, typeahead_1.TYPEAHEAD_DIRECTIVES, forms_1.FORM_DIRECTIVES]
         }), 
         __metadata('design:paramtypes', [company_search_service_1.CompanySearchService])
     ], SearchComponent);

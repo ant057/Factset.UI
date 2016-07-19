@@ -9,7 +9,8 @@
     '@angular':                   'node_modules/@angular',
     'angular2-in-memory-web-api': 'node_modules/angular2-in-memory-web-api',
     'rxjs':                       'node_modules/rxjs',
-    'ng2-select':                 'node_modules/ng2-select'
+    'ng2-select':                 'node_modules/ng2-select',
+    'moment':                     'node_modules/moment/moment.js'
   };
   // packages tells the System loader how to load when no filename and/or no extension
   var packages = {

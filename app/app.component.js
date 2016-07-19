@@ -9,10 +9,12 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
+//providers
 var router_deprecated_1 = require('@angular/router-deprecated');
 //compnents
 var dashboard_component_1 = require('./dashboard/dashboard.component');
 var company_search_component_1 = require('./company-search/company-search.component');
+var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 //services
 var company_search_service_1 = require('./company-search/shared/company-search.service');
 var AppComponent = (function () {
@@ -23,7 +25,7 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'my-app',
             templateUrl: 'app/app.component.html',
-            directives: [router_deprecated_1.ROUTER_DIRECTIVES],
+            directives: [router_deprecated_1.ROUTER_DIRECTIVES, ng2_bootstrap_1.AlertComponent],
             providers: [
                 router_deprecated_1.ROUTER_PROVIDERS,
                 company_search_service_1.CompanySearchService

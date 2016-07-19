@@ -18,6 +18,7 @@ var company_search_service_1 = require('./shared/company-search.service');
 var CompanySearchComponent = (function () {
     function CompanySearchComponent(companySearchProvider) {
         this.companySearchProvider = companySearchProvider;
+        this.toggle = false;
         //something
     }
     CompanySearchComponent.prototype.ngOnInit = function () {
@@ -26,6 +27,9 @@ var CompanySearchComponent = (function () {
     CompanySearchComponent.prototype.bindTemplate = function () {
         // get vm for this and child components
         //this.companySearchProvider.getCompaniesAll();
+    };
+    CompanySearchComponent.prototype.changeToggle = function () {
+        this.toggle = true;
     };
     CompanySearchComponent = __decorate([
         core_1.Component({

@@ -51,7 +51,6 @@ var CompanySearchService = (function () {
     CompanySearchService.prototype.getCompanySearchModel = function () {
         var _this = this;
         if (this._companySearch) {
-            console.warn('into the fray');
             return Promise.resolve(this._companySearch);
         }
         else {
@@ -67,17 +66,19 @@ var CompanySearchService = (function () {
         }
     };
     CompanySearchService.prototype.getCompaniesAll = function () {
-        //if (this._companyList) {
-        return Promise.resolve(this._companyList);
-        //} else {
-        //    return this.http.get(this.apiUrl + 'GetAllCompanies')
-        //        .toPromise()
-        //        .then(response => {
-        //            response.json();
-        //            this._companyList = response.json();
-        //        })
-        //        .catch(this.handleError);
-        //}
+        var _this = this;
+        if (this._companyList) {
+            return Promise.resolve(this._companyList);
+        }
+        else {
+            return this.http.get(this.apiUrl + 'GetAllCompanies')
+                .toPromise()
+                .then(function (response) {
+                response.json();
+                _this._companyList = response.json();
+            })
+                .catch(this.handleError);
+        }
     };
     CompanySearchService.prototype.successHandler = function (response, dataModel) {
     };

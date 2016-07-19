@@ -1,16 +1,18 @@
 import {Component}       from '@angular/core';
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 
+//providers
+import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
 //compnents
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CompanySearchComponent} from './company-search/company-search.component'
+import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
 //services
 import {CompanySearchService} from './company-search/shared/company-search.service';
 
 @Component({
     selector: 'my-app',
     templateUrl: 'app/app.component.html',
-    directives: [ROUTER_DIRECTIVES],
+    directives: [ROUTER_DIRECTIVES, AlertComponent],
     providers: [
         ROUTER_PROVIDERS,
         CompanySearchService

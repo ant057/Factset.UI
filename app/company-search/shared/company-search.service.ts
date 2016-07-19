@@ -51,7 +51,6 @@ export class CompanySearchService {
 
     getCompanySearchModel(): Promise<CompanySearch> {
         if (this._companySearch) {
-            console.warn('into the fray');
             return Promise.resolve(this._companySearch);
         }
         else {
@@ -68,17 +67,18 @@ export class CompanySearchService {
     }
 
     getCompaniesAll(): Promise<CompanyList[]> {
-        //if (this._companyList) {
+        if (this._companyList) {
             return Promise.resolve(this._companyList);
-        //} else {
-        //    return this.http.get(this.apiUrl + 'GetAllCompanies')
-        //        .toPromise()
-        //        .then(response => {
-        //            response.json();
-        //            this._companyList = response.json();
-        //        })
-        //        .catch(this.handleError);
-        //}
+        }
+        else {
+            return this.http.get(this.apiUrl + 'GetAllCompanies')
+                .toPromise()
+                .then(response => {
+                    response.json();
+                    this._companyList = response.json();
+                })
+                .catch(this.handleError);
+        }
     }
 
     private successHandler(response: any, dataModel: any) {

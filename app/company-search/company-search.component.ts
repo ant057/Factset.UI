@@ -16,6 +16,7 @@ import {CompanySearch} from './shared/company-search.models';
 })
 export class CompanySearchComponent implements OnInit{
 
+    public toggle: boolean = false;
     constructor(private companySearchProvider: CompanySearchService) {
         //something
     }
@@ -27,5 +28,9 @@ export class CompanySearchComponent implements OnInit{
     bindTemplate() {
         // get vm for this and child components
         //this.companySearchProvider.getCompaniesAll();
+    }
+
+    changeToggle() {
+        this.toggle = true;
     }
 }
