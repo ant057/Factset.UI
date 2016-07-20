@@ -16,7 +16,9 @@ import {CompanySearch} from './shared/company-search.models';
 })
 export class CompanySearchComponent implements OnInit{
 
-    public toggle: boolean = false;
+    public toggled: boolean = false;
+    public toggleValue: string = '<';
+
     constructor(private companySearchProvider: CompanySearchService) {
         //something
     }
@@ -30,7 +32,14 @@ export class CompanySearchComponent implements OnInit{
         //this.companySearchProvider.getCompaniesAll();
     }
 
-    changeToggle() {
-        this.toggle = true;
+    toggle() {
+        if (this.toggled) {
+            this.toggled = false;
+            this.toggleValue = '<';
+        }
+        else {
+            this.toggled = true;
+            this.toggleValue = '>';
+        }
     }
 }

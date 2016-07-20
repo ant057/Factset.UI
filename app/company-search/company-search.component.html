@@ -3,7 +3,7 @@
         <search></search>
     </div>
     <div id="page-content-wrapper" style="width:100%">
-        <input (click)="changeToggle" type="button"/>
+        <input (click)="toggle()" type="button" [value]="toggleValue"/>
         <company-list></company-list>
     </div>
 </div>

@@ -62,7 +62,7 @@
 
 #sidebar-wrapper {
     z-index: 1000;
-    position: fixed;
+    position: absolute;
     left: 250px;
     width: 0;
     height: 100%;
@@ -75,7 +75,6 @@
     transition: all 0.5s ease;
     color: #536E7A;
     box-shadow: 3px 0 6px rgba(0,0,0,0.3);
-    padding: 6px;
 }
 
 #wrapper.toggled #sidebar-wrapper {
