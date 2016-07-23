@@ -3,11 +3,11 @@
     <div *ngIf="loading">
         <img src="app/assets/pre-loading.gif" /> 
     </div>
-    <div class="table-container">
+    <div *ngIf="companies" class="table-container">
         <div class="row">
             <pagination-controls (pageChange)="getCompanyPage($event)" id="server"></pagination-controls>
         </div>
-        <table *ngIf="companies" id="companyTable" class="table table-filter table-striped">
+        <table id="companyTable" class="table table-filter table-striped">
             <tr>
                 <td><div class="media"><p class="summary">Factset Security ID</p></div></td>
                 <td><div class="media"><p class="summary">Factset Entity ID</p></div></td>

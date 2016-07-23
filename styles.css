@@ -18,6 +18,10 @@
     background-color: #01244A;
 }
 
+.active{
+    background-color: #2BBCDE;
+}
+
 .navbar-inverse .navbar-nav > li > a {
     color: white;
     font-size: medium;

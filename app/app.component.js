@@ -10,10 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 //providers
-var router_deprecated_1 = require('@angular/router-deprecated');
-//compnents
-var dashboard_component_1 = require('./dashboard/dashboard.component');
-var company_search_component_1 = require('./company-search/company-search.component');
+//import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
+var router_1 = require('@angular/router');
 var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 //services
 var company_search_service_1 = require('./company-search/shared/company-search.service');
@@ -25,25 +23,12 @@ var AppComponent = (function () {
         core_1.Component({
             selector: 'my-app',
             templateUrl: 'app/app.component.html',
-            directives: [router_deprecated_1.ROUTER_DIRECTIVES, ng2_bootstrap_1.AlertComponent],
+            directives: [router_1.ROUTER_DIRECTIVES, ng2_bootstrap_1.AlertComponent],
             providers: [
-                router_deprecated_1.ROUTER_PROVIDERS,
+                //ROUTER_PROVIDERS,
                 company_search_service_1.CompanySearchService
             ]
-        }),
-        router_deprecated_1.RouteConfig([
-            {
-                path: '/dashboard',
-                name: 'Dashboard',
-                component: dashboard_component_1.DashboardComponent,
-                useAsDefault: true
-            },
-            {
-                path: '/companysearch',
-                name: 'CompanySearch',
-                component: company_search_component_1.CompanySearchComponent
-            }
-        ]), 
+        }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);
     return AppComponent;

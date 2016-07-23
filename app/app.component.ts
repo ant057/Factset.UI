@@ -1,7 +1,8 @@
 import {Component}       from '@angular/core';
 
 //providers
-import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
+//import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
+import {ROUTER_DIRECTIVES} from '@angular/router';
 //compnents
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CompanySearchComponent} from './company-search/company-search.component'
@@ -14,11 +15,11 @@ import {CompanySearchService} from './company-search/shared/company-search.servi
     templateUrl: 'app/app.component.html',
     directives: [ROUTER_DIRECTIVES, AlertComponent],
     providers: [
-        ROUTER_PROVIDERS,
+        //ROUTER_PROVIDERS,
         CompanySearchService
     ]
 })
-@RouteConfig([
+/*@RouteConfig([
     {
         path: '/dashboard',
         name: 'Dashboard',
@@ -30,7 +31,7 @@ import {CompanySearchService} from './company-search/shared/company-search.servi
         name: 'CompanySearch',
         component: CompanySearchComponent
     }
-])
+])*/
 export class AppComponent {
     title = 'Factset UI';
 }
