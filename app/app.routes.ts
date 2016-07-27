@@ -9,7 +9,8 @@ import {CompanyDetailComponent} from './company/company-detail.component';
 const routes: RouterConfig = [
     { path: 'dashboard', component: DashboardComponent },
     { path: 'companysearch', component: CompanySearchComponent },
-    { path: 'company/:permanentsecurityid', component: CompanyDetailComponent }//,
+    { path: 'company', component: CompanyDetailComponent }//,
+    //{ path: 'company/:permanentsecurityid', component: CompanyDetailComponent }//,
     //{ path: '**', component: PageNotFoundComponent }
 ];
 

@@ -1,6 +1,7 @@
 //angular
-import {Component, OnInit} from '@angular/core';
-import {PaginatePipe, PaginationService, PaginationControlsCmp, IPaginationInstance} from 'ng2-pagination';
+import { Component, OnInit } from '@angular/core';
+import { PaginatePipe, PaginationService, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
+import { Router } from '@angular/router';
 
 //services
 import {CompanySearchService} from './shared/company-search.service';
@@ -23,7 +24,8 @@ export class CompanyListComponent implements OnInit {
     private _pageSize: number = 25;
     private _total: number;
 
-    constructor(private companySearchProvider: CompanySearchService) {
+    constructor(private companySearchProvider: CompanySearchService,
+                private router: Router) {
     //
     }
 
@@ -58,5 +60,6 @@ export class CompanyListComponent implements OnInit {
 
     anAlert() {
         window.alert('i wouldnt do that if i were you.."');
+        this.router.navigate(['/company']);
     }
 }

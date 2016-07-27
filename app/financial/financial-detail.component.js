@@ -10,17 +10,17 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //angular
 var core_1 = require('@angular/core');
-var CompanyDetailComponent = (function () {
-    function CompanyDetailComponent() {
+var FinancialDetailComponent = (function () {
+    function FinancialDetailComponent() {
     }
-    CompanyDetailComponent = __decorate([
+    FinancialDetailComponent = __decorate([
         core_1.Component({
-            selector: 'company-detail',
-            templateUrl: 'app/company/company-detail.component.html'
+            selector: 'financial-detail',
+            templateUrl: 'app/financial/financial-detail.component.html'
         }), 
         __metadata('design:paramtypes', [])
-    ], CompanyDetailComponent);
-    return CompanyDetailComponent;
+    ], FinancialDetailComponent);
+    return FinancialDetailComponent;
 }());
-exports.CompanyDetailComponent = CompanyDetailComponent;
-//# sourceMappingURL=company-detail.component.js.map
+exports.FinancialDetailComponent = FinancialDetailComponent;
+//# sourceMappingURL=financial-detail.component.js.map

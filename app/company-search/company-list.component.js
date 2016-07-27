@@ -11,11 +11,13 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //angular
 var core_1 = require('@angular/core');
 var ng2_pagination_1 = require('ng2-pagination');
+var router_1 = require('@angular/router');
 //services
 var company_search_service_1 = require('./shared/company-search.service');
 var CompanyListComponent = (function () {
-    function CompanyListComponent(companySearchProvider) {
+    function CompanyListComponent(companySearchProvider, router) {
         this.companySearchProvider = companySearchProvider;
+        this.router = router;
         this.loading = false;
         this._page = 1;
         this._pageSize = 25;
@@ -47,6 +49,7 @@ var CompanyListComponent = (function () {
     };
     CompanyListComponent.prototype.anAlert = function () {
         window.alert('i wouldnt do that if i were you.."');
+        this.router.navigate(['/company']);
     };
     CompanyListComponent = __decorate([
         core_1.Component({
@@ -56,7 +59,7 @@ var CompanyListComponent = (function () {
             directives: [ng2_pagination_1.PaginationControlsCmp],
             pipes: [ng2_pagination_1.PaginatePipe]
         }), 
-        __metadata('design:paramtypes', [company_search_service_1.CompanySearchService])
+        __metadata('design:paramtypes', [company_search_service_1.CompanySearchService, router_1.Router])
     ], CompanyListComponent);
     return CompanyListComponent;
 }());

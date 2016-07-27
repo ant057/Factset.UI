@@ -1,1 +1,1 @@
-{"version":3,"file":"company-detail.component.js","sourceRoot":"","sources":["company-detail.component.ts"],"names":[],"mappings":";AAAA;IAAA;IAEA,CAAC;IAAD,6BAAC;AAAD,CAAC,AAFD,IAEC;AAFY,8BAAsB,yBAElC,CAAA"}
+{"version":3,"file":"company-detail.component.js","sourceRoot":"","sources":["company-detail.component.ts"],"names":[],"mappings":";;;;;;;;;;AAAA,SAAS;AACT,qBAAsC,eAAe,CAAC,CAAA;AActD;IAAA;IAEA,CAAC;IAND;QAAC,gBAAS,CAAC;YACP,QAAQ,EAAE,gBAAgB;YAC1B,WAAW,EAAE,2CAA2C;SAC3D,CAAC;;8BAAA;IAGF,6BAAC;AAAD,CAAC,AAFD,IAEC;AAFY,8BAAsB,yBAElC,CAAA"}
