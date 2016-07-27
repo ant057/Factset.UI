@@ -22,5 +22,13 @@ export class CompanyDetail {
         universeEurope: boolean
         universeAsiaPacific: boolean
 
+        entityTypeDescription: string
+        sICCode: string
+        sICDescription: string
+        industryDescription: string
+        sectorDescription: string
+        ticker: string
+        exchange: string
+
         financialStatements: Financial
 }

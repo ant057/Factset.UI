@@ -1,14 +1,15 @@
-import {Component}       from '@angular/core';
+import { Component }       from '@angular/core';
 
 //providers
 //import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
-import {ROUTER_DIRECTIVES} from '@angular/router';
+import { ROUTER_DIRECTIVES } from '@angular/router';
 //compnents
-import {DashboardComponent} from './dashboard/dashboard.component';
-import {CompanySearchComponent} from './company-search/company-search.component'
-import {AlertComponent} from 'ng2-bootstrap/ng2-bootstrap';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { CompanySearchComponent } from './company-search/company-search.component'
+import { AlertComponent } from 'ng2-bootstrap/ng2-bootstrap';
 //services
-import {CompanySearchService} from './company-search/shared/company-search.service';
+import { CompanySearchService } from './company-search/shared/company-search.service';
+import { CompanyDetailService } from './company/shared/company-detail.service';
 
 @Component({
     selector: 'my-app',
@@ -16,7 +17,8 @@ import {CompanySearchService} from './company-search/shared/company-search.servi
     directives: [ROUTER_DIRECTIVES, AlertComponent],
     providers: [
         //ROUTER_PROVIDERS,
-        CompanySearchService
+        CompanySearchService,
+        CompanyDetailService
     ]
 })
 /*@RouteConfig([
@@ -33,5 +35,5 @@ import {CompanySearchService} from './company-search/shared/company-search.servi
     }
 ])*/
 export class AppComponent {
-    title = 'Factset UI';
+    title = 'Factset Account Lookup';
 }

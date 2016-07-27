@@ -1,5 +1,5 @@
 ﻿//angular
-import {Component, OnInit}       from '@angular/core';
+import {Component, OnInit, Input}       from '@angular/core';
 
 //components
 
@@ -15,4 +15,9 @@ import { BalanceModel, FinancialDetail, Financial } from '../financial/shared/fi
 })
 export class FinancialDetailComponent {
 
+    @Input() financials: Financial;
+
+    constructor() {
+
+    }
 }

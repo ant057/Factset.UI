@@ -1,1 +1,42 @@
-<h2>Here's the company detail page.</h2>
+<div class="row">
+    <div class="col-md-12">
+        <div *ngIf="loading">
+            <img src="app/assets/pre-loading.gif" />
+        </div>
+    </div>
+    <div class="col-md-12 well" *ngIf="companyDetail">
+        <h2>{{companyDetail.companyName}}
+            <small>{{companyDetail.countryISO}}</small><br />
+            <small>{{companyDetail.ticker.substring(0, companyDetail.ticker.indexOf("-"))}} {{ companyDetail.exchange}}</small>
+        </h2>
+    </div>
+    <div class="col-md-3 well" *ngIf="companyDetail">
+        <dl>
+            <dt>Business Description</dt>
+            <dd>{{companyDetail.businessDescriptionAbbrev}}</dd>
+            <dt>Universe</dt>
+            <dd>{{companyDetail.universeAmerica}}</dd>
+            <dt>Latest Annual Update</dt>
+            <dd>{{companyDetail.latestAnnualUpdate}}</dd>
+            <dt>Market Value</dt>
+            <dd>{{companyDetail.marketValueCurrent}}</dd>
+            <dt>Cash Flow Per Share</dt>
+            <dd>{{companyDetail.cashFlowPerShare}}</dd>
+            <dt>Dividends Per Share</dt>
+            <dd>{{companyDetail.dividendsPerShare}}</dd>
+            <dt>Price To Book Value</dt>
+            <dd>{{companyDetail.priceToBookValue}}</dd>
+            <dt>Dividend Yield</dt>
+            <dd>{{companyDetail.dividendYield}}</dd>
+            <dt>Dividend Payout Per Share</dt>
+            <dd>{{companyDetail.dividendPayoutPerShare}}</dd>
+            <dt>Price To Earnings</dt>
+            <dd>{{companyDetail.priceToEarnings}}</dd>
+        </dl>
+    </div>
+     <div class="col-md-9 well" *ngIf="companyDetail">
+         <financial-detail [financials]="companyDetail.financialStatements">
+
+         </financial-detail>
+     </div>
+</div>

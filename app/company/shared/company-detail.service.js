@@ -19,7 +19,7 @@ var CompanyDetailService = (function () {
         this.apiUrlBase = 'http://localhost:54665/api/';
         this.apiUrl = this.apiUrlBase + 'Company/';
     }
-    CompanyDetailService.prototype.getCompanyDetail = function (page, pageSize) {
+    CompanyDetailService.prototype.getCompanyDetail = function (permSecurityId) {
         var _this = this;
         //return company list data if we have
         if (this._companyDetail) {
@@ -27,7 +27,7 @@ var CompanyDetailService = (function () {
             return Promise.resolve(this._companyDetail);
         }
         else {
-            return this.http.get(this.apiUrl + 'GetCompanyDetail')
+            return this.http.get(this.apiUrl + 'GetCompany/' + permSecurityId)
                 .toPromise()
                 .then(function (response) {
                 _this._companyDetail = response.json();

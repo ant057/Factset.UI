@@ -20,13 +20,13 @@ export class CompanyDetailService {
  
     }
 
-    getCompanyDetail(page: number, pageSize: number): Promise<CompanyDetail> {
+    getCompanyDetail(permSecurityId: string): Promise<CompanyDetail> {
         //return company list data if we have
         if (this._companyDetail) {
             //do stuff
             return Promise.resolve(this._companyDetail);
         } else { //else, get from server
-            return this.http.get(this.apiUrl + 'GetCompanyDetail')
+            return this.http.get(this.apiUrl + 'GetCompany/' + permSecurityId)
                 .toPromise()
                 .then(response => {
                     this._companyDetail = response.json();

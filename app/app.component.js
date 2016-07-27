@@ -15,9 +15,10 @@ var router_1 = require('@angular/router');
 var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 //services
 var company_search_service_1 = require('./company-search/shared/company-search.service');
+var company_detail_service_1 = require('./company/shared/company-detail.service');
 var AppComponent = (function () {
     function AppComponent() {
-        this.title = 'Factset UI';
+        this.title = 'Factset Account Lookup';
     }
     AppComponent = __decorate([
         core_1.Component({
@@ -26,7 +27,8 @@ var AppComponent = (function () {
             directives: [router_1.ROUTER_DIRECTIVES, ng2_bootstrap_1.AlertComponent],
             providers: [
                 //ROUTER_PROVIDERS,
-                company_search_service_1.CompanySearchService
+                company_search_service_1.CompanySearchService,
+                company_detail_service_1.CompanyDetailService
             ]
         }), 
         __metadata('design:paramtypes', [])

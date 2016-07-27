@@ -66,7 +66,7 @@ export class CompanySearchService {
         }
     }
 
-    getCompaniesAll(): Promise<CompanyList[]> {
+    getCompaniesAll(): Promise<any> {
         if (this._companyList) {
             return Promise.resolve(this._companyList);
         }

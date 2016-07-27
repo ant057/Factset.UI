@@ -10,15 +10,41 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //angular
 var core_1 = require('@angular/core');
+//services
+var company_detail_service_1 = require('./shared/company-detail.service');
 var CompanyDetailComponent = (function () {
-    function CompanyDetailComponent() {
+    function CompanyDetailComponent(companyProvider) {
+        this.companyProvider = companyProvider;
+        this.loading = false;
     }
+    CompanyDetailComponent.prototype.ngOnInit = function () {
+        this.bindTemplate();
+    };
+    CompanyDetailComponent.prototype.bindTemplate = function () {
+        this.loading = true;
+        // get vm for this and child components
+        this.getCompanyDetail("D0MJZ3-S-US");
+    };
+    CompanyDetailComponent.prototype.getCompanyDetail = function (permSecurityId) {
+        var _this = this;
+        this.companyProvider.getCompanyDetail(permSecurityId)
+            .then(function (response) { return _this.successHandler(response); })
+            .catch(function (error) { return _this.logError(error); });
+    };
+    CompanyDetailComponent.prototype.successHandler = function (response) {
+        this.companyDetail = response;
+        this.loading = false;
+    };
+    CompanyDetailComponent.prototype.logError = function (error) {
+        console.error('error inside company detail component bind: OnInit ' + error);
+    };
     CompanyDetailComponent = __decorate([
         core_1.Component({
             selector: 'company-detail',
-            templateUrl: 'app/company/company-detail.component.html'
+            templateUrl: 'app/company/company-detail.component.html',
+            directives: []
         }), 
-        __metadata('design:paramtypes', [])
+        __metadata('design:paramtypes', [company_detail_service_1.CompanyDetailService])
     ], CompanyDetailComponent);
     return CompanyDetailComponent;
 }());
