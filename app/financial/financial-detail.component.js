@@ -10,13 +10,15 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //angular
 var core_1 = require('@angular/core');
-var financial_models_ts_1 = require('../financial/shared/financial.models.ts');
+var financial_models_1 = require('../financial/shared/financial.models');
 var FinancialDetailComponent = (function () {
     function FinancialDetailComponent() {
     }
+    FinancialDetailComponent.prototype.ngOnInit = function () {
+    };
     __decorate([
         core_1.Input(), 
-        __metadata('design:type', financial_models_ts_1.Financial)
+        __metadata('design:type', financial_models_1.Financial)
     ], FinancialDetailComponent.prototype, "financials", void 0);
     FinancialDetailComponent = __decorate([
         core_1.Component({

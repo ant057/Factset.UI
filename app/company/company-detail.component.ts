@@ -2,17 +2,17 @@
 import { Component, OnInit}        from '@angular/core';
 
 //components
-import { FinancialDetailComponent } from '../financial/financial-detail.component.ts';
+import { FinancialDetailComponent } from '../financial/financial-detail.component';
 //services
 import { CompanyDetailService } from './shared/company-detail.service';
 //models
 import { CompanyDetail } from './shared/company-detail.models';
-import { BalanceModel, FinancialDetail, Financial } from '../financial/shared/financial.models.ts';
+import { BalanceModel, FinancialDetail, Financial } from '../financial/shared/financial.models';
 
 @Component({
     selector: 'company-detail',
     templateUrl: 'app/company/company-detail.component.html',
-    directives: []
+    directives: [FinancialDetailComponent]
 })
 export class CompanyDetailComponent implements OnInit{
 
@@ -20,7 +20,7 @@ export class CompanyDetailComponent implements OnInit{
     loading: boolean = false;
 
     constructor(private companyProvider: CompanyDetailService) {
-
+        
     }
 
     ngOnInit() {

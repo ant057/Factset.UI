@@ -10,6 +10,8 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //angular
 var core_1 = require('@angular/core');
+//components
+var financial_detail_component_1 = require('../financial/financial-detail.component');
 //services
 var company_detail_service_1 = require('./shared/company-detail.service');
 var CompanyDetailComponent = (function () {
@@ -42,7 +44,7 @@ var CompanyDetailComponent = (function () {
         core_1.Component({
             selector: 'company-detail',
             templateUrl: 'app/company/company-detail.component.html',
-            directives: []
+            directives: [financial_detail_component_1.FinancialDetailComponent]
         }), 
         __metadata('design:paramtypes', [company_detail_service_1.CompanyDetailService])
     ], CompanyDetailComponent);

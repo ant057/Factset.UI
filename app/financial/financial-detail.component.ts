@@ -7,7 +7,7 @@ import {Component, OnInit, Input}       from '@angular/core';
 import { CompanyDetailService } from '../company/shared/company-detail.service';
 //models
 import { CompanyDetail } from '../company/shared/company-detail.models';
-import { BalanceModel, FinancialDetail, Financial } from '../financial/shared/financial.models.ts';
+import { BalanceModel, FinancialDetail, Financial } from '../financial/shared/financial.models';
 
 @Component({
     selector: 'financial-detail',
@@ -19,5 +19,9 @@ export class FinancialDetailComponent {
 
     constructor() {
 
+    }
+
+    ngOnInit() {
+        
     }
 }

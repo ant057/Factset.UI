@@ -1,10 +1,5 @@
-﻿<!DOCTYPE html>
-<html>
-<head>
-    <title></title>
-	<meta charset="utf-8" />
-</head>
-<body>
-
-</body>
-</html>
+﻿<div>
+    <div *ngFor="let lineitem of financials.annualFinancialStatements[0].financialStatements">
+        {{lineitem.fieldName}} {{ lineitem.value}}
+    </div>
+</div>
