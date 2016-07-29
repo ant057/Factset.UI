@@ -32,6 +32,11 @@ export class FinancialDetailComponent {
     //activeStatementsObs: Observable<FinancialDetail[]>;
     //periodSubject = new Subject<string>();
 
+    L0: boolean = false;
+    L1: boolean = false;
+    L2: boolean = false;
+    L3: boolean = false;
+
     constructor() {
 
     }

@@ -21,6 +21,8 @@ var CompanyListComponent = (function () {
         this.loading = false;
         this._page = 1;
         this._pageSize = 25;
+        this.toggled = false;
+        this.toggleValue = '<';
         //
     }
     CompanyListComponent.prototype.ngOnInit = function () {
@@ -50,6 +52,16 @@ var CompanyListComponent = (function () {
     CompanyListComponent.prototype.anAlert = function () {
         window.alert('i wouldnt do that if i were you.."');
         this.router.navigate(['/company']);
+    };
+    CompanyListComponent.prototype.toggle = function () {
+        if (this.toggled) {
+            this.toggled = false;
+            this.toggleValue = '<';
+        }
+        else {
+            this.toggled = true;
+            this.toggleValue = '>';
+        }
     };
     CompanyListComponent = __decorate([
         core_1.Component({

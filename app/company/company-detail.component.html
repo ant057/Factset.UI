@@ -41,11 +41,9 @@
                      {{type}}  <span class="caret"></span>
                  </button>
                  <ul class="dropdown-menu">
-                     <li style="cursor:pointer" (click)="changeStatementType('Balance Sheet')">Balance Sheet</li>
-                     <li style="cursor:pointer" (click)="changeStatementType('Income Statement')">Income Statement</li>
-                     <li style="cursor:pointer" (click)="changeStatementType('Cash Flow')">Cash Flow</li>
-                     <li role="separator" class="divider"></li>
-                     <li style="cursor:pointer" (click)="changeStatementType('Pension')">Pension</li>
+                     <li style="cursor:pointer" (click)="getStatements(period, 'BS')">Balance Sheet</li>
+                     <li style="cursor:pointer" (click)="getStatements(period, 'IS')">Income Statement</li>
+                     <li style="cursor:pointer" (click)="getStatements(period, 'CF')">Cash Flow</li>
                  </ul>
              </div>
              <div class="btn-group">
@@ -53,10 +51,10 @@
                      {{period}}   <span class="caret"></span>
                  </button>
                  <ul class="dropdown-menu">
-                     <li style="cursor:pointer" (click)="getPeriod('Annual')">Annual</li>
-                     <li style="cursor:pointer" (click)="getPeriod('Quarterly')">Quarterly</li>
-                     <li style="cursor:pointer" (click)="getPeriod('LTM')">LTM</li>
-                     <li style="cursor:pointer" (click)="getPeriod('Semi-Annual')">Semi-Annual</li>
+                     <li style="cursor:pointer" (click)="getStatements('Annual',type)">Annual</li>
+                     <li style="cursor:pointer" (click)="getStatements('Quarterly',type)">Quarterly</li>
+                     <li style="cursor:pointer" (click)="getStatements('LTM',type)">LTM</li>
+                     <li style="cursor:pointer" (click)="getStatements('Semi-Annual',type)">Semi-Annual</li>
                  </ul>
              </div>
          </div>

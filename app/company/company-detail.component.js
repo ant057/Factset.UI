@@ -25,7 +25,7 @@ var CompanyDetailComponent = (function () {
     CompanyDetailComponent.prototype.bindTemplate = function () {
         this.loading = true;
         this.period = "Annual";
-        this.type = "Balance Sheet";
+        this.type = "BS";
         // get vm for this and child components
         this.getCompanyDetail("D0MJZ3-S-US");
     };
@@ -40,12 +40,22 @@ var CompanyDetailComponent = (function () {
         this.activeFinancials = this.companyDetail.financialStatements.annualFinancialStatements;
         this.loading = false;
     };
-    CompanyDetailComponent.prototype.getPeriod = function (period) {
+    CompanyDetailComponent.prototype.getStatements = function (period, type) {
         var _this = this;
         this.period = period;
-        this.companyProvider.getCompanyStatements(period)
-            .then(function (response) { return _this.activeFinancials = response; })
+        this.type = type;
+        this.companyProvider.getStatements(period, type)
+            .then(function (response) { return _this.getStatementsSuccess(response); })
             .catch(function (error) { return _this.logError(error); });
+    };
+    CompanyDetailComponent.prototype.getStatementsSuccess = function (response) {
+        this.activeFinancials = response;
+        console.warn(response);
+        console.warn(this.activeFinancials);
+        for (var i = 0; i < this.activeFinancials.length; i++) {
+            for (var p = 0; p < this.activeFinancials[i].financialStatements.length; p++) {
+            }
+        }
     };
     CompanyDetailComponent.prototype.logError = function (error) {
         console.error('error inside company detail component bind: OnInit ' + error);

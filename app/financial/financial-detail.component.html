@@ -27,33 +27,35 @@
             </div>
 </div>-->
 
-<!--<div class="col-md-3" *ngFor="let statement of financials.annualFinancialStatements[0].financialStatements; let i = index">
+<div class="col-md-3" *ngFor="let statement of activeStatements; let i = index">
     <table class="table table-filter table-striped">
         <tr>
-            <td>Period:</td>
-            <td>{{statement.date | date}}</td>
-        </tr>
-        <tr *ngFor="let lineitem of statement.financialStatements">
-            <th *ngIf="i == 0">{{lineitem.description}}</th>
-            <th><div class="media"><p class="summary">{{lineitem.description}}</p></div></th>
-            <td>{{lineitem.value}}</td>
-        </tr>
-    </table>
-</div>-->
-
-<div class="col-md-4" *ngFor="let statement of activeStatements; let i = index">
-    <table class="table table-filter table-striped">
-        <tr>
-            <td>Period:</td>
-            <td>{{statement.date | date}}</td>
+            <!--<td *ngIf="i == 0">Period:</td>-->
+            <td style="text-align:center" colspan="2">{{statement.date | date}}</td>
         </tr>
         <tr *ngFor="let lineitem of statement.financialStatements">
             <!--<th *ngIf="i == 0">{{lineitem.description}}</th>-->
-            <th><div class="media"><p class="summary">{{lineitem.description}}</p></div></th>
-            <td>{{lineitem.value}}</td>
+            <th><div style="height:28px" class="media"><p class="summary" [class.L0]="lineitem.displayLevel === 'L0'" [class.L1]="lineitem.displayLevel === 'L1'" [class.L2]="lineitem.displayLevel === 'L2'" [class.L3]="lineitem.displayLevel === 'L3'">{{ i === 0 ? lineitem.description : ' '}}</p></div></th>
+            <td>{{lineitem.value === '0' ? ' ' : lineitem.value}}</td>
         </tr>
     </table>
 </div>
+
+<!--<div class="col-md-4" *ngFor="let statement of activeStatements; let i = index">
+    <table class="table table-filter table-striped">
+        <tr>
+            <!--<td>Period:</td>-->
+            <!--<td colspan="2">{{statement.date | date}}</td>
+        <!--</tr>
+        <tbody>
+            <tr style="height:75px" *ngFor="let lineitem of statement.financialStatements">
+                <!--<th *ngIf="i == 0">{{lineitem.description}}</th>-->
+                <!--<th><div class="media"><p class="summary">{{lineitem.description}}</p></div></th>
+                <td><div class="media"><p class="summary">{{lineitem.value}}</p></div></td>
+            </tr>
+        </tbody>
+    </table>
+</div>-->
 
 <!--<div>
     <div>

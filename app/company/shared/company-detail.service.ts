@@ -37,20 +37,19 @@ export class CompanyDetailService {
         }
     }
 
-    getCompanyStatements(period: string): Promise<FinancialDetail[]> {
+    getStatements(period: string, type: string): Promise<FinancialDetail[]> {
         if (this._companyDetail) {
             switch (period) {
                 case "Annual":
-                    console.warn('returning annual stmt promise');
+                    console.warn(this._companyDetail.financialStatements.annualFinancialStatements);
                     return Promise.resolve(this._companyDetail.financialStatements.annualFinancialStatements);
-                //case "Quarterly":
-                //    this.activeStatements = this.financials.quarterlyFinancialStatements;
-                //case "LTM":
-                //    this.activeStatements = this.financials.LTMFinancialStatements;
-                //case "Semi-Annual":
-                //    this.activeStatements = this.financials.semiAnnualFinancialStatements;
+                case "Quarterly":
+                    return Promise.resolve(this._companyDetail.financialStatements.quarterlyFinancialStatements);
+                case "LTM":
+                    return Promise.resolve(this._companyDetail.financialStatements.ltmFinancialStatements);
+                case "Semi-Annual":
+                    return Promise.resolve(this._companyDetail.financialStatements.semiAnnualFinancialStatements);
                 default:
-                    console.warn('returning default annual stmt promise');
                     return Promise.resolve(this._companyDetail.financialStatements.annualFinancialStatements);
             }
         }

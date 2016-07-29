@@ -2,7 +2,7 @@
         permanentSecurityID: string
         annualFinancialStatements: FinancialDetail[]
         quarterlyFinancialStatements: FinancialDetail[]
-        LTMFinancialStatements: FinancialDetail[]
+        ltmFinancialStatements: FinancialDetail[]
         semiAnnualFinancialStatements: FinancialDetail[]
     }
 
@@ -26,6 +26,6 @@ export class BalanceModel {
         LTM: number
         semiAnnual: number
 
-        value: string
+        value: number
 
     }

@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
 //models
-import {CompanyList, PagedCompanyList, Industry, Sector, EntityType, Country, SIC, CompanySearch} from './company-search.models';
+import { CompanyList, PagedCompanyList, Industry, Sector, EntityType, Country, SIC, CompanySearch } from './company-search.models';
 
 import 'rxjs/add/operator/toPromise';
 

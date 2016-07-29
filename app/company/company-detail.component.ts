@@ -33,7 +33,7 @@ export class CompanyDetailComponent implements OnInit{
     bindTemplate() {
         this.loading = true;
         this.period = "Annual";
-        this.type = "Balance Sheet";
+        this.type = "BS";
         // get vm for this and child components
         this.getCompanyDetail("D0MJZ3-S-US");
     }
@@ -50,11 +50,24 @@ export class CompanyDetailComponent implements OnInit{
         this.loading = false;
     }
 
-    getPeriod(period: string) {
+    getStatements(period: string, type: string) {
         this.period = period;      
-        this.companyProvider.getCompanyStatements(period)
-            .then(response => this.activeFinancials = response)
+        this.type = type;
+        this.companyProvider.getStatements(period, type)
+            .then(response => this.getStatementsSuccess(response))
             .catch(error => this.logError(error));
+    }
+
+    getStatementsSuccess(response: any) {
+        this.activeFinancials = response;
+        console.warn(response);
+        console.warn(this.activeFinancials);
+        for (var i = 0; i < this.activeFinancials.length; i++) {
+            for (var p = 0; p < this.activeFinancials[i].financialStatements.length; p++) {
+                //this.activeFinancials[i].financialStatements[p] =
+                //    this.activeFinancials[i].financialStatements[p].filter(p => p.reportCode.substr(0, 2) === this.type);
+            }
+        }
     }
 
     logError(error: any) {

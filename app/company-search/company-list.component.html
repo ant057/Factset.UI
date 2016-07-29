@@ -1,18 +1,25 @@
 <div>
-    <h2>Companies</h2>
     <div *ngIf="loading">
         <img src="app/assets/pre-loading.gif" /> 
     </div>
     <div *ngIf="companies" class="table-container">
         <div class="row">
-            <pagination-controls (pageChange)="getCompanyPage($event)" id="server"></pagination-controls>
+                <div class="col-md-2">
+                    <h4>Companies</h4>
+                </div>
+                <div class="col-md-4">
+                    <input class="input-sm" (click)="toggle()" type="button" [value]="toggleValue" />
+                </div>
+            <div class="col-md-6">
+                <pagination-controls (pageChange)="getCompanyPage($event)" id="server"></pagination-controls>
+            </div>
         </div>
         <table id="companyTable" class="table table-filter table-striped">
-            <tr>
-                <td><div class="media"><p class="summary">Factset Security ID</p></div></td>
-                <td><div class="media"><p class="summary">Factset Entity ID</p></div></td>
-                <td><div class="media"><p class="summary">Company Details</p></div></td>
-            </tr>
+            <thead>
+                <td><div class="media"><p class="summary"><strong>Factset Security ID</strong></p></div></td>
+                <td><div class="media"><p class="summary"><strong>Factset Entity ID</strong></p></div></td>
+                <td><div class="media"><p class="summary"><strong>Company Details</strong></p></div></td>
+            </thead>
             <tbody>
                 <tr *ngFor="let company of companies | paginate: {id: 'server', itemsPerPage: _pageSize, currentPage: _page, totalItems: _total }" (click)="anAlert()">
                     <td>

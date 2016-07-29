@@ -22,9 +22,13 @@ require('rxjs/add/operator/map');
 require('rxjs/add/operator/switchMap');
 var financial_models_1 = require('../financial/shared/financial.models');
 var FinancialDetailComponent = (function () {
-    //activeStatementsObs: Observable<FinancialDetail[]>;
-    //periodSubject = new Subject<string>();
     function FinancialDetailComponent() {
+        //activeStatementsObs: Observable<FinancialDetail[]>;
+        //periodSubject = new Subject<string>();
+        this.L0 = false;
+        this.L1 = false;
+        this.L2 = false;
+        this.L3 = false;
     }
     FinancialDetailComponent.prototype.ngOnInit = function () {
         //this.activeStatements = this.financials.annualFinancialStatements;

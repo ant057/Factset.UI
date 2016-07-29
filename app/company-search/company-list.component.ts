@@ -24,6 +24,9 @@ export class CompanyListComponent implements OnInit {
     private _pageSize: number = 25;
     private _total: number;
 
+    public toggled: boolean = false;
+    public toggleValue: string = '<';
+
     constructor(private companySearchProvider: CompanySearchService,
                 private router: Router) {
     //
@@ -61,5 +64,16 @@ export class CompanyListComponent implements OnInit {
     anAlert() {
         window.alert('i wouldnt do that if i were you.."');
         this.router.navigate(['/company']);
+    }
+
+    toggle() {
+        if (this.toggled) {
+            this.toggled = false;
+            this.toggleValue = '<';
+        }
+        else {
+            this.toggled = true;
+            this.toggleValue = '>';
+        }
     }
 }

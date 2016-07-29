@@ -37,6 +37,26 @@
 }
 
 /* CUSTOM */
+
+.L0{
+    text-align:left
+}
+
+.L1{
+    text-align:center;
+    font-weight:normal;
+}
+
+.L2{
+    text-align:right;
+    font-weight:normal;
+}
+
+.L3{
+    text-align:right;
+    font-weight:normal;
+}
+
 .divUnderline{
     border-bottom: 1px solid black;
 }
