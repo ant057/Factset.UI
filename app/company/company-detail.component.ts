@@ -17,7 +17,10 @@ import { BalanceModel, FinancialDetail, Financial } from '../financial/shared/fi
 export class CompanyDetailComponent implements OnInit{
 
     companyDetail: CompanyDetail;
+    activeFinancials: FinancialDetail[]
     loading: boolean = false;
+    period: string;
+    type: string;
 
     constructor(private companyProvider: CompanyDetailService) {
         
@@ -29,6 +32,8 @@ export class CompanyDetailComponent implements OnInit{
 
     bindTemplate() {
         this.loading = true;
+        this.period = "Annual";
+        this.type = "Balance Sheet";
         // get vm for this and child components
         this.getCompanyDetail("D0MJZ3-S-US");
     }
@@ -41,7 +46,15 @@ export class CompanyDetailComponent implements OnInit{
 
     successHandler(response: any) {
         this.companyDetail = response;
+        this.activeFinancials = this.companyDetail.financialStatements.annualFinancialStatements;
         this.loading = false;
+    }
+
+    getPeriod(period: string) {
+        this.period = period;      
+        this.companyProvider.getCompanyStatements(period)
+            .then(response => this.activeFinancials = response)
+            .catch(error => this.logError(error));
     }
 
     logError(error: any) {

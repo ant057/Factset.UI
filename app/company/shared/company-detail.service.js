@@ -37,6 +37,24 @@ var CompanyDetailService = (function () {
                 .catch(this.handleError);
         }
     };
+    CompanyDetailService.prototype.getCompanyStatements = function (period) {
+        if (this._companyDetail) {
+            switch (period) {
+                case "Annual":
+                    console.warn('returning annual stmt promise');
+                    return Promise.resolve(this._companyDetail.financialStatements.annualFinancialStatements);
+                //case "Quarterly":
+                //    this.activeStatements = this.financials.quarterlyFinancialStatements;
+                //case "LTM":
+                //    this.activeStatements = this.financials.LTMFinancialStatements;
+                //case "Semi-Annual":
+                //    this.activeStatements = this.financials.semiAnnualFinancialStatements;
+                default:
+                    console.warn('returning default annual stmt promise');
+                    return Promise.resolve(this._companyDetail.financialStatements.annualFinancialStatements);
+            }
+        }
+    };
     CompanyDetailService.prototype.handleError = function (error) {
         console.error('An Error Occurred ', error);
         return Promise.reject(error.message || error);

@@ -1,5 +1,74 @@
-﻿<div>
-    <div *ngFor="let lineitem of financials.annualFinancialStatements[0].financialStatements">
-        {{lineitem.fieldName}} {{ lineitem.value}}
-    </div>
+﻿<!--<div>
+    <table id="companyTable" class="table table-filter table-striped">
+        <tr>
+            <td><div class="media"><p class="summary">Line Item</p></div></td>
+            <td><div class="media"><p class="summary">{{}}</p></div></td>
+        </tr>
+        <tbody>
+            <tr *ngFor="let lineitem of financials.annualFinancialStatements[0].financialStatements">
+                <td>
+                    <div class="media">
+                        <p class="summary">{{company.permanentSecurityID}}</p>
+                    </div>
+                </td>
+                <td>
+                    <div class="media">
+                        <p class="summary">{{company.permanentSecurityID}}</p>
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+            <div *ngFor="let lineitem of financials.annualFinancialStatements[0].financialStatements">
+                <div>
+
+                </div>
+                {{lineitem.fieldName}} {{ lineitem.value}}
+            </div>
+</div>-->
+
+<!--<div class="col-md-3" *ngFor="let statement of financials.annualFinancialStatements[0].financialStatements; let i = index">
+    <table class="table table-filter table-striped">
+        <tr>
+            <td>Period:</td>
+            <td>{{statement.date | date}}</td>
+        </tr>
+        <tr *ngFor="let lineitem of statement.financialStatements">
+            <th *ngIf="i == 0">{{lineitem.description}}</th>
+            <th><div class="media"><p class="summary">{{lineitem.description}}</p></div></th>
+            <td>{{lineitem.value}}</td>
+        </tr>
+    </table>
+</div>-->
+
+<div class="col-md-4" *ngFor="let statement of activeStatements; let i = index">
+    <table class="table table-filter table-striped">
+        <tr>
+            <td>Period:</td>
+            <td>{{statement.date | date}}</td>
+        </tr>
+        <tr *ngFor="let lineitem of statement.financialStatements">
+            <!--<th *ngIf="i == 0">{{lineitem.description}}</th>-->
+            <th><div class="media"><p class="summary">{{lineitem.description}}</p></div></th>
+            <td>{{lineitem.value}}</td>
+        </tr>
+    </table>
 </div>
+
+<!--<div>
+    <div>
+        Period Ending:
+    </div>
+    <ul *ngFor="let lineitem of financials.annualFinancialStatements[0].financialStatements" style="list-style-type:none">
+        <li style="text-align:right;height:20px">{{lineitem.description}}</li>
+    </ul>
+</div>
+
+<div *ngFor="let statement of financials.annualFinancialStatements"> 
+    <div>
+        {{statement.date | date}}
+    </div>
+    <ul *ngFor="let lineitem of statement.financialStatements" style="list-style-type:none">
+        <li style="height:20px">{{lineitem.value}}</li>
+    </ul>
+</div>-->

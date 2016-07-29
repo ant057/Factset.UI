@@ -10,7 +10,7 @@
             <small>{{companyDetail.ticker.substring(0, companyDetail.ticker.indexOf("-"))}} {{ companyDetail.exchange}}</small>
         </h2>
     </div>
-    <div class="col-md-3 well" *ngIf="companyDetail">
+    <div class="col-md-2 well" *ngIf="companyDetail">
         <dl>
             <dt>Business Description</dt>
             <dd>{{companyDetail.businessDescriptionAbbrev}}</dd>
@@ -34,9 +34,52 @@
             <dd>{{companyDetail.priceToEarnings}}</dd>
         </dl>
     </div>
-     <div class="col-md-9 well" *ngIf="companyDetail">
-         <financial-detail [financials]="companyDetail.financialStatements">
+     <div class="col-md-10 well" *ngIf="companyDetail">
+         <div class="col-md-10">
+             <div class="btn-group">
+                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     {{type}}  <span class="caret"></span>
+                 </button>
+                 <ul class="dropdown-menu">
+                     <li style="cursor:pointer" (click)="changeStatementType('Balance Sheet')">Balance Sheet</li>
+                     <li style="cursor:pointer" (click)="changeStatementType('Income Statement')">Income Statement</li>
+                     <li style="cursor:pointer" (click)="changeStatementType('Cash Flow')">Cash Flow</li>
+                     <li role="separator" class="divider"></li>
+                     <li style="cursor:pointer" (click)="changeStatementType('Pension')">Pension</li>
+                 </ul>
+             </div>
+             <div class="btn-group">
+                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     {{period}}   <span class="caret"></span>
+                 </button>
+                 <ul class="dropdown-menu">
+                     <li style="cursor:pointer" (click)="getPeriod('Annual')">Annual</li>
+                     <li style="cursor:pointer" (click)="getPeriod('Quarterly')">Quarterly</li>
+                     <li style="cursor:pointer" (click)="getPeriod('LTM')">LTM</li>
+                     <li style="cursor:pointer" (click)="getPeriod('Semi-Annual')">Semi-Annual</li>
+                 </ul>
+             </div>
+         </div>
+         <financial-detail #financial [activeStatements]="activeFinancials">
 
          </financial-detail>
+         <!--<div class="col-md-2">
+             col_md_2
+         </div>
+         <div class="col-md-2">
+             col_md_2
+         </div>
+         <div class="col-md-2">
+             col_md_2
+         </div>
+         <div class="col-md-2">
+             col_md_2
+         </div>
+         <div class="col-md-2">
+             col_md_2
+         </div>
+         <div class="col-md-2">
+             col_md_2
+         </div>-->
      </div>
 </div>
