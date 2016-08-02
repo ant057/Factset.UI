@@ -37,7 +37,7 @@ export class CompanyDetailService {
         }
     }
 
-    getFinancials(permSecurityId: string): Promise<CompanyDetail> {
+    getFinancials(permSecurityId: string): Promise<Financial> {
             return this.http.get(this.apiUrl + 'GetCompanyFinancials/' + permSecurityId)
                 .toPromise()
                 .then(response => {
