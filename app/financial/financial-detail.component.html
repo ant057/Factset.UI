@@ -27,19 +27,33 @@
             </div>
 </div>-->
 
-<div class="col-md-3" *ngFor="let statement of activeStatements; let i = index">
-    <table class="table table-filter table-striped">
-        <tr>
-            <!--<td *ngIf="i == 0">Period:</td>-->
-            <td style="text-align:center" colspan="2">{{statement.date | date}}</td>
-        </tr>
-        <tr *ngFor="let lineitem of statement.financialStatements">
-            <!--<th *ngIf="i == 0">{{lineitem.description}}</th>-->
-            <th><div style="height:28px" class="media"><p class="summary" [class.L0]="lineitem.displayLevel === 'L0'" [class.L1]="lineitem.displayLevel === 'L1'" [class.L2]="lineitem.displayLevel === 'L2'" [class.L3]="lineitem.displayLevel === 'L3'">{{ i === 0 ? lineitem.description : ' '}}</p></div></th>
-            <td>{{lineitem.value === '0' ? ' ' : lineitem.value}}</td>
-        </tr>
-    </table>
-</div>
+
+    <div class="col-md-2">
+        <div style="margin-right:45px">
+            <table class="table table-filter table-striped well" style="width:170px">
+                <thead>
+                <th><div>Period:</div></th>
+                </thead>
+                <tr style="height:49px" *ngFor="let lineitem of activeStatements[0].financialStatements; let i = index">
+                    <th><div style="height:28px" class="media"><p class="summary" [class.L0]="lineitem.displayLevel === 'L0'" [class.L1]="lineitem.displayLevel === 'L1'" [class.L2]="lineitem.displayLevel === 'L2'" [class.L3]="lineitem.displayLevel === 'L3'">{{lineitem.description}}</p></div></th>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-2" *ngFor="let statement of activeStatements; let i = index">
+        <table class="table table-filter table-striped well">
+            <thead>
+                <!--<td *ngIf="i == 0">Period:</td>-->
+                <th style="text-align:left" colspan="2">{{statement.date | date}}</th>
+            </thead>
+            <tr *ngFor="let lineitem of statement.financialStatements">
+                <!--<th *ngIf="i == 0">{{lineitem.description}}</th>-->
+                <!--<th><div style="height:28px" class="media"><p class="summary" [class.L0]="lineitem.displayLevel === 'L0'" [class.L1]="lineitem.displayLevel === 'L1'" [class.L2]="lineitem.displayLevel === 'L2'" [class.L3]="lineitem.displayLevel === 'L3'">{{ i === 0 ? lineitem.description : ' '}}</p></div></th>-->
+                <td><div style="height:28px">{{lineitem.value === '0' ? ' ' : lineitem.value}}</div></td>
+            </tr>
+        </table>
+    </div>
+
 
 <!--<div class="col-md-4" *ngFor="let statement of activeStatements; let i = index">
     <table class="table table-filter table-striped">

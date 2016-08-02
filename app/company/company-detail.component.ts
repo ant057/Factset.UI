@@ -17,7 +17,8 @@ import { BalanceModel, FinancialDetail, Financial } from '../financial/shared/fi
 export class CompanyDetailComponent implements OnInit{
 
     companyDetail: CompanyDetail;
-    activeFinancials: FinancialDetail[]
+    private activeFinancials: FinancialDetail[]
+    private activeFinancialsTemp: FinancialDetail[]
     loading: boolean = false;
     period: string;
     type: string;
@@ -34,7 +35,6 @@ export class CompanyDetailComponent implements OnInit{
         this.loading = true;
         this.period = "Annual";
         this.type = "BS";
-        // get vm for this and child components
         this.getCompanyDetail("D0MJZ3-S-US");
     }
 
@@ -46,6 +46,7 @@ export class CompanyDetailComponent implements OnInit{
 
     successHandler(response: any) {
         this.companyDetail = response;
+        //this.getStatements(this.period, this.type);
         this.activeFinancials = this.companyDetail.financialStatements.annualFinancialStatements;
         this.loading = false;
     }
@@ -53,21 +54,21 @@ export class CompanyDetailComponent implements OnInit{
     getStatements(period: string, type: string) {
         this.period = period;      
         this.type = type;
-        this.companyProvider.getStatements(period, type)
+        this.companyProvider.getStatements(period, type, "D0MJZ3-S-US")
             .then(response => this.getStatementsSuccess(response))
-            .catch(error => this.logError(error));
-    }
+            .catch(error => this.logError(error));       
+    } 
 
-    getStatementsSuccess(response: any) {
-        this.activeFinancials = response;
-        console.warn(response);
-        console.warn(this.activeFinancials);
-        for (var i = 0; i < this.activeFinancials.length; i++) {
-            for (var p = 0; p < this.activeFinancials[i].financialStatements.length; p++) {
-                //this.activeFinancials[i].financialStatements[p] =
-                //    this.activeFinancials[i].financialStatements[p].filter(p => p.reportCode.substr(0, 2) === this.type);
+    getStatementsSuccess(response: FinancialDetail[]) {
+        //if (response[i].financialStatements) {
+        //    window.alert('undefined');
+        //}
+        //else {
+            for (var i = 0; i < response.length; i++) {
+                response[i].financialStatements = response[i].financialStatements.filter(f => f.reportCode.substr(0, 2) === this.type);
             }
-        }
+            this.activeFinancials = response;
+        //}
     }
 
     logError(error: any) {

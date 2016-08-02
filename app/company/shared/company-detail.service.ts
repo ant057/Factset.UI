@@ -15,6 +15,7 @@ export class CompanyDetailService {
     private apiUrl: string = this.apiUrlBase + 'Company/';
 
     private _companyDetail: CompanyDetail;
+    private _financials: Financial;
 
     constructor(private http: Http) {
  
@@ -30,29 +31,44 @@ export class CompanyDetailService {
                 .toPromise()
                 .then(response => {
                     this._companyDetail = response.json();
-                    //other?
                     return this._companyDetail;
                 })
                 .catch(this.handleError);
         }
     }
 
-    getStatements(period: string, type: string): Promise<FinancialDetail[]> {
-        if (this._companyDetail) {
-            switch (period) {
-                case "Annual":
-                    console.warn(this._companyDetail.financialStatements.annualFinancialStatements);
-                    return Promise.resolve(this._companyDetail.financialStatements.annualFinancialStatements);
-                case "Quarterly":
-                    return Promise.resolve(this._companyDetail.financialStatements.quarterlyFinancialStatements);
-                case "LTM":
-                    return Promise.resolve(this._companyDetail.financialStatements.ltmFinancialStatements);
-                case "Semi-Annual":
-                    return Promise.resolve(this._companyDetail.financialStatements.semiAnnualFinancialStatements);
-                default:
-                    return Promise.resolve(this._companyDetail.financialStatements.annualFinancialStatements);
-            }
-        }
+    getFinancials(permSecurityId: string): Promise<CompanyDetail> {
+            return this.http.get(this.apiUrl + 'GetCompanyFinancials/' + permSecurityId)
+                .toPromise()
+                .then(response => {
+                    this._financials = response.json();
+                    //other?
+                    return this._financials;
+                })
+                .catch(this.handleError);
+    }
+
+    getStatements(period: string, type: string, permSecurityId: string): Promise<FinancialDetail[]> {
+
+        return this.http.get(this.apiUrl + 'GetCompanyFinancials/' + permSecurityId)
+            .toPromise()
+            .then(response => {
+                this._companyDetail.financialStatements = response.json();
+                //other?
+                switch (period) {
+                    case "Annual":
+                        return this._companyDetail.financialStatements.annualFinancialStatements;
+                    case "Quarterly":
+                        return this._companyDetail.financialStatements.quarterlyFinancialStatements;
+                    case "LTM":
+                        return this._companyDetail.financialStatements.ltmFinancialStatements;
+                    case "Semi-Annual":
+                        return this._companyDetail.financialStatements.semiAnnualFinancialStatements;
+                    default:
+                        return this._companyDetail.financialStatements.annualFinancialStatements;
+                }
+            })
+            .catch(this.handleError);
     }
 
     private handleError(error: any) {

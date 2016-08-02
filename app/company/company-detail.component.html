@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-12 well" *ngIf="companyDetail">
         <h2>{{companyDetail.companyName}}
-            <small>{{companyDetail.countryISO}}</small><br />
+            <small>{{companyDetail.countryISO}}</small>   <input type="button" class="btn btn-warning" value="CREATE ACCOUNT" /><br />
             <small>{{companyDetail.ticker.substring(0, companyDetail.ticker.indexOf("-"))}} {{ companyDetail.exchange}}</small>
         </h2>
     </div>
@@ -15,7 +15,7 @@
             <dt>Business Description</dt>
             <dd>{{companyDetail.businessDescriptionAbbrev}}</dd>
             <dt>Universe</dt>
-            <dd>{{companyDetail.universeAmerica}}</dd>
+            <dd>{{companyDetail.universeAmerica === 1 ? 'America' : companyDetail.universeEurope === 1 ? 'Europe' : companyDetail.universeAsiaPacific === 1 ? 'Asia/Pacific' : ''}}</dd>
             <dt>Latest Annual Update</dt>
             <dd>{{companyDetail.latestAnnualUpdate}}</dd>
             <dt>Market Value</dt>
@@ -35,15 +35,16 @@
         </dl>
     </div>
      <div class="col-md-10 well" *ngIf="companyDetail">
-         <div class="col-md-10">
+         <h2>Financials</h2>
+         <div class="col-md-12">
              <div class="btn-group">
                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     {{type}}  <span class="caret"></span>
+                     {{type == 'BS' ? 'Balance Sheet' : type == 'CF' ? 'Cash Flow' : type == 'IS' ? 'Income Statement' : '' }}  <span class="caret"></span>
                  </button>
                  <ul class="dropdown-menu">
-                     <li style="cursor:pointer" (click)="getStatements(period, 'BS')">Balance Sheet</li>
-                     <li style="cursor:pointer" (click)="getStatements(period, 'IS')">Income Statement</li>
-                     <li style="cursor:pointer" (click)="getStatements(period, 'CF')">Cash Flow</li>
+                     <li style="cursor:pointer" (click)="getStatements(period,'BS')">Balance Sheet</li>
+                     <li style="cursor:pointer" (click)="getStatements(period,'IS')">Income Statement</li>
+                     <li style="cursor:pointer" (click)="getStatements(period,'CF')">Cash Flow</li>
                  </ul>
              </div>
              <div class="btn-group">
@@ -58,9 +59,9 @@
                  </ul>
              </div>
          </div>
-         <financial-detail #financial [activeStatements]="activeFinancials">
-
-         </financial-detail>
+         <div class="col-md-12" style="padding:15px">
+             <financial-detail #financial [activeStatements]="activeFinancials"></financial-detail>
+         </div>
          <!--<div class="col-md-2">
              col_md_2
          </div>

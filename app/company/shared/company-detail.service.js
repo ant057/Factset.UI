@@ -31,28 +31,43 @@ var CompanyDetailService = (function () {
                 .toPromise()
                 .then(function (response) {
                 _this._companyDetail = response.json();
-                //other?
                 return _this._companyDetail;
             })
                 .catch(this.handleError);
         }
     };
-    CompanyDetailService.prototype.getStatements = function (period, type) {
-        if (this._companyDetail) {
+    CompanyDetailService.prototype.getFinancials = function (permSecurityId) {
+        var _this = this;
+        return this.http.get(this.apiUrl + 'GetCompanyFinancials/' + permSecurityId)
+            .toPromise()
+            .then(function (response) {
+            _this._financials = response.json();
+            //other?
+            return _this._financials;
+        })
+            .catch(this.handleError);
+    };
+    CompanyDetailService.prototype.getStatements = function (period, type, permSecurityId) {
+        var _this = this;
+        return this.http.get(this.apiUrl + 'GetCompanyFinancials/' + permSecurityId)
+            .toPromise()
+            .then(function (response) {
+            _this._companyDetail.financialStatements = response.json();
+            //other?
             switch (period) {
                 case "Annual":
-                    console.warn(this._companyDetail.financialStatements.annualFinancialStatements);
-                    return Promise.resolve(this._companyDetail.financialStatements.annualFinancialStatements);
+                    return _this._companyDetail.financialStatements.annualFinancialStatements;
                 case "Quarterly":
-                    return Promise.resolve(this._companyDetail.financialStatements.quarterlyFinancialStatements);
+                    return _this._companyDetail.financialStatements.quarterlyFinancialStatements;
                 case "LTM":
-                    return Promise.resolve(this._companyDetail.financialStatements.ltmFinancialStatements);
+                    return _this._companyDetail.financialStatements.ltmFinancialStatements;
                 case "Semi-Annual":
-                    return Promise.resolve(this._companyDetail.financialStatements.semiAnnualFinancialStatements);
+                    return _this._companyDetail.financialStatements.semiAnnualFinancialStatements;
                 default:
-                    return Promise.resolve(this._companyDetail.financialStatements.annualFinancialStatements);
+                    return _this._companyDetail.financialStatements.annualFinancialStatements;
             }
-        }
+        })
+            .catch(this.handleError);
     };
     CompanyDetailService.prototype.handleError = function (error) {
         console.error('An Error Occurred ', error);

@@ -43,18 +43,34 @@
 }
 
 .L1{
-    text-align:center;
+    padding-left: 10px;
     font-weight:normal;
 }
 
 .L2{
-    text-align:right;
+    padding-left: 20px;
     font-weight:normal;
 }
 
 .L3{
-    text-align:right;
+    padding-left: 30px;
     font-weight:normal;
+}
+
+.L0M{
+    
+}
+
+.L1M{
+
+}
+
+.L2M{
+   
+}
+
+.L3M{
+    
 }
 
 .divUnderline{

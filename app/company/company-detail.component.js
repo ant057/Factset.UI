@@ -26,7 +26,6 @@ var CompanyDetailComponent = (function () {
         this.loading = true;
         this.period = "Annual";
         this.type = "BS";
-        // get vm for this and child components
         this.getCompanyDetail("D0MJZ3-S-US");
     };
     CompanyDetailComponent.prototype.getCompanyDetail = function (permSecurityId) {
@@ -37,6 +36,7 @@ var CompanyDetailComponent = (function () {
     };
     CompanyDetailComponent.prototype.successHandler = function (response) {
         this.companyDetail = response;
+        //this.getStatements(this.period, this.type);
         this.activeFinancials = this.companyDetail.financialStatements.annualFinancialStatements;
         this.loading = false;
     };
@@ -44,18 +44,21 @@ var CompanyDetailComponent = (function () {
         var _this = this;
         this.period = period;
         this.type = type;
-        this.companyProvider.getStatements(period, type)
+        this.companyProvider.getStatements(period, type, "D0MJZ3-S-US")
             .then(function (response) { return _this.getStatementsSuccess(response); })
             .catch(function (error) { return _this.logError(error); });
     };
     CompanyDetailComponent.prototype.getStatementsSuccess = function (response) {
-        this.activeFinancials = response;
-        console.warn(response);
-        console.warn(this.activeFinancials);
-        for (var i = 0; i < this.activeFinancials.length; i++) {
-            for (var p = 0; p < this.activeFinancials[i].financialStatements.length; p++) {
-            }
+        var _this = this;
+        //if (response[i].financialStatements) {
+        //    window.alert('undefined');
+        //}
+        //else {
+        for (var i = 0; i < response.length; i++) {
+            response[i].financialStatements = response[i].financialStatements.filter(function (f) { return f.reportCode.substr(0, 2) === _this.type; });
         }
+        this.activeFinancials = response;
+        //}
     };
     CompanyDetailComponent.prototype.logError = function (error) {
         console.error('error inside company detail component bind: OnInit ' + error);
