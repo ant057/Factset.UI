@@ -16,9 +16,11 @@
         </div>
         <table id="companyTable" class="table table-filter table-striped">
             <thead>
-                <td><div class="media"><p class="summary"><strong>Factset Security ID</strong></p></div></td>
-                <td><div class="media"><p class="summary"><strong>Factset Entity ID</strong></p></div></td>
-                <td><div class="media"><p class="summary"><strong>Company Details</strong></p></div></td>
+                <tr>
+                    <th>Factset Security ID</th>
+                    <th>Factset Entity ID</th>
+                    <th>Company Details</th>
+                </tr>
             </thead>
             <tbody>
                 <tr *ngFor="let company of companies | paginate: {id: 'server', itemsPerPage: _pageSize, currentPage: _page, totalItems: _total }" (click)="anAlert()">

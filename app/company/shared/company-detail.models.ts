@@ -4,8 +4,16 @@ import { Financial } from '../../financial/shared/financial.models';
 
 export class CompanyDetail {
         permanentSecurityID: string
-
         entityId: string
+
+        city: string
+        state: string
+        zipCode: string
+        street1: string
+        street2: string
+        street3: string
+        phone: string
+
         countryISO: string
         latestAnnualUpdate: string
         companyName: string

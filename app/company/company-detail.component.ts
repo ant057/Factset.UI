@@ -20,6 +20,7 @@ export class CompanyDetailComponent implements OnInit{
     private activeFinancials: FinancialDetail[]
     private activeFinancialsTemp: FinancialDetail[]
     loading: boolean = false;
+    stmtloading: boolean = false;
     period: string;
     type: string;
 
@@ -46,12 +47,14 @@ export class CompanyDetailComponent implements OnInit{
 
     successHandler(response: any) {
         this.companyDetail = response;
+        this.getStatements(this.period, this.type);
         //this.getStatements(this.period, this.type);
-        this.activeFinancials = this.companyDetail.financialStatements.annualFinancialStatements;
+        //this.activeFinancials = this.companyDetail.financialStatements.annualFinancialStatements;
         this.loading = false;
     }
 
     getStatements(period: string, type: string) {
+        this.stmtloading = true;
         this.period = period;      
         this.type = type;
         this.companyProvider.getStatements(period, type, "D0MJZ3-S-US")
@@ -69,6 +72,7 @@ export class CompanyDetailComponent implements OnInit{
             }
             this.activeFinancials = response;
         //}
+       this.stmtloading = false;
     }
 
     logError(error: any) {

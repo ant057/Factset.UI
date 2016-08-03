@@ -18,6 +18,7 @@ var CompanyDetailComponent = (function () {
     function CompanyDetailComponent(companyProvider) {
         this.companyProvider = companyProvider;
         this.loading = false;
+        this.stmtloading = false;
     }
     CompanyDetailComponent.prototype.ngOnInit = function () {
         this.bindTemplate();
@@ -36,12 +37,14 @@ var CompanyDetailComponent = (function () {
     };
     CompanyDetailComponent.prototype.successHandler = function (response) {
         this.companyDetail = response;
+        this.getStatements(this.period, this.type);
         //this.getStatements(this.period, this.type);
-        this.activeFinancials = this.companyDetail.financialStatements.annualFinancialStatements;
+        //this.activeFinancials = this.companyDetail.financialStatements.annualFinancialStatements;
         this.loading = false;
     };
     CompanyDetailComponent.prototype.getStatements = function (period, type) {
         var _this = this;
+        this.stmtloading = true;
         this.period = period;
         this.type = type;
         this.companyProvider.getStatements(period, type, "D0MJZ3-S-US")
@@ -59,6 +62,7 @@ var CompanyDetailComponent = (function () {
         }
         this.activeFinancials = response;
         //}
+        this.stmtloading = false;
     };
     CompanyDetailComponent.prototype.logError = function (error) {
         console.error('error inside company detail component bind: OnInit ' + error);

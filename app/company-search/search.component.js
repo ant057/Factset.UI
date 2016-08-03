@@ -32,6 +32,7 @@ var SearchComponent = (function () {
         this.selected = '';
         this.companyListArray = [];
         this.companySearch = new company_search_models_1.CompanySearch;
+        this.searchParams = new company_search_models_1.SearchParams;
     }
     SearchComponent.prototype.ngOnInit = function () {
         this.bindTemplate();
@@ -86,6 +87,10 @@ var SearchComponent = (function () {
     };
     SearchComponent.prototype.selectedIndustry = function (value) {
         console.log('Selected value is: ', value);
+        var industry;
+        industry.industryCode = value.id;
+        industry.industryDescription = value.text;
+        this.companySearchProvider.addIndustryParam(industry);
     };
     SearchComponent.prototype.removedIndustry = function (value) {
         console.log('Removed value is: ', value);

@@ -9,7 +9,7 @@ import {ACCORDION_DIRECTIVES} from 'ng2-bootstrap/components/accordion';
 import {TYPEAHEAD_DIRECTIVES} from 'ng2-bootstrap/components/typeahead';
 import {FORM_DIRECTIVES} from '@angular/forms';
 //models
-import {CompanySearch, CompanyList} from './shared/company-search.models';
+import {CompanySearch, CompanyList, SearchParams, Industry} from './shared/company-search.models';
 
 @Component({
     selector: 'search',
@@ -34,6 +34,7 @@ export class SearchComponent implements OnInit{
     
     constructor(private companySearchProvider: CompanySearchService) {
         this.companySearch = new CompanySearch;
+        this.searchParams = new SearchParams;
     }
 
     ngOnInit(){
@@ -99,6 +100,11 @@ export class SearchComponent implements OnInit{
 
     public selectedIndustry(value: any): void {
         console.log('Selected value is: ', value);
+        let industry: Industry;
+        industry.industryCode = value.id;
+        industry.industryDescription = value.text;
+
+        this.companySearchProvider.addIndustryParam(industry);
     }
 
     public removedIndustry(value: any): void {

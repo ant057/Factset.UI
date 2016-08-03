@@ -28,7 +28,10 @@ var CompanySearchService = (function () {
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
-    CompanySearchService.prototype.getCompanies = function (page, pageSize) {
+    CompanySearchService.prototype.addIndustryParam = function (industry) {
+        this.searchParams.industries.push(industry);
+    };
+    CompanySearchService.prototype.getCompanies = function (page, pageSize, searchParams) {
         var _this = this;
         //return company list data if we have
         if (this._companyList) {

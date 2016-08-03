@@ -9,9 +9,57 @@
             <small>{{companyDetail.countryISO}}</small>   <input type="button" class="btn btn-warning" value="CREATE ACCOUNT" /><br />
             <small>{{companyDetail.ticker.substring(0, companyDetail.ticker.indexOf("-"))}} {{ companyDetail.exchange}}</small>
         </h2>
+        <div>
+            {{companyDetail.street1}}<br />
+            {{companyDetail.city}} {{companyDetail.state}} {{companyDetail.zipcode}}<br />
+            {{companyDetail.phone}}
+        </div>
     </div>
-    <div class="col-md-2 well" *ngIf="companyDetail">
-        <dl>
+    <div class="col-md-3 well" *ngIf="companyDetail">
+        <h3>Details</h3>
+        <table class="table table-striped table-condensed" style="font-size:small">
+            <tr>
+                <th>Business Description</th>
+                <td>{{companyDetail.businessDescriptionAbbrev}}</td>
+            </tr>
+            <tr>
+                <th>Universe</th>
+                <td>{{companyDetail.universeAmerica === 1 ? 'America' : companyDetail.universeEurope === 1 ? 'Europe' : companyDetail.universeAsiaPacific === 1 ? 'Asia/Pacific' : ''}}</td>
+            </tr>
+            <tr>
+                <th>Latest Annual Update</th>
+                <td>{{companyDetail.latestAnnualUpdate}}</td>
+            </tr>
+            <tr>
+                <th>Market Value</th>
+                <td>{{companyDetail.marketValueCurrent}}</td>
+            </tr>
+            <tr>
+                <th>Cash Flow Per Share</th>
+                <td>{{companyDetail.cashFlowPerShare}}</td>
+            </tr>
+            <tr>
+                <th>Dividends Per Share</th>
+                <td>{{companyDetail.dividendsPerShare}}</td>
+            </tr>
+            <tr>
+                <th>Price To Book Value</th>
+                <td>{{companyDetail.priceToBookValue}}</td>
+            </tr>
+            <tr>
+                <th>Dividend Yield</th>
+                <td>{{companyDetail.dividendYield}}</td>
+            </tr>
+            <tr>
+                <th>Dividend Payout Per Share</th>
+                <td>{{companyDetail.dividendPayoutPerShare}}</td>
+            </tr>
+            <tr>
+                <th>Price To Earnings</th>
+                <td>{{companyDetail.priceToEarnings}}</td>
+            </tr>
+        </table>
+        <!--<dl>
             <dt>Business Description</dt>
             <dd>{{companyDetail.businessDescriptionAbbrev}}</dd>
             <dt>Universe</dt>
@@ -32,13 +80,13 @@
             <dd>{{companyDetail.dividendPayoutPerShare}}</dd>
             <dt>Price To Earnings</dt>
             <dd>{{companyDetail.priceToEarnings}}</dd>
-        </dl>
+        </dl>-->
     </div>
-     <div class="col-md-10 well" *ngIf="companyDetail">
-         <div class="col-md-2">
-             <h4>Financials</h4>
+     <div class="col-md-9 well" *ngIf="companyDetail">
+         <div class="col-md-4">
+             <h4>Financials<br /><small>Showing previous 4 statements..</small></h4>
          </div>
-         <div class="col-md-10">
+         <div class="col-md-8 pull-right">
              <div class="btn-group">
                  <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                      {{type == 'BS' ? 'Balance Sheet' : type == 'CF' ? 'Cash Flow' : type == 'IS' ? 'Income Statement' : '' }}  <span class="caret"></span>
@@ -60,8 +108,11 @@
                      <li style="cursor:pointer" (click)="getStatements('Semi-Annual',type)">Semi-Annual</li>
                  </ul>
              </div>
+             <div *ngIf="stmtloading">
+                 <img src="app/assets/pre-loading.gif" />
+             </div>
          </div>
-         <div class="col-md-12" style="padding:15px">
+         <div class="col-md-12" style="padding:15px" *ngIf="activeFinancials">
              <financial-detail #financial [activeStatements]="activeFinancials"></financial-detail>
          </div>
          <!--<div class="col-md-2">

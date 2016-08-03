@@ -70,3 +70,15 @@ export class EntityType {
      entityTypeCode: string 
      entityTypeDescription: string 
 }
+
+export class SearchParams {
+    entityTypes: EntityType[]
+    sicCodes: SIC[]
+    sectors: Sector[]
+    countries: Country[]
+    industries: Industry[]
+
+    americaUniverse: boolean
+    europeUniverse: boolean
+    asiaPacificUniverse: boolean 
+}

@@ -59,4 +59,10 @@ var EntityType = (function () {
     return EntityType;
 }());
 exports.EntityType = EntityType;
+var SearchParams = (function () {
+    function SearchParams() {
+    }
+    return SearchParams;
+}());
+exports.SearchParams = SearchParams;
 //# sourceMappingURL=company-search.models.js.map

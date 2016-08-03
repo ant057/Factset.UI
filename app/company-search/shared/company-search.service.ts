@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 
 //models
-import { CompanyList, PagedCompanyList, Industry, Sector, EntityType, Country, SIC, CompanySearch } from './company-search.models';
+import { CompanyList, PagedCompanyList, Industry, Sector, EntityType, Country, SIC, CompanySearch, SearchParams } from './company-search.models';
 
 import 'rxjs/add/operator/toPromise';
 
@@ -18,6 +18,8 @@ export class CompanySearchService {
     private _companyList: CompanyList[]; 
     private _companySearch: CompanySearch;
 
+    private searchParams: SearchParams;
+
     constructor(private http: Http) { 
         this._pagedCompanyList = new PagedCompanyList;
     }
@@ -29,7 +31,11 @@ export class CompanySearchService {
             .catch(this.handleError);
     }
 
-    getCompanies(page: number, pageSize: number): Promise<PagedCompanyList> {
+    addIndustryParam(industry: Industry) {
+        this.searchParams.industries.push(industry);
+    }
+
+    getCompanies(page: number, pageSize: number, searchParams: SearchParams): Promise<PagedCompanyList> {
 
         //return company list data if we have
         if (this._companyList) {
