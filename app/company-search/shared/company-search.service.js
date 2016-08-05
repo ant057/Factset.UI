@@ -11,6 +11,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 //angular
 var core_1 = require('@angular/core');
 var http_1 = require('@angular/http');
+var http_2 = require('@angular/http');
 //models
 var company_search_models_1 = require('./company-search.models');
 require('rxjs/add/operator/toPromise');
@@ -21,6 +22,7 @@ var CompanySearchService = (function () {
         this.apiUrlBase = 'http://localhost:54665/api/';
         this.apiUrl = this.apiUrlBase + 'CompanySearch/';
         this._pagedCompanyList = new company_search_models_1.PagedCompanyList;
+        this._searchParams = new company_search_models_1.SearchParams;
     }
     CompanySearchService.prototype.getIndustries = function () {
         return this.http.get(this.mockApiUrl)
@@ -28,10 +30,62 @@ var CompanySearchService = (function () {
             .then(function (response) { return response.json().data; })
             .catch(this.handleError);
     };
-    CompanySearchService.prototype.addIndustryParam = function (industry) {
-        this.searchParams.industries.push(industry);
+    CompanySearchService.prototype.addCountryParam = function (country) {
+        if (this._searchParams.countries) {
+        }
+        else {
+            this._searchParams.countries = new Array();
+        }
+        this._searchParams.countries.push(country);
     };
-    CompanySearchService.prototype.getCompanies = function (page, pageSize, searchParams) {
+    CompanySearchService.prototype.removeCountryParam = function (country) {
+        this._searchParams.countries = this._searchParams.countries.filter(function (i) { return i.countryDescription !== country.countryDescription; });
+    };
+    CompanySearchService.prototype.addSICParam = function (sic) {
+        if (this._searchParams.sicCodes) {
+        }
+        else {
+            this._searchParams.sicCodes = new Array();
+        }
+        this._searchParams.sicCodes.push(sic);
+    };
+    CompanySearchService.prototype.removeSICParam = function (sic) {
+        this._searchParams.sicCodes = this._searchParams.sicCodes.filter(function (i) { return i.sicCode !== sic.sicCode; });
+    };
+    CompanySearchService.prototype.addEntityTypeParam = function (entitytype) {
+        if (this._searchParams.entityTypes) {
+        }
+        else {
+            this._searchParams.entityTypes = new Array();
+        }
+        this._searchParams.entityTypes.push(entitytype);
+    };
+    CompanySearchService.prototype.removeEntityTypeParam = function (entitytype) {
+        this._searchParams.entityTypes = this._searchParams.entityTypes.filter(function (i) { return i.entityTypeDescription !== entitytype.entityTypeDescription; });
+    };
+    CompanySearchService.prototype.addSectorParam = function (sector) {
+        if (this._searchParams.sectors) {
+        }
+        else {
+            this._searchParams.sectors = new Array();
+        }
+        this._searchParams.sectors.push(sector);
+    };
+    CompanySearchService.prototype.removeSectorParam = function (sector) {
+        this._searchParams.sectors = this._searchParams.sectors.filter(function (i) { return i.sectorDescription !== sector.sectorDescription; });
+    };
+    CompanySearchService.prototype.addIndustryParam = function (industry) {
+        if (this._searchParams.industries) {
+        }
+        else {
+            this._searchParams.industries = new Array();
+        }
+        this._searchParams.industries.push(industry);
+    };
+    CompanySearchService.prototype.removeIndustryParam = function (industry) {
+        this._searchParams.industries = this._searchParams.industries.filter(function (i) { return i.industryDescription !== industry.industryDescription; });
+    };
+    CompanySearchService.prototype.getCompanies = function (page, pageSize) {
         var _this = this;
         //return company list data if we have
         if (this._companyList) {
@@ -50,6 +104,24 @@ var CompanySearchService = (function () {
             })
                 .catch(this.handleError);
         }
+    };
+    CompanySearchService.prototype.getFilteredCompanies = function (page, pageSize) {
+        var _this = this;
+        var body;
+        if (this._searchParams) {
+            body = JSON.stringify(this._searchParams);
+        }
+        var headers = new http_2.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_2.RequestOptions({ headers: headers });
+        return this.http.post(this.apiUrl + 'GetAllCompanies', body, options)
+            .toPromise()
+            .then(function (response) {
+            _this._companyList = response.json();
+            _this._pagedCompanyList.data = _this._companyList.slice((page - 1) * pageSize, ((page - 1) * pageSize) + pageSize);
+            _this._pagedCompanyList.count = _this._companyList.length;
+            return _this._pagedCompanyList;
+        })
+            .catch(this.handleError);
     };
     CompanySearchService.prototype.getCompanySearchModel = function () {
         var _this = this;

@@ -19,8 +19,8 @@ var CompanyListComponent = (function () {
         this.companySearchProvider = companySearchProvider;
         this.router = router;
         this.loading = false;
-        this._page = 1;
-        this._pageSize = 25;
+        this.page = 1;
+        this.pageSize = 25;
         this.toggled = false;
         this.toggleValue = '<';
         //
@@ -31,19 +31,19 @@ var CompanyListComponent = (function () {
     CompanyListComponent.prototype.bindTemplate = function () {
         this.loading = true;
         //get vm data back from service
-        this.getCompanyPage(this._page);
+        this.getCompanyPage(this.page);
     };
     CompanyListComponent.prototype.getCompanyPage = function (page) {
         var _this = this;
-        this.companySearchProvider.getCompanies(page, this._pageSize)
+        this.companySearchProvider.getCompanies(page, this.pageSize)
             .then(function (response) { return _this.successHandler(response); })
             .catch(function (error) { return _this.logError(error); });
-        this._page = page;
+        this.page = page;
     };
     CompanyListComponent.prototype.successHandler = function (response) {
         this.pagedData = response;
         this.companies = response.data;
-        this._total = response.count;
+        this.total = response.count;
         this.loading = false;
     };
     CompanyListComponent.prototype.logError = function (error) {
@@ -63,6 +63,26 @@ var CompanyListComponent = (function () {
             this.toggleValue = '>';
         }
     };
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], CompanyListComponent.prototype, "companies", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Boolean)
+    ], CompanyListComponent.prototype, "loading", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], CompanyListComponent.prototype, "page", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], CompanyListComponent.prototype, "pageSize", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Number)
+    ], CompanyListComponent.prototype, "total", void 0);
     CompanyListComponent = __decorate([
         core_1.Component({
             selector: 'company-list',

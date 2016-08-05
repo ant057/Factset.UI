@@ -21,11 +21,16 @@ export class CompanyList {
      universeEurope: boolean 
      universeAsiaPacific: boolean 
 
-     country: Country 
-     industry: Industry 
-     sector: Sector 
-     sic: SIC 
-     entityType: EntityType 
+     iSOCountry: string
+     countryDescription: string
+     industryCode: string
+     industryDescription: string
+     sectorCode: string
+     sectorDescription: string
+     sICCode: string
+     sICDescription: string
+     entityTypeCode: string
+     entityTypeDescription: string
 }
 
 export class PagedCompanyList {

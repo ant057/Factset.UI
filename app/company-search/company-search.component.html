@@ -1,8 +1,10 @@
 <div id="wrapper" [class.toggled]="complist.toggled">
     <div id="sidebar-wrapper">
-        <search></search>
+        <search #search></search>
     </div>
     <div id="page-content-wrapper" class="col-md-12 well">
-        <company-list #complist></company-list>
+        <company-list #complist [companies]="search.companies" 
+                      [page]="page" [total]="total" [pageSize]="pageSize">
+        </company-list>
     </div>
 </div>

@@ -9,7 +9,7 @@ import {ACCORDION_DIRECTIVES} from 'ng2-bootstrap/components/accordion';
 import {TYPEAHEAD_DIRECTIVES} from 'ng2-bootstrap/components/typeahead';
 import {FORM_DIRECTIVES} from '@angular/forms';
 //models
-import {CompanySearch, CompanyList, SearchParams, Industry} from './shared/company-search.models';
+import {CompanySearch, CompanyList, SearchParams, Industry, Country, SIC, EntityType, Sector} from './shared/company-search.models';
 
 @Component({
     selector: 'search',
@@ -31,10 +31,14 @@ export class SearchComponent implements OnInit{
 
     public selected: string = '';
     public companyListArray: Array<string> = [];
+
+    public companies: CompanyList[];
+    private page: number = 1;
+    private pageSize: number = 25;
+    private total: number;
     
     constructor(private companySearchProvider: CompanySearchService) {
         this.companySearch = new CompanySearch;
-        this.searchParams = new SearchParams;
     }
 
     ngOnInit(){
@@ -47,7 +51,7 @@ export class SearchComponent implements OnInit{
 
     bindTemplate(){
         this.getCompanySearchModel();
-        this.getCompanies();
+       // this.getCompanies();
     }
 
     getCompanySearchModel(){
@@ -95,12 +99,11 @@ export class SearchComponent implements OnInit{
     }
 
     logError(error: any){
-        console.error('error inside form bind OnInit ' + error);
+        console.error('error inside search component bind OnInit ' + error);
     }
 
     public selectedIndustry(value: any): void {
-        console.log('Selected value is: ', value);
-        let industry: Industry;
+        let industry: Industry = new Industry;
         industry.industryCode = value.id;
         industry.industryDescription = value.text;
 
@@ -108,7 +111,75 @@ export class SearchComponent implements OnInit{
     }
 
     public removedIndustry(value: any): void {
-        console.log('Removed value is: ', value);
+        let industry: Industry = new Industry;
+        industry.industryCode = value.id;
+        industry.industryDescription = value.text;
+
+        this.companySearchProvider.removeIndustryParam(industry);
+    }
+
+    public selectedCountry(value: any): void {
+        let country: Country = new Country;
+        country.isoCountry = value.id;
+        country.countryDescription = value.text;
+
+        this.companySearchProvider.addCountryParam(country);
+    }
+
+    public removedCountry(value: any): void {
+        let country: Country = new Country;
+        country.isoCountry = value.id;
+        country.countryDescription = value.text;
+
+        this.companySearchProvider.removeCountryParam(country);
+    }
+
+    public selectedSIC(value: any): void {
+        let sic: SIC = new SIC;
+        sic.sicCode = value.id;
+        sic.sicDescription = value.text;
+
+        this.companySearchProvider.addSICParam(sic);
+    }
+
+    public removedSIC(value: any): void {
+        let sic: SIC = new SIC;
+        sic.sicCode = value.id;
+        sic.sicDescription = value.text;
+
+        this.companySearchProvider.removeSICParam(sic);
+    }
+
+    public selectedEntityType(value: any): void {
+        let entitytype: EntityType = new EntityType;
+        entitytype.entityTypeCode = value.id;
+        entitytype.entityTypeDescription = value.text;
+
+        this.companySearchProvider.addEntityTypeParam(entitytype);
+    }
+
+    public removedEntityType(value: any): void {
+        let entitytype: EntityType = new EntityType;
+        entitytype.entityTypeCode = value.id;
+        entitytype.entityTypeDescription = value.text;
+
+        this.companySearchProvider.removeEntityTypeParam(entitytype);
+    }
+
+    public selectedSector(value: any): void {
+        let sector: Sector = new Sector;
+        sector.sectorCode = value.id;
+        sector.sectorDescription = value.text;
+
+        this.companySearchProvider.addSectorParam(sector);
+    }
+
+    public removedSector(value: any): void {
+        let sector: Sector = new Sector;
+        sector.sectorCode = value.id;
+        sector.sectorDescription = value.text;
+
+        this.companySearchProvider.removeSectorParam(sector);
     }
 
     public refreshValue(value: any): void {
@@ -125,4 +196,17 @@ export class SearchComponent implements OnInit{
     public typeaheadOnSelect(e: any): void {
         console.log('Selected value: ', e.item);
     }
+
+    getFilteredCompanies() {
+        console.warn('i got clicked');
+        this.companySearchProvider.getFilteredCompanies(this.page, this.pageSize)
+            .then(response => this.getCompanyPageHandler(response))
+            .catch(error => this.logError(error));
+    }
+
+    getCompanyPageHandler(response: any) {
+        this.companies = response.data;
+        this.total = response.count;
+    }
+
 }
