@@ -24,6 +24,7 @@ export class CompanyDetailComponent implements OnInit{
     type: string;
     sub: any;
     permSecId: string;
+    noFinancials: boolean = false;
 
     constructor(private companyProvider: CompanyDetailService,
     private route: ActivatedRoute, private router: Router) {
@@ -47,7 +48,6 @@ export class CompanyDetailComponent implements OnInit{
             this.permSecId = params['permanentSecurityId'];
             this.getCompanyDetail(this.permSecId);
         });
-
     }
 
     getCompanyDetail(permSecurityId: string) {
@@ -78,9 +78,11 @@ export class CompanyDetailComponent implements OnInit{
                 response[i].financialStatements = response[i].financialStatements.filter(f => f.reportCode.substr(0, 2) === this.type);
             }
             this.activeFinancials = response;
+            this.noFinancials = false;
         }
         else { //no financials
-            
+            this.noFinancials = true;
+            this.activeFinancials = null;
         }
        this.stmtloading = false;
     }

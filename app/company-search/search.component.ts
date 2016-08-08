@@ -20,12 +20,18 @@ import {CompanySearch, CompanyList, SearchParams, Industry, Country, SIC, Entity
 export class SearchComponent implements OnInit{
 
     companySearch: CompanySearch;
+    searchParams: SearchParams;
     private value: any;
     public industryItems: Array<string> = [];
+    public industrySelectedItems: Array<any> = [];
     public countryItems: Array<string> = [];
+    public countrySelectedItems: Array<any> = [];
     public sicItems: Array<string> = [];
+    public sicSelectedItems: Array<any> = [];
     public entityTypeItems: Array<string> = [];
+    public entitySelectedItems: Array<any> = [];
     public sectorItems: Array<string> = [];
+    public sectorSelectedItems: Array<any> = [];
 
     public accordionOpen: boolean = true;
 
@@ -40,10 +46,12 @@ export class SearchComponent implements OnInit{
     
     constructor(private companySearchProvider: CompanySearchService) {
         this.companySearch = new CompanySearch;
+        this.searchParams = new SearchParams;
     }
 
     ngOnInit(){
         this.bindTemplate();
+        this.bindSearchParams();
     }
 
     alert() {
@@ -97,10 +105,35 @@ export class SearchComponent implements OnInit{
         for (var i = 0; i < this.companySearch.sectors.length; i++) {
             this.sectorItems.push(this.companySearch.sectors[i].sectorDescription);
         }
+
+        //this.industrySelectedItems.push({
+        //    id: 'Airlines',
+        //    text: 'Airlines'
+        //});
     }
 
     logError(error: any){
         console.error('error inside search component bind OnInit ' + error);
+    }
+
+    bindSearchParams() {
+        this.searchParams = this.companySearchProvider.getSearchParams();
+        if (this.searchParams.industries) {
+            this.searchParams.industries.forEach(f => this.industrySelectedItems.push(f.industryDescription));
+        }
+        if (this.searchParams.countries) {
+            this.searchParams.countries.forEach(f => this.countrySelectedItems.push(f.countryDescription));
+        }
+        if (this.searchParams.sectors) {
+            this.searchParams.sectors.forEach(f => this.sectorSelectedItems.push(f.sectorDescription));
+        }
+        if (this.searchParams.sicCodes) {
+            this.searchParams.sicCodes.forEach(f => this.sicSelectedItems.push(f.sicCode));
+        }
+        if (this.searchParams.entityTypes) {
+            this.searchParams.entityTypes.forEach(f => this.entitySelectedItems.push(f.entityTypeDescription));
+        }
+        
     }
 
     public selectedIndustry(value: any): void {

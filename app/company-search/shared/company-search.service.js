@@ -24,6 +24,11 @@ var CompanySearchService = (function () {
         this._pagedCompanyList = new company_search_models_1.PagedCompanyList;
         this._searchParams = new company_search_models_1.SearchParams;
     }
+    CompanySearchService.prototype.getSearchParams = function () {
+        if (this._searchParams) {
+            return this._searchParams;
+        }
+    };
     CompanySearchService.prototype.getIndustries = function () {
         return this.http.get(this.mockApiUrl)
             .toPromise()

@@ -22,6 +22,7 @@ var CompanyDetailComponent = (function () {
         this.router = router;
         this.loading = false;
         this.stmtloading = false;
+        this.noFinancials = false;
     }
     CompanyDetailComponent.prototype.ngOnInit = function () {
         this.bindTemplate();
@@ -67,8 +68,11 @@ var CompanyDetailComponent = (function () {
                 response[i].financialStatements = response[i].financialStatements.filter(function (f) { return f.reportCode.substr(0, 2) === _this.type; });
             }
             this.activeFinancials = response;
+            this.noFinancials = false;
         }
         else {
+            this.noFinancials = true;
+            this.activeFinancials = null;
         }
         this.stmtloading = false;
     };

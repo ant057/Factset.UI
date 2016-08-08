@@ -26,6 +26,12 @@ export class CompanySearchService {
         this._searchParams = new SearchParams;
     }
 
+    getSearchParams() {
+        if (this._searchParams) {
+            return this._searchParams;
+        }
+    }
+
     getIndustries() : Promise<{}[]>{
         return this.http.get(this.mockApiUrl)
             .toPromise()

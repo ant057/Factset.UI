@@ -28,7 +28,8 @@
                     </div>
                     <div *ngIf="companySearch.industries" class="input-group">
                         <label>Industry</label>
-                        <ng-select class="input-sm" [data]="value"
+                        <ng-select class="input-sm" 
+                                   [initData]="industrySelectedItems"
                                    [multiple]="true"
                                    [items]="industryItems"
                                    (selected)="selectedIndustry($event)"
@@ -38,7 +39,8 @@
                     </div>
                     <div *ngIf="companySearch.countries" class="input-group">
                         <label>Country</label>
-                        <ng-select class="input-sm" [data]="value"
+                        <ng-select class="input-sm" 
+                                   [initData]="countrySelectedItems"
                                    [multiple]="true"
                                    [items]="countryItems"
                                    (selected)="selectedCountry($event)"
@@ -48,7 +50,8 @@
                     </div>
                     <div *ngIf="companySearch.sics" class="input-group">
                         <label>SIC</label>
-                        <ng-select class="input-sm" [data]="value"
+                        <ng-select class="input-sm" 
+                                   [initData]="sicSelectedItems"
                                    [multiple]="true"
                                    [items]="sicItems"
                                    (selected)="selectedSIC($event)"
@@ -58,7 +61,8 @@
                     </div>
                     <div *ngIf="companySearch.entityTypes" class="input-group">
                         <label>Entity Type</label>
-                        <ng-select class="input-sm" [data]="value"
+                        <ng-select class="input-sm" 
+                                   [initData]="entitySelectedItems"
                                    [multiple]="true"
                                    [items]="entityTypeItems"
                                    (selected)="selectedEntityType($event)"
@@ -68,7 +72,8 @@
                     </div>
                     <div *ngIf="companySearch.sectors" class="input-group">
                         <label>Sector</label>
-                        <ng-select class="input-sm" [data]="value"
+                        <ng-select class="input-sm" 
+                                   [initData]="sectorSelectedItems"
                                    [multiple]="true"
                                    [items]="sectorItems"
                                    (selected)="selectedSector($event)"

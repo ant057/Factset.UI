@@ -24,10 +24,15 @@ var SearchComponent = (function () {
     function SearchComponent(companySearchProvider) {
         this.companySearchProvider = companySearchProvider;
         this.industryItems = [];
+        this.industrySelectedItems = [];
         this.countryItems = [];
+        this.countrySelectedItems = [];
         this.sicItems = [];
+        this.sicSelectedItems = [];
         this.entityTypeItems = [];
+        this.entitySelectedItems = [];
         this.sectorItems = [];
+        this.sectorSelectedItems = [];
         this.accordionOpen = true;
         this.selected = '';
         this.companyListArray = [];
@@ -35,9 +40,11 @@ var SearchComponent = (function () {
         this.pageSize = 25;
         this.loading = false;
         this.companySearch = new company_search_models_1.CompanySearch;
+        this.searchParams = new company_search_models_1.SearchParams;
     }
     SearchComponent.prototype.ngOnInit = function () {
         this.bindTemplate();
+        this.bindSearchParams();
     };
     SearchComponent.prototype.alert = function () {
         window.alert('hi');
@@ -83,9 +90,32 @@ var SearchComponent = (function () {
         for (var i = 0; i < this.companySearch.sectors.length; i++) {
             this.sectorItems.push(this.companySearch.sectors[i].sectorDescription);
         }
+        //this.industrySelectedItems.push({
+        //    id: 'Airlines',
+        //    text: 'Airlines'
+        //});
     };
     SearchComponent.prototype.logError = function (error) {
         console.error('error inside search component bind OnInit ' + error);
+    };
+    SearchComponent.prototype.bindSearchParams = function () {
+        var _this = this;
+        this.searchParams = this.companySearchProvider.getSearchParams();
+        if (this.searchParams.industries) {
+            this.searchParams.industries.forEach(function (f) { return _this.industrySelectedItems.push(f.industryDescription); });
+        }
+        if (this.searchParams.countries) {
+            this.searchParams.countries.forEach(function (f) { return _this.countrySelectedItems.push(f.countryDescription); });
+        }
+        if (this.searchParams.sectors) {
+            this.searchParams.sectors.forEach(function (f) { return _this.sectorSelectedItems.push(f.sectorDescription); });
+        }
+        if (this.searchParams.sicCodes) {
+            this.searchParams.sicCodes.forEach(function (f) { return _this.sicSelectedItems.push(f.sicCode); });
+        }
+        if (this.searchParams.entityTypes) {
+            this.searchParams.entityTypes.forEach(function (f) { return _this.entitySelectedItems.push(f.entityTypeDescription); });
+        }
     };
     SearchComponent.prototype.selectedIndustry = function (value) {
         var industry = new company_search_models_1.Industry;

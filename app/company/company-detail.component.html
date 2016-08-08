@@ -7,9 +7,9 @@
     <div class="col-md-12 well" *ngIf="companyDetail">
         <h2>{{companyDetail.companyName}}
             <small>{{companyDetail.countryISO}}</small>   <input type="button" class="btn btn-warning" value="CREATE ACCOUNT" /><br />
-            <small>{{companyDetail.ticker.substring(0, companyDetail.ticker.indexOf("-"))}} {{ companyDetail.exchange}}</small>
+            <small *ngIf="companyDetail.ticker">{{companyDetail.ticker.substring(0, companyDetail.ticker.indexOf("-"))}} {{ companyDetail.exchange}}</small>
         </h2>
-        <div>
+        <div *ngIf="companyDetail.street1">
             {{companyDetail.street1}}<br />
             {{companyDetail.city}} {{companyDetail.state}} {{companyDetail.zipcode}}<br />
             {{companyDetail.phone}}
@@ -25,6 +25,26 @@
             <tr>
                 <th>Universe</th>
                 <td>{{companyDetail.universeAmerica === 1 ? 'America' : companyDetail.universeEurope === 1 ? 'Europe' : companyDetail.universeAsiaPacific === 1 ? 'Asia/Pacific' : ''}}</td>
+            </tr>
+            <tr>
+                <th>Entity Type</th>
+                <td>{{companyDetail.entityTypeDescription}}</td>
+            </tr>
+            <tr>
+                <th>SIC Code</th>
+                <td>{{companyDetail.sicCode}}</td>
+            </tr>
+            <tr>
+                <th>SIC Description</th>
+                <td>{{companyDetail.sicDescription}}</td>
+            </tr>
+            <tr>
+                <th>Industry</th>
+                <td>{{companyDetail.industryDescription}}</td>
+            </tr>
+            <tr>
+                <th>Sector</th>
+                <td>{{companyDetail.sectorDescription}}</td>
             </tr>
             <tr>
                 <th>Latest Annual Update</th>
@@ -111,6 +131,9 @@
              <div *ngIf="stmtloading">
                  <img src="app/assets/pre-loading.gif" />
              </div>
+         </div>
+         <div *ngIf="noFinancials" class="alert alert-danger col-md-12" role="alert">
+             No Financials Available
          </div>
          <div class="col-md-12" style="padding:15px" *ngIf="activeFinancials">
              <financial-detail #financial [activeStatements]="activeFinancials"></financial-detail>
