@@ -20,7 +20,7 @@ export class CompanyListComponent implements OnInit {
     pagedData: PagedCompanyList;
     @Input() companies: CompanyList[];
     @Input() loading: boolean = false;
-    @Input() page: number = 1;
+    @Input() page: number;
     @Input() pageSize: number = 25;
     @Input() total: number;
 
@@ -39,7 +39,7 @@ export class CompanyListComponent implements OnInit {
     bindTemplate() {
         this.loading = true;
         //get vm data back from service
-        this.getCompanyPage(this.page);
+        this.getCompanyPage(1);
     }
 
     getCompanyPage(page: number) {
@@ -61,9 +61,8 @@ export class CompanyListComponent implements OnInit {
         console.error('error inside form bind OnInit ' + error);
     }
 
-    anAlert() {
-        window.alert('i wouldnt do that if i were you.."');
-        this.router.navigate(['/company']);
+    selectCompany(permSecId: string) {
+        this.router.navigate(['/company', permSecId]);
     }
 
     toggle() {

@@ -19,7 +19,6 @@ var CompanyListComponent = (function () {
         this.companySearchProvider = companySearchProvider;
         this.router = router;
         this.loading = false;
-        this.page = 1;
         this.pageSize = 25;
         this.toggled = false;
         this.toggleValue = '<';
@@ -31,7 +30,7 @@ var CompanyListComponent = (function () {
     CompanyListComponent.prototype.bindTemplate = function () {
         this.loading = true;
         //get vm data back from service
-        this.getCompanyPage(this.page);
+        this.getCompanyPage(1);
     };
     CompanyListComponent.prototype.getCompanyPage = function (page) {
         var _this = this;
@@ -49,9 +48,8 @@ var CompanyListComponent = (function () {
     CompanyListComponent.prototype.logError = function (error) {
         console.error('error inside form bind OnInit ' + error);
     };
-    CompanyListComponent.prototype.anAlert = function () {
-        window.alert('i wouldnt do that if i were you.."');
-        this.router.navigate(['/company']);
+    CompanyListComponent.prototype.selectCompany = function (permSecId) {
+        this.router.navigate(['/company', permSecId]);
     };
     CompanyListComponent.prototype.toggle = function () {
         if (this.toggled) {

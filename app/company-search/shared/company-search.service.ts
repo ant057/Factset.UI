@@ -3,7 +3,6 @@ import { Injectable } from '@angular/core';
 import { Http, Response } from '@angular/http';
 import { Headers, RequestOptions } from '@angular/http';
 
-
 //models
 import { CompanyList, PagedCompanyList, Industry, Sector, EntityType, Country, SIC, CompanySearch, SearchParams } from './company-search.models';
 

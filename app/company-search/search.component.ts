@@ -33,9 +33,10 @@ export class SearchComponent implements OnInit{
     public companyListArray: Array<string> = [];
 
     public companies: CompanyList[];
-    private page: number = 1;
-    private pageSize: number = 25;
-    private total: number;
+    public page: number = 1;
+    public pageSize: number = 25;
+    public total: number;
+    public loading: boolean = false;
     
     constructor(private companySearchProvider: CompanySearchService) {
         this.companySearch = new CompanySearch;
@@ -198,15 +199,17 @@ export class SearchComponent implements OnInit{
     }
 
     getFilteredCompanies() {
-        console.warn('i got clicked');
+        this.loading = true;
         this.companySearchProvider.getFilteredCompanies(this.page, this.pageSize)
             .then(response => this.getCompanyPageHandler(response))
             .catch(error => this.logError(error));
     }
 
     getCompanyPageHandler(response: any) {
+        this.loading = false;
         this.companies = response.data;
         this.total = response.count;
+        this.page = 1;
     }
 
 }

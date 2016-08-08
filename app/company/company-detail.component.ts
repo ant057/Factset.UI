@@ -1,6 +1,6 @@
 //angular
 import { Component, OnInit}        from '@angular/core';
-
+import { ActivatedRoute, Router } from '@angular/router';
 //components
 import { FinancialDetailComponent } from '../financial/financial-detail.component';
 //services
@@ -17,14 +17,16 @@ import { BalanceModel, FinancialDetail, Financial } from '../financial/shared/fi
 export class CompanyDetailComponent implements OnInit{
 
     companyDetail: CompanyDetail;
-    private activeFinancials: FinancialDetail[]
-    private activeFinancialsTemp: FinancialDetail[]
+    private activeFinancials: FinancialDetail[];
     loading: boolean = false;
     stmtloading: boolean = false;
     period: string;
     type: string;
+    sub: any;
+    permSecId: string;
 
-    constructor(private companyProvider: CompanyDetailService) {
+    constructor(private companyProvider: CompanyDetailService,
+    private route: ActivatedRoute, private router: Router) {
         
     }
 
@@ -32,11 +34,20 @@ export class CompanyDetailComponent implements OnInit{
         this.bindTemplate();
     }
 
-    bindTemplate() {
+    ngOnDestroy() {
+        this.sub.unsubscribe();
+    }
+
+    bindTemplate() { 
         this.loading = true;
         this.period = "Annual";
         this.type = "BS";
-        this.getCompanyDetail("D0MJZ3-S-US");
+
+        this.sub = this.route.params.subscribe(params => {
+            this.permSecId = params['permanentSecurityId'];
+            this.getCompanyDetail(this.permSecId);
+        });
+
     }
 
     getCompanyDetail(permSecurityId: string) {
@@ -48,8 +59,6 @@ export class CompanyDetailComponent implements OnInit{
     successHandler(response: any) {
         this.companyDetail = response;
         this.getStatements(this.period, this.type);
-        //this.getStatements(this.period, this.type);
-        //this.activeFinancials = this.companyDetail.financialStatements.annualFinancialStatements;
         this.loading = false;
     }
 
@@ -57,21 +66,22 @@ export class CompanyDetailComponent implements OnInit{
         this.stmtloading = true;
         this.period = period;      
         this.type = type;
-        this.companyProvider.getStatements(period, type, "D0MJZ3-S-US")
+        this.companyProvider.getStatements(period, type, this.permSecId)
             .then(response => this.getStatementsSuccess(response))
             .catch(error => this.logError(error));       
     } 
 
     getStatementsSuccess(response: FinancialDetail[]) {
-        //if (response[i].financialStatements) {
-        //    window.alert('undefined');
-        //}
-        //else {
+        console.warn(response);
+        if (response.length > 0) { //financials 
             for (var i = 0; i < response.length; i++) {
                 response[i].financialStatements = response[i].financialStatements.filter(f => f.reportCode.substr(0, 2) === this.type);
             }
             this.activeFinancials = response;
-        //}
+        }
+        else { //no financials
+            
+        }
        this.stmtloading = false;
     }
 

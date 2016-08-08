@@ -4,7 +4,7 @@
     </div>
     <div id="page-content-wrapper" class="col-md-12 well">
         <company-list #complist [companies]="search.companies" 
-                      [page]="page" [total]="total" [pageSize]="pageSize">
+                      [page]="search.page" [total]="search.total" [pageSize]="search.pageSize" [loading]="search.loading">
         </company-list>
     </div>
 </div>

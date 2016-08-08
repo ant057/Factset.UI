@@ -38,7 +38,7 @@ export class FinancialDetailComponent {
     L3: boolean = false;
 
     constructor() {
-        
+
     }
 
     ngOnInit() {

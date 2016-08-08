@@ -33,6 +33,7 @@ var SearchComponent = (function () {
         this.companyListArray = [];
         this.page = 1;
         this.pageSize = 25;
+        this.loading = false;
         this.companySearch = new company_search_models_1.CompanySearch;
     }
     SearchComponent.prototype.ngOnInit = function () {
@@ -161,14 +162,16 @@ var SearchComponent = (function () {
     };
     SearchComponent.prototype.getFilteredCompanies = function () {
         var _this = this;
-        console.warn('i got clicked');
+        this.loading = true;
         this.companySearchProvider.getFilteredCompanies(this.page, this.pageSize)
             .then(function (response) { return _this.getCompanyPageHandler(response); })
             .catch(function (error) { return _this.logError(error); });
     };
     SearchComponent.prototype.getCompanyPageHandler = function (response) {
+        this.loading = false;
         this.companies = response.data;
         this.total = response.count;
+        this.page = 1;
     };
     SearchComponent = __decorate([
         core_1.Component({

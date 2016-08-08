@@ -15,15 +15,15 @@
             </div>
         </div>
         <table id="companyTable" class="table table-filter table-striped">
-            <thead>
+            <!--<thead>
                 <tr>
-                    <!--<th>Factset Security ID</th>
-                    <th>Factset Entity ID</th>-->
+                    <th>Factset Security ID</th>
+                    <th>Factset Entity ID</th>
                     <th>Company Details</th>
                 </tr>
-            </thead>
+            </thead>-->
             <tbody>
-                <tr *ngFor="let company of companies | paginate: {id: 'server', itemsPerPage: _pageSize, currentPage: _page, totalItems: _total }" (click)="anAlert()">
+                <tr *ngFor="let company of companies | paginate: {id: 'server', itemsPerPage: pageSize, currentPage: page, totalItems: total }" (click)="selectCompany(company.permanentSecurityID)">
                     <!--<td>
                         <div class="media">
                             <p class="summary">{{company.permanentSecurityID}}</p>

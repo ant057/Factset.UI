@@ -10,24 +10,34 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //angular
 var core_1 = require('@angular/core');
+var router_1 = require('@angular/router');
 //components
 var financial_detail_component_1 = require('../financial/financial-detail.component');
 //services
 var company_detail_service_1 = require('./shared/company-detail.service');
 var CompanyDetailComponent = (function () {
-    function CompanyDetailComponent(companyProvider) {
+    function CompanyDetailComponent(companyProvider, route, router) {
         this.companyProvider = companyProvider;
+        this.route = route;
+        this.router = router;
         this.loading = false;
         this.stmtloading = false;
     }
     CompanyDetailComponent.prototype.ngOnInit = function () {
         this.bindTemplate();
     };
+    CompanyDetailComponent.prototype.ngOnDestroy = function () {
+        this.sub.unsubscribe();
+    };
     CompanyDetailComponent.prototype.bindTemplate = function () {
+        var _this = this;
         this.loading = true;
         this.period = "Annual";
         this.type = "BS";
-        this.getCompanyDetail("D0MJZ3-S-US");
+        this.sub = this.route.params.subscribe(function (params) {
+            _this.permSecId = params['permanentSecurityId'];
+            _this.getCompanyDetail(_this.permSecId);
+        });
     };
     CompanyDetailComponent.prototype.getCompanyDetail = function (permSecurityId) {
         var _this = this;
@@ -38,8 +48,6 @@ var CompanyDetailComponent = (function () {
     CompanyDetailComponent.prototype.successHandler = function (response) {
         this.companyDetail = response;
         this.getStatements(this.period, this.type);
-        //this.getStatements(this.period, this.type);
-        //this.activeFinancials = this.companyDetail.financialStatements.annualFinancialStatements;
         this.loading = false;
     };
     CompanyDetailComponent.prototype.getStatements = function (period, type) {
@@ -47,21 +55,21 @@ var CompanyDetailComponent = (function () {
         this.stmtloading = true;
         this.period = period;
         this.type = type;
-        this.companyProvider.getStatements(period, type, "D0MJZ3-S-US")
+        this.companyProvider.getStatements(period, type, this.permSecId)
             .then(function (response) { return _this.getStatementsSuccess(response); })
             .catch(function (error) { return _this.logError(error); });
     };
     CompanyDetailComponent.prototype.getStatementsSuccess = function (response) {
         var _this = this;
-        //if (response[i].financialStatements) {
-        //    window.alert('undefined');
-        //}
-        //else {
-        for (var i = 0; i < response.length; i++) {
-            response[i].financialStatements = response[i].financialStatements.filter(function (f) { return f.reportCode.substr(0, 2) === _this.type; });
+        console.warn(response);
+        if (response.length > 0) {
+            for (var i = 0; i < response.length; i++) {
+                response[i].financialStatements = response[i].financialStatements.filter(function (f) { return f.reportCode.substr(0, 2) === _this.type; });
+            }
+            this.activeFinancials = response;
         }
-        this.activeFinancials = response;
-        //}
+        else {
+        }
         this.stmtloading = false;
     };
     CompanyDetailComponent.prototype.logError = function (error) {
@@ -73,7 +81,7 @@ var CompanyDetailComponent = (function () {
             templateUrl: 'app/company/company-detail.component.html',
             directives: [financial_detail_component_1.FinancialDetailComponent]
         }), 
-        __metadata('design:paramtypes', [company_detail_service_1.CompanyDetailService])
+        __metadata('design:paramtypes', [company_detail_service_1.CompanyDetailService, router_1.ActivatedRoute, router_1.Router])
     ], CompanyDetailComponent);
     return CompanyDetailComponent;
 }());

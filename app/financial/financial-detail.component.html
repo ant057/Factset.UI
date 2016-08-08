@@ -27,12 +27,12 @@
             </div>
 </div>-->
 
-
+<div *ngIf="activeStatements[0].financialStatements">
     <div class="col-md-3">
         <div style="margin-right:45px">
             <table class="table table-filter table-striped table-condensed well" style="width:210px">
                 <thead>
-                <tr><th><div>Period:</div></th></tr>
+                    <tr><th><div>Period:</div></th></tr>
                 </thead>
                 <tr style="height:45px" *ngFor="let lineitem of activeStatements[0].financialStatements; let i = index">
                     <th><div class="media"><p class="summary" [class.L0]="lineitem.displayLevel === 'L0'" [class.L1]="lineitem.displayLevel === 'L1'" [class.L2]="lineitem.displayLevel === 'L2'" [class.L3]="lineitem.displayLevel === 'L3'">{{lineitem.description}}</p></div></th>
@@ -49,11 +49,11 @@
             <tr style="height:45px" *ngFor="let lineitem of statement.financialStatements">
                 <!--<th *ngIf="i == 0">{{lineitem.description}}</th>-->
                 <!--<th><div style="height:28px" class="media"><p class="summary" [class.L0]="lineitem.displayLevel === 'L0'" [class.L1]="lineitem.displayLevel === 'L1'" [class.L2]="lineitem.displayLevel === 'L2'" [class.L3]="lineitem.displayLevel === 'L3'">{{ i === 0 ? lineitem.description : ' '}}</p></div></th>-->
-                <td><div style="font-size:small">{{lineitem.value === '0' ? ' ' : lineitem.value}}</div></td>
+                <td><div style="font-size:small">{{lineitem.value === '0' ? ' ' : lineitem.value | number}}</div></td>
             </tr>
         </table>
     </div>
-
+</div>
 
 <!--<div class="col-md-4" *ngFor="let statement of activeStatements; let i = index">
     <table class="table table-filter table-striped">

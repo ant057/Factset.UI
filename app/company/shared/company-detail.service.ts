@@ -23,10 +23,7 @@ export class CompanyDetailService {
 
     getCompanyDetail(permSecurityId: string): Promise<CompanyDetail> {
         //return company list data if we have
-        if (this._companyDetail) {
-            //do stuff
-            return Promise.resolve(this._companyDetail);
-        } else { //else, get from server
+
             return this.http.get(this.apiUrl + 'GetCompany/' + permSecurityId)
                 .toPromise()
                 .then(response => {
@@ -34,7 +31,7 @@ export class CompanyDetailService {
                     return this._companyDetail;
                 })
                 .catch(this.handleError);
-        }
+
     }
 
     getFinancials(permSecurityId: string): Promise<Financial> {
