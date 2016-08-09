@@ -19,8 +19,23 @@ var CompanyDetailService = (function () {
         this.apiUrlBase = 'http://localhost:54665/api/';
         this.apiUrl = this.apiUrlBase + 'Company/';
     }
+    CompanyDetailService.prototype.addAccount = function (permanentSecurityId) {
+        var body;
+        {
+            body = JSON.stringify(permanentSecurityId);
+        }
+        ;
+        var headers = new http_1.Headers({ 'Content-Type': 'application/json' });
+        var options = new http_1.RequestOptions({ headers: headers });
+        return this.http.post(this.apiUrl + 'AddAccount/' + permanentSecurityId, body, options)
+            .toPromise()
+            .then(function (response) {
+            //return this._pagedCompanyList;
+            return 1;
+        })
+            .catch(this.handleError);
+    };
     CompanyDetailService.prototype.getCompanyDetail = function (permSecurityId) {
-        //return company list data if we have
         var _this = this;
         return this.http.get(this.apiUrl + 'GetCompany/' + permSecurityId)
             .toPromise()

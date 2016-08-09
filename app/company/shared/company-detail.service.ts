@@ -1,6 +1,6 @@
 ﻿//angular
 import { Injectable } from '@angular/core';
-import { Http, Response } from '@angular/http';
+import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 //models
 import { CompanyDetail } from './company-detail.models';
@@ -21,9 +21,23 @@ export class CompanyDetailService {
  
     }
 
-    getCompanyDetail(permSecurityId: string): Promise<CompanyDetail> {
-        //return company list data if we have
+    addAccount(permanentSecurityId: string): string {
+        let body: string; {
+            body = JSON.stringify(permanentSecurityId)
+        };
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
 
+        return this.http.post(this.apiUrl + 'AddAccount/' + permanentSecurityId, body, options)
+            .toPromise()
+            .then(response => {
+                //return this._pagedCompanyList;
+                return 1;
+            })
+            .catch(this.handleError);
+    }
+
+    getCompanyDetail(permSecurityId: string): Promise<CompanyDetail> {
             return this.http.get(this.apiUrl + 'GetCompany/' + permSecurityId)
                 .toPromise()
                 .then(response => {
@@ -31,7 +45,6 @@ export class CompanyDetailService {
                     return this._companyDetail;
                 })
                 .catch(this.handleError);
-
     }
 
     getFinancials(permSecurityId: string): Promise<Financial> {

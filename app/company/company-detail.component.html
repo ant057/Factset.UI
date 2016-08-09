@@ -6,7 +6,7 @@
     </div>
     <div class="col-md-12 well" *ngIf="companyDetail">
         <h2>{{companyDetail.companyName}}
-            <small>{{companyDetail.countryISO}}</small>   <input type="button" class="btn btn-warning" value="CREATE ACCOUNT" /><br />
+            <small>{{companyDetail.countryISO}}</small>   <input type="button" class="btn btn-warning" value="CREATE ACCOUNT" (click)="addAccount(companyDetail.permanentSecurityID)" /><br />
             <small *ngIf="companyDetail.ticker">{{companyDetail.ticker.substring(0, companyDetail.ticker.indexOf("-"))}} {{ companyDetail.exchange}}</small>
         </h2>
         <div *ngIf="companyDetail.street1">
@@ -16,7 +16,7 @@
         </div>
     </div>
     <div class="col-md-3 well" *ngIf="companyDetail">
-        <h3>Details</h3>
+        <h4>Details</h4>
         <table class="table table-striped table-condensed" style="font-size:small">
             <tr>
                 <th>Business Description</th>

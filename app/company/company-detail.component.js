@@ -51,6 +51,9 @@ var CompanyDetailComponent = (function () {
         this.getStatements(this.period, this.type);
         this.loading = false;
     };
+    CompanyDetailComponent.prototype.addAccount = function (permSecId) {
+        this.companyProvider.addAccount(permSecId);
+    };
     CompanyDetailComponent.prototype.getStatements = function (period, type) {
         var _this = this;
         this.stmtloading = true;

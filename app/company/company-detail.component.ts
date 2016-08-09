@@ -62,6 +62,10 @@ export class CompanyDetailComponent implements OnInit{
         this.loading = false;
     }
 
+    addAccount(permSecId: string) {
+        this.companyProvider.addAccount(permSecId);
+    }
+
     getStatements(period: string, type: string) {
         this.stmtloading = true;
         this.period = period;      
