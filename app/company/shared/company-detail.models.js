@@ -5,4 +5,10 @@ var CompanyDetail = (function () {
     return CompanyDetail;
 }());
 exports.CompanyDetail = CompanyDetail;
+var AnchorAccount = (function () {
+    function AnchorAccount() {
+    }
+    return AnchorAccount;
+}());
+exports.AnchorAccount = AnchorAccount;
 //# sourceMappingURL=company-detail.models.js.map

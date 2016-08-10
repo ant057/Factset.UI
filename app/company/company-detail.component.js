@@ -23,6 +23,9 @@ var CompanyDetailComponent = (function () {
         this.loading = false;
         this.stmtloading = false;
         this.noFinancials = false;
+        this.addAccountSuccess = false;
+        this.disableAddAcct = false;
+        this.addingAccount = false;
     }
     CompanyDetailComponent.prototype.ngOnInit = function () {
         this.bindTemplate();
@@ -52,7 +55,21 @@ var CompanyDetailComponent = (function () {
         this.loading = false;
     };
     CompanyDetailComponent.prototype.addAccount = function (permSecId) {
-        this.companyProvider.addAccount(permSecId);
+        var _this = this;
+        if (window.confirm('Create new account?')) {
+            this.disableAddAcct = true;
+            this.addingAccount = true;
+            this.companyProvider.addAccount(permSecId)
+                .then(function (response) { return _this.handleAddAccountSuccess(response); })
+                .catch(function (error) { return _this.logError(error); });
+        }
+    };
+    CompanyDetailComponent.prototype.handleAddAccountSuccess = function (response) {
+        if (response) {
+            this.companyDetail.anchorAccount = response;
+            this.addAccountSuccess = true;
+            this.addingAccount = false;
+        }
     };
     CompanyDetailComponent.prototype.getStatements = function (period, type) {
         var _this = this;

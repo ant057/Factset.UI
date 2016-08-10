@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Http, Response, Headers, RequestOptions } from '@angular/http';
 
 //models
-import { CompanyDetail } from './company-detail.models';
+import { CompanyDetail, AnchorAccount } from './company-detail.models';
 import { BalanceModel, FinancialDetail, Financial } from '../../financial/shared/financial.models';
 
 import 'rxjs/add/operator/toPromise';
@@ -21,7 +21,7 @@ export class CompanyDetailService {
  
     }
 
-    addAccount(permanentSecurityId: string): string {
+    addAccount(permanentSecurityId: string): Promise<AnchorAccount> {
         let body: string; {
             body = JSON.stringify(permanentSecurityId)
         };
@@ -31,8 +31,10 @@ export class CompanyDetailService {
         return this.http.post(this.apiUrl + 'AddAccount/' + permanentSecurityId, body, options)
             .toPromise()
             .then(response => {
-                //return this._pagedCompanyList;
-                return 1;
+                if (this._companyDetail) {
+                    this._companyDetail.anchorAccount = response.json();
+                    return this._companyDetail.anchorAccount;
+                }
             })
             .catch(this.handleError);
     }

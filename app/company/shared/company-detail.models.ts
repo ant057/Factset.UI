@@ -39,4 +39,13 @@ export class CompanyDetail {
         exchange: string
 
         financialStatements: Financial
+        anchorAccount: AnchorAccount
+}
+
+export class AnchorAccount {
+    accountNumber: number
+    principalName: string
+    primaryUW: string
+    agency: string
+    region: string
 }

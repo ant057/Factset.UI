@@ -5,18 +5,29 @@
         </div>
     </div>
     <div class="col-md-12 well" *ngIf="companyDetail">
-        <h2>{{companyDetail.companyName}}
-            <small>{{companyDetail.countryISO}}</small>   <input type="button" class="btn btn-warning" value="CREATE ACCOUNT" (click)="addAccount(companyDetail.permanentSecurityID)" /><br />
-            <small *ngIf="companyDetail.ticker">{{companyDetail.ticker.substring(0, companyDetail.ticker.indexOf("-"))}} {{ companyDetail.exchange}}</small>
-        </h2>
-        <div *ngIf="companyDetail.street1">
-            {{companyDetail.street1}}<br />
-            {{companyDetail.city}} {{companyDetail.state}} {{companyDetail.zipcode}}<br />
-            {{companyDetail.phone}}
+        <div class="col-md-12">
+            <h2>
+                {{companyDetail.companyName}}
+                <small>{{companyDetail.countryISO}}</small>  
+                <img *ngIf="!companyDetail.anchorAccount" src="./app/assets/artificial_add_girl_folder_by_base.png" /> <input *ngIf="!companyDetail.anchorAccount" type="button" [disabled]="disableAddAcct" class="btn btn-warning" value="CREATE ACCOUNT" (click)="addAccount(companyDetail.permanentSecurityID)" /><img *ngIf="addingAccount" src="app/assets/pre-loading.gif" /><br />
+                <small *ngIf="companyDetail.ticker">{{companyDetail.ticker.substring(0, companyDetail.ticker.indexOf("-"))}} {{ companyDetail.exchange}}</small>
+            </h2>
+            <div *ngIf="companyDetail.street1">
+                {{companyDetail.street1}}<br />
+                {{companyDetail.city}} {{companyDetail.state}} {{companyDetail.zipcode}}<br />
+                {{companyDetail.phone}}
+            </div>
+            <div *ngIf="companyDetail.anchorAccount">
+                <a target="_blank" href="https://www.argosuretyportal.com/AMS/Account/Summary/AcctSummary.aspx?qryLoad=1&qryAccountID={{companyDetail.anchorAccount.accountNumber}}&qryBusinessType=Commercial">Anchor Account #{{companyDetail.anchorAccount.accountNumber}}</a>
+            </div>
+        </div>
+        <div *ngIf="addAccountSuccess" class="alert alert-success col-md-12" role="alert">
+            Success! New Account Added - #<a target="_blank" href="https://www.argosuretyportal.com/AMS/Account/Summary/AcctSummary.aspx?qryLoad=1&qryAccountID={{companyDetail.anchorAccount.accountNumber}}&qryBusinessType=Commercial">{{companyDetail.anchorAccount.accountNumber}}</a>
         </div>
     </div>
     <div class="col-md-3 well" *ngIf="companyDetail">
-        <h4>Details</h4>
+        <h4>
+        <img src="./app/assets/social_table_jeans_pocket_media_base_icon_file.png" /> Details</h4>
         <table class="table table-striped table-condensed" style="font-size:small">
             <tr>
                 <th>Business Description</th>
@@ -104,7 +115,10 @@
     </div>
      <div class="col-md-9 well" *ngIf="companyDetail">
          <div class="col-md-4">
-             <h4>Financials<br /><small>Showing previous 4 statements..</small></h4>
+             <h4>
+                 <img src="./app/assets/bar_chart_by_web_cartoon_pack_document_icons_shlyapnikova_base.png"/> Financials<br />             
+                 <small>Showing previous 4 statements..</small>
+             </h4>
          </div>
          <div class="col-md-8 pull-right">
              <div class="btn-group">

@@ -25,6 +25,9 @@ export class CompanyDetailComponent implements OnInit{
     sub: any;
     permSecId: string;
     noFinancials: boolean = false;
+    addAccountSuccess: boolean = false;
+    disableAddAcct: boolean = false;
+    addingAccount: boolean = false;
 
     constructor(private companyProvider: CompanyDetailService,
     private route: ActivatedRoute, private router: Router) {
@@ -63,7 +66,21 @@ export class CompanyDetailComponent implements OnInit{
     }
 
     addAccount(permSecId: string) {
-        this.companyProvider.addAccount(permSecId);
+        if (window.confirm('Create new account?')) {
+            this.disableAddAcct = true;
+            this.addingAccount = true;
+            this.companyProvider.addAccount(permSecId)
+                .then(response => this.handleAddAccountSuccess(response))
+                .catch(error => this.logError(error));
+        }
+    }
+
+    handleAddAccountSuccess(response: any) {
+        if (response) {
+            this.companyDetail.anchorAccount = response;
+            this.addAccountSuccess = true;
+            this.addingAccount = false;
+        }
     }
 
     getStatements(period: string, type: string) {

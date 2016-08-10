@@ -20,6 +20,7 @@ var CompanyDetailService = (function () {
         this.apiUrl = this.apiUrlBase + 'Company/';
     }
     CompanyDetailService.prototype.addAccount = function (permanentSecurityId) {
+        var _this = this;
         var body;
         {
             body = JSON.stringify(permanentSecurityId);
@@ -30,8 +31,10 @@ var CompanyDetailService = (function () {
         return this.http.post(this.apiUrl + 'AddAccount/' + permanentSecurityId, body, options)
             .toPromise()
             .then(function (response) {
-            //return this._pagedCompanyList;
-            return 1;
+            if (_this._companyDetail) {
+                _this._companyDetail.anchorAccount = response.json();
+                return _this._companyDetail.anchorAccount;
+            }
         })
             .catch(this.handleError);
     };
