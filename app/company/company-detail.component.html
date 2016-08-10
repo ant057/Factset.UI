@@ -5,7 +5,7 @@
         </div>
     </div>
     <div class="col-md-12 well" *ngIf="companyDetail">
-        <div class="col-md-12">
+        <div class="col-md-9">
             <h2>
                 {{companyDetail.companyName}}
                 <small>{{companyDetail.countryISO}}</small>  
@@ -17,9 +17,13 @@
                 {{companyDetail.city}} {{companyDetail.state}} {{companyDetail.zipcode}}<br />
                 {{companyDetail.phone}}
             </div>
-            <div *ngIf="companyDetail.anchorAccount">
-                <a target="_blank" href="https://www.argosuretyportal.com/AMS/Account/Summary/AcctSummary.aspx?qryLoad=1&qryAccountID={{companyDetail.anchorAccount.accountNumber}}&qryBusinessType=Commercial">Anchor Account #{{companyDetail.anchorAccount.accountNumber}}</a>
+        </div>
+        <div class="col-md-3 accountwell" *ngIf="companyDetail.anchorAccount">
+            <div>
+                <img src="./app/assets/Folder_WPaper.gif" />
+                <img src="./app/assets/Account_Details2.jpg" />
             </div>
+            <a target="_blank" href="https://www.argosuretyportal.com/AMS/Account/Summary/AcctSummary.aspx?qryLoad=1&qryAccountID={{companyDetail.anchorAccount.accountNumber}}&qryBusinessType=Commercial">Account #{{companyDetail.anchorAccount.accountNumber}}</a>
         </div>
         <div *ngIf="addAccountSuccess" class="alert alert-success col-md-12" role="alert">
             Success! New Account Added - #<a target="_blank" href="https://www.argosuretyportal.com/AMS/Account/Summary/AcctSummary.aspx?qryLoad=1&qryAccountID={{companyDetail.anchorAccount.accountNumber}}&qryBusinessType=Commercial">{{companyDetail.anchorAccount.accountNumber}}</a>
