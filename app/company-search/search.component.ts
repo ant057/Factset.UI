@@ -60,7 +60,7 @@ export class SearchComponent implements OnInit{
 
     bindTemplate(){
         this.getCompanySearchModel();
-       // this.getCompanies();
+        this.getCompanies();
     }
 
     getCompanySearchModel(){

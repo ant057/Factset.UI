@@ -51,7 +51,7 @@ var SearchComponent = (function () {
     };
     SearchComponent.prototype.bindTemplate = function () {
         this.getCompanySearchModel();
-        // this.getCompanies();
+        this.getCompanies();
     };
     SearchComponent.prototype.getCompanySearchModel = function () {
         var _this = this;
