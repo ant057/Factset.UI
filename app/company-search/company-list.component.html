@@ -5,6 +5,7 @@
     <div *ngIf="companies" class="table-container">
         <div class="row">
                 <div class="col-md-3">
+                    <!--<h4><img src="./app/assets/social_table_jeans_pocket_media_base_icon_file.png" /> Companies</h4>-->
                     <h4><img src="./app/assets/social_table_jeans_pocket_media_base_icon_file.png" /> Companies</h4>
                 </div>
                 <div class="col-md-3">
@@ -37,7 +38,7 @@
                     <td>
                         <div class="media">
                             <a href="#" class="pull-left">
-                                <img src="https://s3.amazonaws.com/uifaces/faces/twitter/fffabs/128.jpg" class="media-photo">
+                                <img src="{{company.imgUrl}}" class="media-photo">
                             </a>
                             <div class="media-body">
                                 <span *ngIf="company.marketValueCurrent" class="media-meta">Market Value: {{company.marketValueCurrent}}</span>

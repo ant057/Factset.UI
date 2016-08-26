@@ -31,6 +31,8 @@ export class CompanyList {
      sICDescription: string
      entityTypeCode: string
      entityTypeDescription: string
+
+     imgUrl: string
 }
 
 export class PagedCompanyList {
