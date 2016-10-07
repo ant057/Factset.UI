@@ -19,11 +19,15 @@ var CompanySearchService = (function () {
     function CompanySearchService(http) {
         this.http = http;
         this.mockApiUrl = 'app/company-search/shared/industries.json';
-        this.apiUrlBase = 'http://localhost:54665/api/';
+        this.apiUrlBase = 'http://ausp-sur-sql01:54665/api/';
         this.apiUrl = this.apiUrlBase + 'CompanySearch/';
         this._pagedCompanyList = new company_search_models_1.PagedCompanyList;
         this._searchParams = new company_search_models_1.SearchParams;
     }
+    CompanySearchService.prototype.search = function (term) {
+        return this.http.get(this.apiUrl + ("SearchCompanyName/?name=" + term))
+            .map(function (r) { return r.json(); });
+    };
     CompanySearchService.prototype.getSearchParams = function () {
         if (this._searchParams) {
             return this._searchParams;
@@ -91,7 +95,6 @@ var CompanySearchService = (function () {
         this._searchParams.industries = this._searchParams.industries.filter(function (i) { return i.industryDescription !== industry.industryDescription; });
     };
     CompanySearchService.prototype.getCompanies = function (page, pageSize) {
-        var _this = this;
         //return company list data if we have
         if (this._companyList) {
             this._pagedCompanyList.count = this._companyList.length;
@@ -99,15 +102,16 @@ var CompanySearchService = (function () {
             return Promise.resolve(this._pagedCompanyList);
         }
         else {
-            return this.http.get(this.apiUrl + 'GetAllCompanies')
-                .toPromise()
-                .then(function (response) {
-                _this._companyList = response.json();
-                _this._pagedCompanyList.data = _this._companyList.slice((page - 1) * pageSize, ((page - 1) * pageSize) + pageSize);
-                _this._pagedCompanyList.count = _this._companyList.length;
-                return _this._pagedCompanyList;
-            })
-                .catch(this.handleError);
+            //return this.http.get(this.apiUrl + 'GetAllCompanies')
+            //    .toPromise()
+            //    .then(response => {
+            //        this._companyList = response.json();
+            //        this._pagedCompanyList.data = this._companyList.slice((page - 1) * pageSize, ((page - 1) * pageSize) + pageSize);
+            //        this._pagedCompanyList.count = this._companyList.length;
+            //        return this._pagedCompanyList;
+            //    })
+            //    .catch(this.handleError);
+            return Promise.resolve(this._pagedCompanyList);
         }
     };
     CompanySearchService.prototype.getFilteredCompanies = function (page, pageSize) {
@@ -137,7 +141,6 @@ var CompanySearchService = (function () {
             return this.http.get(this.apiUrl + 'GetCompanySearch')
                 .toPromise() //
                 .then(function (response) {
-                console.warn(response);
                 _this._companySearch = new company_search_models_1.CompanySearch;
                 _this._companySearch = response.json();
                 return _this._companySearch;

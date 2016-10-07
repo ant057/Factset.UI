@@ -9,13 +9,9 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 var core_1 = require('@angular/core');
-//providers
-//import {RouteConfig, ROUTER_DIRECTIVES, ROUTER_PROVIDERS} from '@angular/router-deprecated';
-var router_1 = require('@angular/router');
-var ng2_bootstrap_1 = require('ng2-bootstrap/ng2-bootstrap');
 //services
-var company_search_service_1 = require('./company-search/shared/company-search.service');
-var company_detail_service_1 = require('./company/shared/company-detail.service');
+//import { CompanySearchService } from './company-search/shared/company-search.service';
+//import { CompanyDetailService } from './company/shared/company-detail.service';
 var AppComponent = (function () {
     function AppComponent() {
         this.title = 'Factset Account Lookup';
@@ -23,13 +19,7 @@ var AppComponent = (function () {
     AppComponent = __decorate([
         core_1.Component({
             selector: 'my-app',
-            templateUrl: 'app/app.component.html',
-            directives: [router_1.ROUTER_DIRECTIVES, ng2_bootstrap_1.AlertComponent],
-            providers: [
-                //ROUTER_PROVIDERS,
-                company_search_service_1.CompanySearchService,
-                company_detail_service_1.CompanyDetailService
-            ]
+            templateUrl: 'app/app.component.html'
         }), 
         __metadata('design:paramtypes', [])
     ], AppComponent);

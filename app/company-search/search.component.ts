@@ -1,21 +1,17 @@
 //angular
 import {Component, OnInit} from '@angular/core';
+import {Router}            from '@angular/router';
 //services
 import {CompanySearchService} from './shared/company-search.service';
-//components
-import {AutoCompleteComponent} from './shared/auto-complete.component';
-import {SELECT_DIRECTIVES} from 'ng2-select';
-import {ACCORDION_DIRECTIVES} from 'ng2-bootstrap/components/accordion';
-import {TYPEAHEAD_DIRECTIVES} from 'ng2-bootstrap/components/typeahead';
-import {FORM_DIRECTIVES} from '@angular/forms';
 //models
 import {CompanySearch, CompanyList, SearchParams, Industry, Country, SIC, EntityType, Sector} from './shared/company-search.models';
 
+import {Observable}        from 'rxjs/Observable';
+import {Subject}           from 'rxjs/Subject';
+
 @Component({
     selector: 'search',
-    templateUrl: 'app/company-search/search.component.html',
-    directives: [AutoCompleteComponent, SELECT_DIRECTIVES,
-        ACCORDION_DIRECTIVES, TYPEAHEAD_DIRECTIVES, FORM_DIRECTIVES]
+    templateUrl: 'app/company-search/search.component.html'
 })
 export class SearchComponent implements OnInit{
 
@@ -60,7 +56,7 @@ export class SearchComponent implements OnInit{
 
     bindTemplate(){
         this.getCompanySearchModel();
-        this.getCompanies();
+       // this.getCompanies();
     }
 
     getCompanySearchModel(){
@@ -228,7 +224,7 @@ export class SearchComponent implements OnInit{
     }
 
     public typeaheadOnSelect(e: any): void {
-        console.log('Selected value: ', e.item);
+        //console.log('Selected value: ', e.item);
     }
 
     getFilteredCompanies() {
@@ -236,13 +232,66 @@ export class SearchComponent implements OnInit{
         this.companySearchProvider.getFilteredCompanies(this.page, this.pageSize)
             .then(response => this.getCompanyPageHandler(response))
             .catch(error => this.logError(error));
+        this.page = null;
     }
 
     getCompanyPageHandler(response: any) {
-        this.loading = false;
         this.companies = response.data;
+        this.companies.forEach(p => p.imgUrl = this.findPicture(p.sectorCode));
         this.total = response.count;
         this.page = 1;
+        this.loading = false;
+    }
+
+    private findPicture(sector: string): string {
+        switch (sector) {
+            case '1100':
+                return './app/assets/Coal.png';
+            case '1200':
+                return './app/assets/Deployment.png';
+            case '1300':
+                return './app/assets/Processor.png';
+            case '1400':
+                return './app/assets/Deployment.png';
+            case '2100':
+                return './app/assets/Electro Devices.png';
+            case '2200':
+                return './app/assets/Automatic.png';
+            case '2300':
+                return './app/assets/Electrical Sensor.png';
+            case '2400':
+                return './app/assets/Deployment.png';
+            case '3100':
+                return './app/assets/Whisky Still.png';
+            case '3200':
+                return './app/assets/Work.png';
+            case '3250':
+                return './app/assets/Deployment.png';
+            case '3300':
+                return './app/assets/Gyroscope.png';
+            case '3350':
+                return './app/assets/Electrical Sensor.png';
+            case '3400':
+                return './app/assets/Deployment.png';
+            case '3500':
+                return './app/assets/Industrial Scales.png';
+            case '4600':
+                return './app/assets/Fork Lift.png';
+            case '4700':
+                return './app/assets/Worker Male.png';
+            case '4800':
+                return './app/assets/Crowdfunding.png';
+            case '4900':
+                return './app/assets/Radio Tower.png';
+            case '6000':
+                return './app/assets/Processor.png';
+            case '7000':
+                return './app/assets/Warning Shield.png';
+            case '9999':
+                return './app/assets/Deployment.png';
+            default:
+                return './app/assets/Deployment.png';
+        }
     }
 
 }

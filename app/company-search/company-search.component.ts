@@ -11,8 +11,7 @@ import {CompanySearch} from './shared/company-search.models';
 
 @Component({
     selector: 'company-search',
-    templateUrl: 'app/company-search/company-search.component.html',
-    directives: [SearchComponent, CompanyListComponent]
+    templateUrl: 'app/company-search/company-search.component.html'
 })
 export class CompanySearchComponent implements OnInit{
 

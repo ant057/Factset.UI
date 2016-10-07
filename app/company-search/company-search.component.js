@@ -10,9 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //angular
 var core_1 = require('@angular/core');
-//components
-var search_component_1 = require('./search.component');
-var company_list_component_1 = require('./company-list.component');
 //services
 var company_search_service_1 = require('./shared/company-search.service');
 var CompanySearchComponent = (function () {
@@ -30,8 +27,7 @@ var CompanySearchComponent = (function () {
     CompanySearchComponent = __decorate([
         core_1.Component({
             selector: 'company-search',
-            templateUrl: 'app/company-search/company-search.component.html',
-            directives: [search_component_1.SearchComponent, company_list_component_1.CompanyListComponent]
+            templateUrl: 'app/company-search/company-search.component.html'
         }), 
         __metadata('design:paramtypes', [company_search_service_1.CompanySearchService])
     ], CompanySearchComponent);

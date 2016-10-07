@@ -4,7 +4,7 @@
             <img src="app/assets/pre-loading.gif" />
         </div>
     </div>
-    <div class="col-md-12 well" *ngIf="companyDetail">
+    <div class="col-md-12 well" *ngIf="companyDetail" style="background: -webkit-linear-gradient(top, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%);">
         <div class="col-md-9">
             <h2>
                 {{companyDetail.companyName}}
@@ -23,156 +23,141 @@
                 <img src="./app/assets/Folder_WPaper.gif" />
                 <img src="./app/assets/Account_Details2.jpg" />
             </div>
-            <a target="_blank" href="https://www.argosuretyportal.com/AMS/Account/Summary/AcctSummary.aspx?qryLoad=1&qryAccountID={{companyDetail.anchorAccount.accountNumber}}&qryBusinessType=Commercial">Account #{{companyDetail.anchorAccount.accountNumber}}</a>
+            <!--<a target="_blank" href="https://www.argosuretyportal.com/AMS/Account/Summary/AcctSummary.aspx?qryLoad=1&qryAccountID={{companyDetail.anchorAccount.accountNumber}}&qryBusinessType=Commercial"> #{{companyDetail.anchorAccount.accountNumber}}</a>-->
+            <a target="_blank" href="http://cs-test32-1/AMS/Account/Summary/AcctSummary.aspx?qryLoad=1&qryAccountID={{companyDetail.anchorAccount.accountNumber}}&qryBusinessType=Commercial"> #{{companyDetail.anchorAccount.accountNumber}}</a>
         </div>
         <div *ngIf="addAccountSuccess" class="alert alert-success col-md-12" role="alert">
-            Success! New Account Added - #<a target="_blank" href="https://www.argosuretyportal.com/AMS/Account/Summary/AcctSummary.aspx?qryLoad=1&qryAccountID={{companyDetail.anchorAccount.accountNumber}}&qryBusinessType=Commercial">{{companyDetail.anchorAccount.accountNumber}}</a>
+            <!--Success! New Account Added - #<a target="_blank" href="https://www.argosuretyportal.com/AMS/Account/Summary/AcctSummary.aspx?qryLoad=1&qryAccountID={{companyDetail.anchorAccount.accountNumber}}&qryBusinessType=Commercial">{{companyDetail.anchorAccount.accountNumber}}</a>-->
+            Success! New Account Added - #<a target="_blank" href="http://cs-test32-1/AMS/Account/Summary/AcctSummary.aspx?qryLoad=1&qryAccountID={{companyDetail.anchorAccount.accountNumber}}&qryBusinessType=Commercial">{{companyDetail.anchorAccount.accountNumber}}</a>
         </div>
     </div>
-    <div class="col-md-3 well" *ngIf="companyDetail">
-        <h4>
-        <img src="./app/assets/social_table_jeans_pocket_media_base_icon_file.png" /> Details</h4>
-        <table class="table table-striped table-condensed" style="font-size:small">
-            <tr>
-                <th>Business Description</th>
-                <td>{{companyDetail.businessDescriptionAbbrev}}</td>
-            </tr>
-            <tr>
-                <th>Universe</th>
-                <td>{{companyDetail.universeAmerica === 1 ? 'America' : companyDetail.universeEurope === 1 ? 'Europe' : companyDetail.universeAsiaPacific === 1 ? 'Asia/Pacific' : ''}}</td>
-            </tr>
-            <tr>
-                <th>Entity Type</th>
-                <td>{{companyDetail.entityTypeDescription}}</td>
-            </tr>
-            <tr>
-                <th>SIC Code</th>
-                <td>{{companyDetail.sicCode}}</td>
-            </tr>
-            <tr>
-                <th>SIC Description</th>
-                <td>{{companyDetail.sicDescription}}</td>
-            </tr>
-            <tr>
-                <th>Industry</th>
-                <td>{{companyDetail.industryDescription}}</td>
-            </tr>
-            <tr>
-                <th>Sector</th>
-                <td>{{companyDetail.sectorDescription}}</td>
-            </tr>
-            <tr>
-                <th>Latest Annual Update</th>
-                <td>{{companyDetail.latestAnnualUpdate}}</td>
-            </tr>
-            <tr>
-                <th>Market Value</th>
-                <td>{{companyDetail.marketValueCurrent}}</td>
-            </tr>
-            <tr>
-                <th>Cash Flow Per Share</th>
-                <td>{{companyDetail.cashFlowPerShare}}</td>
-            </tr>
-            <tr>
-                <th>Dividends Per Share</th>
-                <td>{{companyDetail.dividendsPerShare}}</td>
-            </tr>
-            <tr>
-                <th>Price To Book Value</th>
-                <td>{{companyDetail.priceToBookValue}}</td>
-            </tr>
-            <tr>
-                <th>Dividend Yield</th>
-                <td>{{companyDetail.dividendYield}}</td>
-            </tr>
-            <tr>
-                <th>Dividend Payout Per Share</th>
-                <td>{{companyDetail.dividendPayoutPerShare}}</td>
-            </tr>
-            <tr>
-                <th>Price To Earnings</th>
-                <td>{{companyDetail.priceToEarnings}}</td>
-            </tr>
-        </table>
-        <!--<dl>
-            <dt>Business Description</dt>
-            <dd>{{companyDetail.businessDescriptionAbbrev}}</dd>
-            <dt>Universe</dt>
-            <dd>{{companyDetail.universeAmerica === 1 ? 'America' : companyDetail.universeEurope === 1 ? 'Europe' : companyDetail.universeAsiaPacific === 1 ? 'Asia/Pacific' : ''}}</dd>
-            <dt>Latest Annual Update</dt>
-            <dd>{{companyDetail.latestAnnualUpdate}}</dd>
-            <dt>Market Value</dt>
-            <dd>{{companyDetail.marketValueCurrent}}</dd>
-            <dt>Cash Flow Per Share</dt>
-            <dd>{{companyDetail.cashFlowPerShare}}</dd>
-            <dt>Dividends Per Share</dt>
-            <dd>{{companyDetail.dividendsPerShare}}</dd>
-            <dt>Price To Book Value</dt>
-            <dd>{{companyDetail.priceToBookValue}}</dd>
-            <dt>Dividend Yield</dt>
-            <dd>{{companyDetail.dividendYield}}</dd>
-            <dt>Dividend Payout Per Share</dt>
-            <dd>{{companyDetail.dividendPayoutPerShare}}</dd>
-            <dt>Price To Earnings</dt>
-            <dd>{{companyDetail.priceToEarnings}}</dd>
-        </dl>-->
+    <div class="col-md-12 well" *ngIf="companyDetail">       
+        <div class="col-md-6">         
+            <h4>
+                <img src="./app/assets/presentation-2.png" /> Company Summary
+            </h4>   
+            <table class="table table-striped table-condensed" style="font-size:small">
+                <tr>
+                    <th>Permanent Security ID</th>
+                    <td>{{companyDetail.permanentSecurityID}}</td>
+                </tr>
+                <tr>
+                    <th>Business Description</th>
+                    <td>{{companyDetail.businessDescriptionAbbrev}}</td>
+                </tr>
+                <tr>
+                    <th>Universe</th>
+                    <td>{{companyDetail.universeAmerica === 1 ? 'America' : companyDetail.universeEurope === 1 ? 'Europe' : companyDetail.universeAsiaPacific === 1 ? 'Asia/Pacific' : ''}}</td>
+                </tr>
+                <tr>
+                    <th>Entity Type</th>
+                    <td>{{companyDetail.entityTypeDescription}}</td>
+                </tr>
+                <tr>
+                    <th>SIC Code</th>
+                    <td>{{companyDetail.sicCode}}</td>
+                </tr>
+                <tr>
+                    <th>SIC Description</th>
+                    <td>{{companyDetail.sicDescription}}</td>
+                </tr>
+                <tr>
+                    <th>Industry</th>
+                    <td>{{companyDetail.industryDescription}}</td>
+                </tr>
+                <tr>
+                    <th>Sector</th>
+                    <td>{{companyDetail.sectorDescription}}</td>
+                </tr>                
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h4>
+                <img src="./app/assets/presentation-5.png" /> Market Details
+            </h4>
+            <table class="table table-striped table-condensed" style="font-size:small">
+                <tr>
+                    <th>Latest Annual Update</th>
+                    <td>{{companyDetail.latestAnnualUpdate}}</td>
+                </tr>
+                <tr>
+                    <th>Market Value</th>
+                    <td>{{companyDetail.marketValueCurrent}}</td>
+                </tr>
+                <tr>
+                    <th>Cash Flow Per Share</th>
+                    <td>{{companyDetail.cashFlowPerShare}}</td>
+                </tr>
+                <tr>
+                    <th>Dividends Per Share</th>
+                    <td>{{companyDetail.dividendsPerShare}}</td>
+                </tr>
+                <tr>
+                    <th>Price To Book Value</th>
+                    <td>{{companyDetail.priceToBookValue}}</td>
+                </tr>
+                <tr>
+                    <th>Dividend Yield</th>
+                    <td>{{companyDetail.dividendYield}}</td>
+                </tr>
+                <tr>
+                    <th>Dividend Payout Per Share</th>
+                    <td>{{companyDetail.dividendPayoutPerShare}}</td>
+                </tr>
+                <tr>
+                    <th>Price To Earnings</th>
+                    <td>{{companyDetail.priceToEarnings}}</td>
+                </tr>
+            </table>
+        </div>
     </div>
-     <div class="col-md-9 well" *ngIf="companyDetail">
-         <div class="col-md-4">
-             <h4>
-                 <img src="./app/assets/bar_chart_by_web_cartoon_pack_document_icons_shlyapnikova_base.png"/> Financials<br />             
-                 <small>Showing previous 4 statements..</small>
-             </h4>
-         </div>
-         <div class="col-md-8 pull-right">
-             <div class="btn-group">
-                 <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     {{type == 'BS' ? 'Balance Sheet' : type == 'CF' ? 'Cash Flow' : type == 'IS' ? 'Income Statement' : '' }}  <span class="caret"></span>
-                 </button>
-                 <ul class="dropdown-menu">
-                     <li style="cursor:pointer" (click)="getStatements(period,'BS')">Balance Sheet</li>
-                     <li style="cursor:pointer" (click)="getStatements(period,'IS')">Income Statement</li>
-                     <li style="cursor:pointer" (click)="getStatements(period,'CF')">Cash Flow</li>
-                 </ul>
-             </div>
-             <div class="btn-group">
-                 <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                     {{period}}   <span class="caret"></span>
-                 </button>
-                 <ul class="dropdown-menu">
-                     <li style="cursor:pointer" (click)="getStatements('Annual',type)">Annual</li>
-                     <li style="cursor:pointer" (click)="getStatements('Quarterly',type)">Quarterly</li>
-                     <li style="cursor:pointer" (click)="getStatements('LTM',type)">LTM</li>
-                     <li style="cursor:pointer" (click)="getStatements('Semi-Annual',type)">Semi-Annual</li>
-                 </ul>
-             </div>
-             <div *ngIf="stmtloading">
-                 <img src="app/assets/pre-loading.gif" />
-             </div>
-         </div>
-         <div *ngIf="noFinancials" class="alert alert-danger col-md-12" role="alert">
-             No Financials Available
-         </div>
-         <div class="col-md-12" style="padding:15px" *ngIf="activeFinancials">
-             <financial-detail #financial [activeStatements]="activeFinancials"></financial-detail>
-         </div>
-         <!--<div class="col-md-2">
-             col_md_2
-         </div>
-         <div class="col-md-2">
-             col_md_2
-         </div>
-         <div class="col-md-2">
-             col_md_2
-         </div>
-         <div class="col-md-2">
-             col_md_2
-         </div>
-         <div class="col-md-2">
-             col_md_2
-         </div>
-         <div class="col-md-2">
-             col_md_2
-         </div>-->
-     </div>
-</div>
+        <div class="col-md-12 well" *ngIf="companyDetail">
+            <div class="col-md-12">
+                <div class="col-md-12">
+                    <div style="border-bottom:1px solid #e3e3e3">
+                        <h4>
+                            <img src="./app/assets/bar_chart_by_web_cartoon_pack_document_icons_shlyapnikova_base.png" /> Financials <small>Showing previous 4 statements..</small>
+                        </h4>
+                    </div>
+                    <div  style="padding-top:5px;padding-bottom:5px">
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{type == 'BS' ? 'Balance Sheet' : type == 'CF' ? 'Cash Flow' : type == 'IS' ? 'Income Statement' : '' }}  <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li style="cursor:pointer" (click)="getStatements(period,'BS')">Balance Sheet</li>
+                                <li style="cursor:pointer" (click)="getStatements(period,'IS')">Income Statement</li>
+                                <li style="cursor:pointer" (click)="getStatements(period,'CF')">Cash Flow</li>
+                            </ul>
+                        </div>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                {{period}}   <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu">
+                                <li style="cursor:pointer" (click)="getStatements('Annual',type)">Annual</li>
+                                <li style="cursor:pointer" (click)="getStatements('Quarterly',type)">Quarterly</li>
+                                <li style="cursor:pointer" (click)="getStatements('LTM',type)">LTM</li>
+                                <li style="cursor:pointer" (click)="getStatements('Semi-Annual',type)">Semi-Annual</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div *ngIf="stmtloading">
+                        <img src="app/assets/pre-loading.gif" />
+                    </div>
+                </div>
+                <div *ngIf="noFinancials" class="alert alert-danger col-md-12" role="alert">
+                    No Financials Available
+                </div>
+                <div *ngIf="activeFinancials">
+                    <financial-detail #financial [activeStatements]="activeFinancials" 
+                                      [barChartData]="barChartData" 
+                                      [barChartLabels]="barChartLabels" 
+                                      [lineChartData]="lineChartData" 
+                                      [lineChartLabels]="lineChartLabels"
+                                      [bar2ChartData]="bar2ChartData" 
+                                      [bar2ChartLabels]="bar2ChartLabels">
+                    </financial-detail>                  
+                </div>
+            </div>
+        </div>

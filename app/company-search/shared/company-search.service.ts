@@ -6,13 +6,14 @@ import { Headers, RequestOptions } from '@angular/http';
 //models
 import { CompanyList, PagedCompanyList, Industry, Sector, EntityType, Country, SIC, CompanySearch, SearchParams } from './company-search.models';
 
+import { Observable } from 'rxjs';
 import 'rxjs/add/operator/toPromise';
 
 @Injectable()
 export class CompanySearchService {
     
     private mockApiUrl: string = 'app/company-search/shared/industries.json';
-    private apiUrlBase: string = 'http://localhost:54665/api/';
+    private apiUrlBase: string = 'http://ausp-sur-sql01:54665/api/';
     private apiUrl: string = this.apiUrlBase + 'CompanySearch/';
 
     private _pagedCompanyList: PagedCompanyList;
@@ -24,6 +25,11 @@ export class CompanySearchService {
     constructor(private http: Http) { 
         this._pagedCompanyList = new PagedCompanyList;
         this._searchParams = new SearchParams;
+    }
+
+    search(term: string): Observable<CompanyList[]> {
+        return this.http.get(this.apiUrl + `SearchCompanyName/?name=${term}`)
+            .map((r: Response) => r.json() as CompanyList[]);
     }
 
     getSearchParams() {
@@ -111,15 +117,16 @@ export class CompanySearchService {
             this._pagedCompanyList.data = this._companyList.slice((page - 1) * pageSize, ((page - 1) * pageSize) + pageSize);
             return Promise.resolve(this._pagedCompanyList);
         } else { //else, get from server
-            return this.http.get(this.apiUrl + 'GetAllCompanies')
-                .toPromise()
-                .then(response => {
-                    this._companyList = response.json();
-                    this._pagedCompanyList.data = this._companyList.slice((page - 1) * pageSize, ((page - 1) * pageSize) + pageSize);
-                    this._pagedCompanyList.count = this._companyList.length;
-                    return this._pagedCompanyList;
-                })
-                .catch(this.handleError);
+            //return this.http.get(this.apiUrl + 'GetAllCompanies')
+            //    .toPromise()
+            //    .then(response => {
+            //        this._companyList = response.json();
+            //        this._pagedCompanyList.data = this._companyList.slice((page - 1) * pageSize, ((page - 1) * pageSize) + pageSize);
+            //        this._pagedCompanyList.count = this._companyList.length;
+            //        return this._pagedCompanyList;
+            //    })
+            //    .catch(this.handleError);
+            return Promise.resolve(this._pagedCompanyList);
         }
     }
 
@@ -150,7 +157,6 @@ export class CompanySearchService {
             return this.http.get(this.apiUrl + 'GetCompanySearch')
                 .toPromise()//
                 .then(response => {
-                    console.warn(response);
                     this._companySearch = new CompanySearch;
                     this._companySearch = response.json();
                     return this._companySearch;

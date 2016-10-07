@@ -23,31 +23,30 @@ require('rxjs/add/operator/switchMap');
 var financial_models_1 = require('../financial/shared/financial.models');
 var FinancialDetailComponent = (function () {
     function FinancialDetailComponent() {
-        //activeStatementsObs: Observable<FinancialDetail[]>;
-        //periodSubject = new Subject<string>();
-        this.L0 = false;
-        this.L1 = false;
-        this.L2 = false;
-        this.L3 = false;
+        this.barChartLabels = [];
+        //earnings chart
+        this.barChartOptions = {
+            scaleShowVerticalLines: false,
+            responsive: false
+        };
+        this.barChartType = 'bar';
+        this.barChartLegend = true;
+        //ROE chart
+        this.lineChartOptions = {
+            animation: false,
+            responsive: false
+        };
+        this.lineChartType = 'line';
+        this.lineChartLegend = true;
+        //CR chart
+        this.bar2ChartOptions = {
+            scaleShowVerticalLines: false,
+            responsive: false
+        };
+        this.bar2ChartType = 'bar';
+        this.bar2ChartLegend = true;
     }
     FinancialDetailComponent.prototype.ngOnInit = function () {
-        //this.activeStatements = this.financials.annualFinancialStatements;
-        //this.activeStatementsObs.subscribe(
-        //    data => 
-        //)
-        //this.activeStatementsObs = this.periodSubject
-        //    .asObservable()           // cast as Observable
-        //    .debounceTime(300)        // wait for 300ms pause in events
-        //    .distinctUntilChanged()   // ignore if next search term is same as previous
-        //    .switchMap(term => term   // switch to new observable each time
-        //        // return the http search observable
-        //        ? this.returnObs()
-        //        // or the observable of empty heroes if no search term
-        //        : Observable.of<FinancialDetail[]>([]))
-        //    .catch(error => {
-        //        // Todo: real error handling
-        //        console.log(error);
-        //    });
     };
     __decorate([
         core_1.Input(), 
@@ -57,6 +56,30 @@ var FinancialDetailComponent = (function () {
         core_1.Input(), 
         __metadata('design:type', Array)
     ], FinancialDetailComponent.prototype, "activeStatements", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], FinancialDetailComponent.prototype, "barChartData", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], FinancialDetailComponent.prototype, "barChartLabels", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], FinancialDetailComponent.prototype, "lineChartData", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], FinancialDetailComponent.prototype, "lineChartLabels", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], FinancialDetailComponent.prototype, "bar2ChartData", void 0);
+    __decorate([
+        core_1.Input(), 
+        __metadata('design:type', Array)
+    ], FinancialDetailComponent.prototype, "bar2ChartLabels", void 0);
     FinancialDetailComponent = __decorate([
         core_1.Component({
             selector: 'financial-detail',

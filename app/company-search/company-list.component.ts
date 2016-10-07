@@ -1,6 +1,5 @@
 //angular
 import { Component, OnInit, Input } from '@angular/core';
-import { PaginatePipe, PaginationService, PaginationControlsCmp, IPaginationInstance } from 'ng2-pagination';
 import { Router } from '@angular/router';
 
 //services
@@ -10,10 +9,7 @@ import {CompanyList, PagedCompanyList} from './shared/company-search.models';
 
 @Component({
     selector: 'company-list',
-    templateUrl: 'app/company-search/company-list.component.html',
-    providers: [PaginationService],
-    directives: [PaginationControlsCmp],
-    pipes: [PaginatePipe]
+    templateUrl: 'app/company-search/company-list.component.html'
 })
 export class CompanyListComponent implements OnInit {
 
@@ -50,13 +46,13 @@ export class CompanyListComponent implements OnInit {
         this.page = page;
     }
 
-    successHandler(response: any) {
-        this.pagedData = response;
-        this.companies = response.data;
-
-        this.companies.forEach(p => p.imgUrl = this.findPicture(p.sectorCode));
-
-        this.total = response.count;
+    successHandler(response: PagedCompanyList) {
+        if (response.data) {
+            this.pagedData = response;
+            this.companies = response.data;
+            this.companies.forEach(p => p.imgUrl = this.findPicture(p.sectorCode));
+            this.total = response.count;
+        }
         this.loading = false;
     }
 

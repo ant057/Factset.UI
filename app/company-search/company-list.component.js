@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 //angular
 var core_1 = require('@angular/core');
-var ng2_pagination_1 = require('ng2-pagination');
 var router_1 = require('@angular/router');
 //services
 var company_search_service_1 = require('./shared/company-search.service');
@@ -41,10 +40,12 @@ var CompanyListComponent = (function () {
     };
     CompanyListComponent.prototype.successHandler = function (response) {
         var _this = this;
-        this.pagedData = response;
-        this.companies = response.data;
-        this.companies.forEach(function (p) { return p.imgUrl = _this.findPicture(p.sectorCode); });
-        this.total = response.count;
+        if (response.data) {
+            this.pagedData = response;
+            this.companies = response.data;
+            this.companies.forEach(function (p) { return p.imgUrl = _this.findPicture(p.sectorCode); });
+            this.total = response.count;
+        }
         this.loading = false;
     };
     CompanyListComponent.prototype.findPicture = function (sector) {
@@ -136,10 +137,7 @@ var CompanyListComponent = (function () {
     CompanyListComponent = __decorate([
         core_1.Component({
             selector: 'company-list',
-            templateUrl: 'app/company-search/company-list.component.html',
-            providers: [ng2_pagination_1.PaginationService],
-            directives: [ng2_pagination_1.PaginationControlsCmp],
-            pipes: [ng2_pagination_1.PaginatePipe]
+            templateUrl: 'app/company-search/company-list.component.html'
         }), 
         __metadata('design:paramtypes', [company_search_service_1.CompanySearchService, router_1.Router])
     ], CompanyListComponent);

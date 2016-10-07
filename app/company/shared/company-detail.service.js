@@ -16,7 +16,7 @@ var CompanyDetailService = (function () {
     function CompanyDetailService(http) {
         this.http = http;
         this.mockApiUrl = 'app/company-search/shared/industries.json';
-        this.apiUrlBase = 'http://localhost:54665/api/';
+        this.apiUrlBase = 'http://ausp-sur-sql01:54665/api/';
         this.apiUrl = this.apiUrlBase + 'Company/';
     }
     CompanyDetailService.prototype.addAccount = function (permanentSecurityId) {

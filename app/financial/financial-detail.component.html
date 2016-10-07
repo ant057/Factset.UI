@@ -1,90 +1,63 @@
-﻿<!--<div>
-    <table id="companyTable" class="table table-filter table-striped">
-        <tr>
-            <td><div class="media"><p class="summary">Line Item</p></div></td>
-            <td><div class="media"><p class="summary">{{}}</p></div></td>
-        </tr>
-        <tbody>
-            <tr *ngFor="let lineitem of financials.annualFinancialStatements[0].financialStatements">
-                <td>
-                    <div class="media">
-                        <p class="summary">{{company.permanentSecurityID}}</p>
+﻿<div class="col-md-8" style="height:700px;overflow-y:auto;"> 
+    <table id="financialTable" class="table table-striped table-fixed">
+        <thead>
+            <tr>
+                <th class="stmtth">
+                    <div class="media-body" style="width:120px;">
+                        <h4 style="width:120px;">Period:</h4>
                     </div>
-                </td>
+                    <div class="media-body" style="width:167px;" *ngFor="let statement of activeStatements; let i = index">
+                        <h4>{{statement.date | date}}</h4>
+                    </div>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let lineitem of activeStatements[0].financialStatements; let i = index">
                 <td>
                     <div class="media">
-                        <p class="summary">{{company.permanentSecurityID}}</p>
+                        <p class="pull-left" style="width:120px" [class.L0]="lineitem.displayLevel === 'L0'"
+                           [class.L1]="lineitem.displayLevel === 'L1'"
+                           [class.L2]="lineitem.displayLevel === 'L2'"
+                           [class.L3]="lineitem.displayLevel === 'L3'">
+                            {{lineitem.description}}
+                        </p>
+                        <div class="media-body" *ngFor="let statement of activeStatements; let p = index" style="width:160px;text-align:center">
+                            <p [class.L0I]="lineitem.displayLevel === 'L0'" [class.L1I]="lineitem.displayLevel === 'L1'"
+                               [class.L2I]="lineitem.displayLevel === 'L2'"
+                               [class.L3I]="lineitem.displayLevel === 'L3'">
+                                {{statement.financialStatements[i].value === 0 ? ' ' : statement.financialStatements[i].value | number}}
+                            </p>
+                        </div>
                     </div>
                 </td>
             </tr>
         </tbody>
     </table>
-            <div *ngFor="let lineitem of financials.annualFinancialStatements[0].financialStatements">
-                <div>
-
-                </div>
-                {{lineitem.fieldName}} {{ lineitem.value}}
-            </div>
-</div>-->
-
-
-    <div class="col-md-3">
-        <div style="margin-right:45px">
-            <table class="table table-filter table-striped table-condensed well" style="width:210px">
-                <thead>
-                    <tr><th><div>Period:</div></th></tr>
-                </thead>
-                <tr style="height:45px" *ngFor="let lineitem of activeStatements[0].financialStatements; let i = index">
-                    <th><div class="media"><p class="summary" [class.L0]="lineitem.displayLevel === 'L0'" [class.L1]="lineitem.displayLevel === 'L1'" [class.L2]="lineitem.displayLevel === 'L2'" [class.L3]="lineitem.displayLevel === 'L3'">{{lineitem.description}}</p></div></th>
-                </tr>
-            </table>
-        </div>
-    </div>
-    <div class="col-md-2" *ngFor="let statement of activeStatements; let i = index">
-        <table class="table table-striped table-condensed well" style="width:137px">
-            <thead>
-                <!--<td *ngIf="i == 0">Period:</td>-->
-                <tr><th style="text-align:left" colspan="2">{{statement.date | date}}</th></tr>
-            </thead>
-            <tr style="height:45px" *ngFor="let lineitem of statement.financialStatements">
-                <!--<th *ngIf="i == 0">{{lineitem.description}}</th>-->
-                <!--<th><div style="height:28px" class="media"><p class="summary" [class.L0]="lineitem.displayLevel === 'L0'" [class.L1]="lineitem.displayLevel === 'L1'" [class.L2]="lineitem.displayLevel === 'L2'" [class.L3]="lineitem.displayLevel === 'L3'">{{ i === 0 ? lineitem.description : ' '}}</p></div></th>-->
-                <td><div style="font-size:small">{{lineitem.value === '0' ? ' ' : lineitem.value | number}}</div></td>
-            </tr>
-        </table>
-    </div>
-
-
-<!--<div class="col-md-4" *ngFor="let statement of activeStatements; let i = index">
-    <table class="table table-filter table-striped">
-        <tr>
-            <!--<td>Period:</td>-->
-            <!--<td colspan="2">{{statement.date | date}}</td>
-        <!--</tr>
-        <tbody>
-            <tr style="height:75px" *ngFor="let lineitem of statement.financialStatements">
-                <!--<th *ngIf="i == 0">{{lineitem.description}}</th>-->
-                <!--<th><div class="media"><p class="summary">{{lineitem.description}}</p></div></th>
-                <td><div class="media"><p class="summary">{{lineitem.value}}</p></div></td>
-            </tr>
-        </tbody>
-    </table>
-</div>-->
-
-<!--<div>
-    <div>
-        Period Ending:
-    </div>
-    <ul *ngFor="let lineitem of financials.annualFinancialStatements[0].financialStatements" style="list-style-type:none">
-        <li style="text-align:right;height:20px">{{lineitem.description}}</li>
-    </ul>
 </div>
-
-<div *ngFor="let statement of financials.annualFinancialStatements"> 
-    <div>
-        {{statement.date | date}}
-    </div>
-    <ul *ngFor="let lineitem of statement.financialStatements" style="list-style-type:none">
-        <li style="height:20px">{{lineitem.value}}</li>
-    </ul>
-</div>-->
+<div class="col-md-4">
+    <h4><img src="./app/assets/change.png" /> Earnings</h4>
+    <base-chart class="chart" style="width:100%"
+                [datasets]="barChartData"
+                [labels]="barChartLabels"
+                [options]="barChartOptions"
+                [legend]="barChartLegend"
+                [chartType]="barChartType">
+    </base-chart>
+    <h4><img src="./app/assets/graph.png" /> Return on Equity</h4>
+    <base-chart class="chart" style="width:100%"
+                [datasets]="lineChartData"
+                [labels]="lineChartLabels"
+                [options]="lineChartOptions"
+                [legend]="lineChartLegend"
+                [chartType]="lineChartType">
+    </base-chart>
+    <h4><img src="./app/assets/pie-chart-1.png" /> Free Cash Flow</h4>
+    <base-chart class="chart" style="width:100%"
+                [datasets]="bar2ChartData"
+                [labels]="bar2ChartLabels"
+                [options]="bar2ChartOptions"
+                [legend]="bar2ChartLegend"
+                [chartType]="bar2ChartType">
+    </base-chart>
+</div>

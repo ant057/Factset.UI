@@ -12,12 +12,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 //services
 var company_search_service_1 = require('./shared/company-search.service');
-//components
-var auto_complete_component_1 = require('./shared/auto-complete.component');
-var ng2_select_1 = require('ng2-select');
-var accordion_1 = require('ng2-bootstrap/components/accordion');
-var typeahead_1 = require('ng2-bootstrap/components/typeahead');
-var forms_1 = require('@angular/forms');
 //models
 var company_search_models_1 = require('./shared/company-search.models');
 var SearchComponent = (function () {
@@ -51,7 +45,7 @@ var SearchComponent = (function () {
     };
     SearchComponent.prototype.bindTemplate = function () {
         this.getCompanySearchModel();
-        this.getCompanies();
+        // this.getCompanies();
     };
     SearchComponent.prototype.getCompanySearchModel = function () {
         var _this = this;
@@ -188,7 +182,7 @@ var SearchComponent = (function () {
         }).join(',');
     };
     SearchComponent.prototype.typeaheadOnSelect = function (e) {
-        console.log('Selected value: ', e.item);
+        //console.log('Selected value: ', e.item);
     };
     SearchComponent.prototype.getFilteredCompanies = function () {
         var _this = this;
@@ -196,19 +190,70 @@ var SearchComponent = (function () {
         this.companySearchProvider.getFilteredCompanies(this.page, this.pageSize)
             .then(function (response) { return _this.getCompanyPageHandler(response); })
             .catch(function (error) { return _this.logError(error); });
+        this.page = null;
     };
     SearchComponent.prototype.getCompanyPageHandler = function (response) {
-        this.loading = false;
+        var _this = this;
         this.companies = response.data;
+        this.companies.forEach(function (p) { return p.imgUrl = _this.findPicture(p.sectorCode); });
         this.total = response.count;
         this.page = 1;
+        this.loading = false;
+    };
+    SearchComponent.prototype.findPicture = function (sector) {
+        switch (sector) {
+            case '1100':
+                return './app/assets/Coal.png';
+            case '1200':
+                return './app/assets/Deployment.png';
+            case '1300':
+                return './app/assets/Processor.png';
+            case '1400':
+                return './app/assets/Deployment.png';
+            case '2100':
+                return './app/assets/Electro Devices.png';
+            case '2200':
+                return './app/assets/Automatic.png';
+            case '2300':
+                return './app/assets/Electrical Sensor.png';
+            case '2400':
+                return './app/assets/Deployment.png';
+            case '3100':
+                return './app/assets/Whisky Still.png';
+            case '3200':
+                return './app/assets/Work.png';
+            case '3250':
+                return './app/assets/Deployment.png';
+            case '3300':
+                return './app/assets/Gyroscope.png';
+            case '3350':
+                return './app/assets/Electrical Sensor.png';
+            case '3400':
+                return './app/assets/Deployment.png';
+            case '3500':
+                return './app/assets/Industrial Scales.png';
+            case '4600':
+                return './app/assets/Fork Lift.png';
+            case '4700':
+                return './app/assets/Worker Male.png';
+            case '4800':
+                return './app/assets/Crowdfunding.png';
+            case '4900':
+                return './app/assets/Radio Tower.png';
+            case '6000':
+                return './app/assets/Processor.png';
+            case '7000':
+                return './app/assets/Warning Shield.png';
+            case '9999':
+                return './app/assets/Deployment.png';
+            default:
+                return './app/assets/Deployment.png';
+        }
     };
     SearchComponent = __decorate([
         core_1.Component({
             selector: 'search',
-            templateUrl: 'app/company-search/search.component.html',
-            directives: [auto_complete_component_1.AutoCompleteComponent, ng2_select_1.SELECT_DIRECTIVES,
-                accordion_1.ACCORDION_DIRECTIVES, typeahead_1.TYPEAHEAD_DIRECTIVES, forms_1.FORM_DIRECTIVES]
+            templateUrl: 'app/company-search/search.component.html'
         }), 
         __metadata('design:paramtypes', [company_search_service_1.CompanySearchService])
     ], SearchComponent);

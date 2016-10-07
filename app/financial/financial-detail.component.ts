@@ -17,6 +17,7 @@ import { Subject }  from 'rxjs/Subject';
 
 //services
 import { CompanyDetailService } from '../company/shared/company-detail.service';
+
 //models
 import { CompanyDetail } from '../company/shared/company-detail.models';
 import { BalanceModel, FinancialDetail, Financial } from '../financial/shared/financial.models';
@@ -29,49 +30,42 @@ export class FinancialDetailComponent {
 
     @Input() financials: Financial;
     @Input() activeStatements: FinancialDetail[];
-    //activeStatementsObs: Observable<FinancialDetail[]>;
-    //periodSubject = new Subject<string>();
+    @Input() barChartData: any[];
+    @Input() barChartLabels: any[] = [];
+    @Input() lineChartData: any[];
+    @Input() lineChartLabels: any[];
+    @Input() bar2ChartData: any[];
+    @Input() bar2ChartLabels: any[];
 
-    L0: boolean = false;
-    L1: boolean = false;
-    L2: boolean = false;
-    L3: boolean = false;
+    //earnings chart
+    public barChartOptions: any = {
+        scaleShowVerticalLines: false,
+        responsive: false
+    };
+    public barChartType: string = 'bar';
+    public barChartLegend: boolean = true;
+
+    //ROE chart
+    public lineChartOptions: any = {
+        animation: false,
+        responsive: false
+    };
+    public lineChartType: string = 'line';
+    public lineChartLegend: boolean = true;
+
+    //CR chart
+    public bar2ChartOptions: any = {
+        scaleShowVerticalLines: false,
+        responsive: false
+    };
+    public bar2ChartType: string = 'bar';
+    public bar2ChartLegend: boolean = true;
 
     constructor() {
-
+        
     }
 
     ngOnInit() {
-        //this.activeStatements = this.financials.annualFinancialStatements;
 
-        //this.activeStatementsObs.subscribe(
-        //    data => 
-        //)
-
-        //this.activeStatementsObs = this.periodSubject
-        //    .asObservable()           // cast as Observable
-        //    .debounceTime(300)        // wait for 300ms pause in events
-        //    .distinctUntilChanged()   // ignore if next search term is same as previous
-        //    .switchMap(term => term   // switch to new observable each time
-        //        // return the http search observable
-        //        ? this.returnObs()
-        //        // or the observable of empty heroes if no search term
-        //        : Observable.of<FinancialDetail[]>([]))
-        //    .catch(error => {
-        //        // Todo: real error handling
-        //        console.log(error);
-        //    });
     }
-
-    //returnObs(): Observable<FinancialDetail[]> {
-    //    return this.activeStatements = Observable.create(this.financials.annualFinancialStatements);
-
-    //    switch (period) {
-
-    //    }
-    //    //    case "Annual":
-    //    //        this.activeStatements = null;
-    //    //        this.activeStatements = this.financials.annualFinancialStatements;
-    //}
-
 }

@@ -11,7 +11,7 @@ import 'rxjs/add/operator/toPromise';
 @Injectable()
 export class CompanyDetailService {
     private mockApiUrl: string = 'app/company-search/shared/industries.json';
-    private apiUrlBase: string = 'http://localhost:54665/api/';
+    private apiUrlBase: string = 'http://ausp-sur-sql01:54665/api/';
     private apiUrl: string = this.apiUrlBase + 'Company/';
 
     private _companyDetail: CompanyDetail;

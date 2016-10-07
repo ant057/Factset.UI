@@ -4,92 +4,106 @@
             <h4><img src="./app/assets/beecustomizedicon_config_base_window.png" /> Company Search</h4>
         </div>
         <div>
-            <div class="input-group" style="padding-top:5px;padding-bottom:5px">
-                <input [(ngModel)]="selected"
-                       [typeahead]="companyListArray"
-                       (typeaheadOnSelect)="typeaheadOnSelect($event)"
-                       class="form-control">
-                <span (click)="alert()" class="input-group-addon" style="cursor:pointer"><i class="glyphicon glyphicon-search"></i></span>
-                <!--<autocomplete></autocomplete>-->
-            </div>
-            <accordion>
-                <accordion-group heading="Customize Search Options" [isOpen]="accordionOpen" panelClass="panel panel-primary">
-                    
-                    <div>
-                        <label>Universe</label>
+            <search-company></search-company>
+            <div class="panel panel-group" id="accordion" role="tab" aria-multiselectable="true">
+                <div class="panel panel-primary">
+                    <div class="panel panel-heading" role="tab" id="headingOne">
+                        <h4 class="panel-title">
+                            <a role="button" data-toggle="collapse" data-parent="#accordion" data-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Customize Search
+                            </a>
+                        </h4>
                     </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="" checked="checked" /> American</label>
+                    <div id="collapseOne" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingOne">
+                        <div class="panel-body">
+                            <div style="background: -webkit-linear-gradient(top, #ffffff 0%,#f3f3f3 50%,#ededed 51%,#ffffff 100%);">
+                                <div>
+                                    <label>Universe</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" checked="checked" /> American</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" checked="checked" /> Europe</label>
+                                </div>
+                                <div class="checkbox">
+                                    <label><input type="checkbox" value="" checked="checked" /> Asia/Pacific</label>
+                                </div>
+                                <div *ngIf="companySearch.industries" class="input-group">
+                                    <label>Industry</label>
+                                    <ng-select class="input-sm"
+                                               [initData]="industrySelectedItems"
+                                               [multiple]="true"
+                                               [items]="industryItems"
+                                               (selected)="selectedIndustry($event)"
+                                               (removed)="removedIndustry($event)"
+                                               placeholder="Select Industries">
+                                    </ng-select>
+                                </div>
+                                <div *ngIf="companySearch.countries" class="input-group">
+                                    <label>Country</label>
+                                    <ng-select class="input-sm"
+                                               [initData]="countrySelectedItems"
+                                               [multiple]="true"
+                                               [items]="countryItems"
+                                               (selected)="selectedCountry($event)"
+                                               (removed)="removedCountry($event)"
+                                               placeholder="Select Country">
+                                    </ng-select>
+                                </div>
+                                <div *ngIf="companySearch.sics" class="input-group">
+                                    <label>SIC</label>
+                                    <ng-select class="input-sm"
+                                               [initData]="sicSelectedItems"
+                                               [multiple]="true"
+                                               [items]="sicItems"
+                                               (selected)="selectedSIC($event)"
+                                               (removed)="removedSIC($event)"
+                                               placeholder="Select SIC">
+                                    </ng-select>
+                                </div>
+                                <div *ngIf="companySearch.entityTypes" class="input-group">
+                                    <label>Entity Type</label>
+                                    <ng-select class="input-sm"
+                                               [initData]="entitySelectedItems"
+                                               [multiple]="true"
+                                               [items]="entityTypeItems"
+                                               (selected)="selectedEntityType($event)"
+                                               (removed)="removedEntityType($event)"
+                                               placeholder="Select Entity Type">
+                                    </ng-select>
+                                </div>
+                                <div *ngIf="companySearch.sectors" class="form-group">
+                                    <label>Sector</label>
+                                    <ng-select class="input-sm"
+                                               [initData]="sectorSelectedItems"
+                                               [multiple]="true"
+                                               [items]="sectorItems"
+                                               (selected)="selectedSector($event)"
+                                               (removed)="removedSector($event)"
+                                               placeholder="Select Sector">
+                                    </ng-select>
+                                </div>
+                                <div style="padding:8px">
+                                    <input type="submit" value="Search" (click)="getFilteredCompanies()">
+                                </div>
+                            </div>     
+                        </div>
                     </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="" checked="checked" /> Europe</label>
+                </div>
+                <div class="panel panel-primary">
+                    <div class="panel panel-heading" role="tab" id="headingTwo">
+                        <h4 class="panel-title">
+                                Recently Visited
+                        </h4>
                     </div>
-                    <div class="checkbox">
-                        <label><input type="checkbox" value="" checked="checked" /> Asia/Pacific</label>
+                    <div id="collapseTwo" class="panel-collapse collapse in" role="tabpanel" aria-labelledby="headingTwo">
+                        <div class="panel-body">
+
+                        </div>
                     </div>
-                    <div *ngIf="companySearch.industries" class="input-group">
-                        <label>Industry</label>
-                        <ng-select class="input-sm" 
-                                   [initData]="industrySelectedItems"
-                                   [multiple]="true"
-                                   [items]="industryItems"
-                                   (selected)="selectedIndustry($event)"
-                                   (removed)="removedIndustry($event)"
-                                   placeholder="Select Industries">
-                        </ng-select>
-                    </div>
-                    <div *ngIf="companySearch.countries" class="input-group">
-                        <label>Country</label>
-                        <ng-select class="input-sm" 
-                                   [initData]="countrySelectedItems"
-                                   [multiple]="true"
-                                   [items]="countryItems"
-                                   (selected)="selectedCountry($event)"
-                                   (removed)="removedCountry($event)"
-                                   placeholder="Select Country">
-                        </ng-select>
-                    </div>
-                    <div *ngIf="companySearch.sics" class="input-group">
-                        <label>SIC</label>
-                        <ng-select class="input-sm" 
-                                   [initData]="sicSelectedItems"
-                                   [multiple]="true"
-                                   [items]="sicItems"
-                                   (selected)="selectedSIC($event)"
-                                   (removed)="removedSIC($event)"
-                                   placeholder="Select SIC">
-                        </ng-select>
-                    </div>
-                    <div *ngIf="companySearch.entityTypes" class="input-group">
-                        <label>Entity Type</label>
-                        <ng-select class="input-sm" 
-                                   [initData]="entitySelectedItems"
-                                   [multiple]="true"
-                                   [items]="entityTypeItems"
-                                   (selected)="selectedEntityType($event)"
-                                   (removed)="removedEntityType($event)"
-                                   placeholder="Select Entity Type">
-                        </ng-select>
-                    </div>
-                    <div *ngIf="companySearch.sectors" class="input-group">
-                        <label>Sector</label>
-                        <ng-select class="input-sm" 
-                                   [initData]="sectorSelectedItems"
-                                   [multiple]="true"
-                                   [items]="sectorItems"
-                                   (selected)="selectedSector($event)"
-                                   (removed)="removedSector($event)"
-                                   placeholder="Select Sector">
-                        </ng-select>
-                    </div>
-                    <div style="padding:8px">
-                        <input type="submit" value="Search" (click)="getFilteredCompanies()">
-                    </div>
-                </accordion-group>
-                <accordion-group heading="Recently Visited">
-                    <label>something</label>
-                </accordion-group>
-            </accordion>
-        </div>
+               </div>                   
+                </div>
     </div>
+</div>        
     <!-- /#sidebar-wrapper -->

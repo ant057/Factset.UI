@@ -1,12 +1,14 @@
 ﻿//angular
-import { provideRouter, RouterConfig } from '@angular/router';
+import { ModuleWithProviders }  from '@angular/core';
+import { Routes, RouterModule } from '@angular/router';
 
 //compnents
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {CompanySearchComponent} from './company-search/company-search.component';
 import {CompanyDetailComponent} from './company/company-detail.component';
 
-const routes: RouterConfig = [
+const routes: Routes = [
+    { path: '', redirectTo: '/companysearch', pathMatch: 'full' },
     { path: 'dashboard', component: DashboardComponent },
     { path: 'companysearch', component: CompanySearchComponent },
     { path: 'company/:permanentSecurityId', component: CompanyDetailComponent }//,
@@ -14,6 +16,4 @@ const routes: RouterConfig = [
     //{ path: '**', component: PageNotFoundComponent }
 ];
 
-export const appRouterProviders = [
-    provideRouter(routes)
-];
+export const routing: ModuleWithProviders = RouterModule.forRoot(routes);

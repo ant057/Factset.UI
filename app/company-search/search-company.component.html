@@ -1,0 +1,10 @@
+﻿<div id="search-component" class="input-group" style="padding:4px">
+    <span class="input-group-addon" style="cursor:pointer"><i class="glyphicon glyphicon-search"></i></span>
+    <input #searchBox id="search-box" (keyup)="search(searchBox.value)" class="form-control">
+    <div>
+        <div *ngFor="let company of searchCompaniesResult | async"
+             (click)="gotoDetail(company)" class="search-result">
+            {{company.companyName}} - {{company.latestAnnualUpdate}}
+        </div>
+    </div>
+</div>

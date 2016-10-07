@@ -12,7 +12,7 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 var core_1 = require('@angular/core');
 var router_1 = require('@angular/router');
 //components
-var financial_detail_component_1 = require('../financial/financial-detail.component');
+//import {MdSidenavLayout, MdSidenav} from '@angular2-material/sidenav';
 //services
 var company_detail_service_1 = require('./shared/company-detail.service');
 var CompanyDetailComponent = (function () {
@@ -26,6 +26,12 @@ var CompanyDetailComponent = (function () {
         this.addAccountSuccess = false;
         this.disableAddAcct = false;
         this.addingAccount = false;
+        this.barChartData = [];
+        this.barChartLabels = [];
+        this.lineChartData = [];
+        this.lineChartLabels = [];
+        this.bar2ChartData = [];
+        this.bar2ChartLabels = [];
     }
     CompanyDetailComponent.prototype.ngOnInit = function () {
         this.bindTemplate();
@@ -82,19 +88,51 @@ var CompanyDetailComponent = (function () {
     };
     CompanyDetailComponent.prototype.getStatementsSuccess = function (response) {
         var _this = this;
-        console.warn(response);
+        this.stmtloading = false;
+        var incomeChartData = new ChartData;
+        var revenueChartData = new ChartData;
+        var date = [];
+        incomeChartData.label = 'Income';
+        revenueChartData.label = 'Revenue';
+        incomeChartData.data = [];
+        revenueChartData.data = [];
+        this.barChartData = [];
+        this.barChartLabels = [];
+        var ROEChartData = new ChartData;
+        ROEChartData.label = 'Return on Equity';
+        ROEChartData.data = [];
+        this.lineChartData = [];
+        this.lineChartLabels = [];
+        var FCFChartData = new ChartData;
+        FCFChartData.label = 'Free Cash Flow';
+        FCFChartData.data = [];
+        this.bar2ChartData = [];
+        this.bar2ChartLabels = [];
         if (response.length > 0) {
+            for (var i_1 = 0; i_1 < response.length; i_1++) {
+                date.push(response[i_1].date.toString().substr(0, response[i_1].date.toString().indexOf('T')));
+                incomeChartData.data.push(response[i_1].financialStatements[response[i_1].financialStatements.findIndex(function (p) { return p.fieldName == 'ff_net_inc'; })].value);
+                revenueChartData.data.push(response[i_1].financialStatements[response[i_1].financialStatements.findIndex(function (p) { return p.fieldName == 'ff_sales'; })].value);
+                ROEChartData.data.push((response[i_1].financialStatements[response[i_1].financialStatements.findIndex(function (p) { return p.fieldName == 'ff_net_inc'; })].value / response[i_1].financialStatements[response[i_1].financialStatements.findIndex(function (p) { return p.fieldName == 'ff_shldrs_eq'; })].value) * 100);
+                FCFChartData.data.push(response[i_1].financialStatements[response[i_1].financialStatements.findIndex(function (p) { return p.fieldName == 'ff_free_cf'; })].value);
+            }
+            this.barChartLabels = (date);
+            this.lineChartLabels = (date);
+            this.bar2ChartLabels = (date);
             for (var i = 0; i < response.length; i++) {
                 response[i].financialStatements = response[i].financialStatements.filter(function (f) { return f.reportCode.substr(0, 2) === _this.type; });
             }
             this.activeFinancials = response;
             this.noFinancials = false;
+            this.barChartData.push(incomeChartData);
+            this.barChartData.push(revenueChartData);
+            this.lineChartData.push(ROEChartData);
+            this.bar2ChartData.push(FCFChartData);
         }
         else {
             this.noFinancials = true;
             this.activeFinancials = null;
         }
-        this.stmtloading = false;
     };
     CompanyDetailComponent.prototype.logError = function (error) {
         console.error('error inside company detail component bind: OnInit ' + error);
@@ -102,12 +140,16 @@ var CompanyDetailComponent = (function () {
     CompanyDetailComponent = __decorate([
         core_1.Component({
             selector: 'company-detail',
-            templateUrl: 'app/company/company-detail.component.html',
-            directives: [financial_detail_component_1.FinancialDetailComponent]
+            templateUrl: 'app/company/company-detail.component.html'
         }), 
         __metadata('design:paramtypes', [company_detail_service_1.CompanyDetailService, router_1.ActivatedRoute, router_1.Router])
     ], CompanyDetailComponent);
     return CompanyDetailComponent;
 }());
 exports.CompanyDetailComponent = CompanyDetailComponent;
+var ChartData = (function () {
+    function ChartData() {
+    }
+    return ChartData;
+}());
 //# sourceMappingURL=company-detail.component.js.map
