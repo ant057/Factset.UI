@@ -70,9 +70,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="app\app.component.html" />
-    <Content Include="app\app.component.js" />
-    <Content Include="app\app.module.js" />
-    <Content Include="app\app.routes.js" />
     <Content Include="app\assets\3d_icons_base_warning_cartoon.png" />
     <Content Include="app\assets\Account_Details.jpg" />
     <Content Include="app\assets\Account_Details2.jpg" />
@@ -135,29 +132,13 @@
     <Content Include="app\assets\Work.png" />
     <Content Include="app\assets\Worker Male.png" />
     <Content Include="app\company-search\company-list.component.html" />
-    <Content Include="app\company-search\company-list.component.js" />
     <Content Include="app\company-search\company-search.component.html" />
-    <Content Include="app\company-search\company-search.component.js" />
     <Content Include="app\company-search\recent-searches.component.html" />
-    <Content Include="app\company-search\recent-searches.component.js" />
     <Content Include="app\company-search\search-company.component.html" />
-    <Content Include="app\company-search\search-company.component.js" />
     <Content Include="app\company-search\search.component.html" />
-    <Content Include="app\company-search\search.component.js" />
-    <Content Include="app\company-search\shared\auto-complete.component.js" />
-    <Content Include="app\company-search\shared\company-search.models.js" />
-    <Content Include="app\company-search\shared\company-search.service.js" />
     <Content Include="app\company\company-detail.component.html" />
-    <Content Include="app\company\company-detail.component.js" />
-    <Content Include="app\company\shared\company-detail.models.js" />
-    <Content Include="app\company\shared\company-detail.service.js" />
     <Content Include="app\dashboard\dashboard.component.html" />
-    <Content Include="app\dashboard\dashboard.component.js" />
-    <Content Include="app\dashboard\financial.models.js" />
     <Content Include="app\financial\financial-detail.component.html" />
-    <Content Include="app\financial\financial-detail.component.js" />
-    <Content Include="app\financial\shared\financial.models.js" />
-    <Content Include="app\main.js" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll" />
     <Content Include="bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml" />
     <Content Include="bin\roslyn\csc.exe" />
@@ -7701,26 +7682,7 @@
     <Content Include="systemjs.config.js" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="app\app.component.js.map" />
-    <Content Include="app\app.module.js.map" />
-    <Content Include="app\app.routes.js.map" />
-    <Content Include="app\company-search\company-list.component.js.map" />
-    <Content Include="app\company-search\company-search.component.js.map" />
-    <Content Include="app\company-search\recent-searches.component.js.map" />
-    <Content Include="app\company-search\search-company.component.js.map" />
-    <Content Include="app\company-search\search.component.js.map" />
-    <Content Include="app\company-search\shared\auto-complete.component.js.map" />
-    <Content Include="app\company-search\shared\company-search.models.js.map" />
-    <Content Include="app\company-search\shared\company-search.service.js.map" />
     <Content Include="app\company-search\shared\industries.json" />
-    <Content Include="app\company\company-detail.component.js.map" />
-    <Content Include="app\company\shared\company-detail.models.js.map" />
-    <Content Include="app\company\shared\company-detail.service.js.map" />
-    <Content Include="app\dashboard\dashboard.component.js.map" />
-    <Content Include="app\dashboard\financial.models.js.map" />
-    <Content Include="app\financial\financial-detail.component.js.map" />
-    <Content Include="app\financial\shared\financial.models.js.map" />
-    <Content Include="app\main.js.map" />
     <Content Include="bin\roslyn\csc.exe.refresh" />
     <Content Include="bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll.refresh" />
     <Content Include="bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll.refresh" />
