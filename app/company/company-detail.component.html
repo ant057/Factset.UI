@@ -81,7 +81,7 @@
                     <td>{{companyDetail.latestAnnualUpdate}}</td>
                 </tr>
                 <tr>
-                    <th>Market Value</th>
+                    <th>Market Value ($ millions)</th>
                     <td>{{companyDetail.marketValueCurrent}}</td>
                 </tr>
                 <tr>
@@ -112,11 +112,10 @@
         </div>
     </div>
         <div class="col-md-12 well" *ngIf="companyDetail">
-            <div class="col-md-12">
                 <div class="col-md-12">
                     <div style="border-bottom:1px solid #e3e3e3">
                         <h4>
-                            <img src="./app/assets/bar_chart_by_web_cartoon_pack_document_icons_shlyapnikova_base.png" /> Financials <small>Showing previous 4 statements..</small>
+                            <img src="./app/assets/bar_chart_by_web_cartoon_pack_document_icons_shlyapnikova_base.png" /> Financials ($ millions) <small>Showing previous 4 statements..</small>
                         </h4>
                     </div>
                     <div  style="padding-top:5px;padding-bottom:5px">
@@ -159,5 +158,4 @@
                                       [bar2ChartLabels]="bar2ChartLabels">
                     </financial-detail>                  
                 </div>
-            </div>
         </div>
